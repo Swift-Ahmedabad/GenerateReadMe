@@ -7,7 +7,7 @@ struct GenerateReadMe: ParsableCommand {
     @Argument
     var path: String
     
-    var skipPaths: [String] = [".DS_Store", "README.md", "talks.json", ".scripts", "generate-readme.sh"]
+    var skipPaths: [String] = [".DS_Store", "README.md", "talks.json", ".scripts", "generate-readme.sh", ".git", ".gitattributes", "instruction.md"]
     
     mutating func run() throws {
         let decoder = YAMLDecoder()
