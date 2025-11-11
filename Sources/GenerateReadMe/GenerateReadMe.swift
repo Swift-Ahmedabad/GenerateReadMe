@@ -16,23 +16,23 @@ struct GenerateReadMe: ParsableCommand {
     var jsonFileName: String = "talks.json"
     
     mutating func run() throws {
-        let allEvents: [Event] = try GenerateReadMeCommand.events(from: path, skipFileWithExtensions: skipFileWithExtensions)
+        let allEvents: [Event] = try GenerateReadMeCommand.events(
+            from: path,
+            skipFileWithExtensions: skipFileWithExtensions
+        )
+        .sorted(by: {$0.title > $1.title })
         
-        let destinationPath = self.path.appending("/\(readMeFileName)")
-        let destinationContent = allEvents.sorted(by: {$0.title > $1.title}).map { $0.description }.joined(separator: "\n")
-        if !FileManager.default.fileExists(atPath: destinationPath) {
-            FileManager.default.createFile(atPath: destinationPath, contents: nil)
-        }
-        try destinationContent.data(using: .utf8)?.write(to: URL(fileURLWithPath: destinationPath))
+        try GenerateReadMeCommand.generateReadMe(for: allEvents, at: URL(filePath: path).appending(path: readMeFileName))
         
-        let jsonDestinationPath = self.path.appending("/\(jsonFileName)")
-        let jsonEncoder = JSONEncoder()
-        let encoded = try jsonEncoder.encode(allEvents)
-        try encoded.write(to: URL(fileURLWithPath: jsonDestinationPath))
+        try GenerateReadMeCommand.generateJson(for: allEvents, at: URL(filePath: path).appending(path: jsonFileName))
     }
 }
 
 enum GenerateReadMeCommand {
+    enum GeneratorError: LocalizedError {
+        case noSpeakerFile
+    }
+    
     static func events(from path: String, skipFileWithExtensions: [String]) throws -> [Event] {
         let decoder = YAMLDecoder()
         var allEvents: [Event] = []
@@ -52,14 +52,15 @@ enum GenerateReadMeCommand {
                             let parsedTalk = Talk(title: talkURL.lastPathComponent, speakers: speakers)
                             parsedTalks.append(parsedTalk)
                         } else {
-                            debugPrint("Can not get the speakers from: \(talkContentURL.path)")
+                            throw GeneratorError.noSpeakerFile
                         }
                     }
                 }
                 
-                let parsedEvent = Event(title: eventURL.lastPathComponent, talks: parsedTalks)
-                allEvents.append(parsedEvent)
             }
+            
+            let parsedEvent = Event(title: eventURL.lastPathComponent, talks: parsedTalks)
+            allEvents.append(parsedEvent)
         }
         
         return allEvents
@@ -68,5 +69,19 @@ enum GenerateReadMeCommand {
     static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String]) throws -> [URL] {
         let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
         return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) })
+    }
+    
+    static func generateReadMe(for events: [Event], at path: URL) throws {
+        if FileManager.default.fileExists(atPath: path.path(percentEncoded: false)) {
+            try FileManager.default.removeItem(at: path)
+        }
+        let content = events.map { $0.description }.joined(separator: "\n")
+        try content.write(to: path, atomically: true, encoding: .utf8)
+    }
+    
+    static func generateJson(for events: [Event], at path: URL) throws {
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(events)
+        try data.write(to: path)
     }
 }
