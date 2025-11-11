@@ -7,49 +7,66 @@ struct GenerateReadMe: ParsableCommand {
     @Argument
     var path: String
     
-    var skipPaths: [String] = [".DS_Store", "README.md", "talks.json", ".scripts", "generate-readme.sh", ".git", ".gitattributes", "instruction.md"]
+    var skipFileWithExtensions: [String] = [
+        "md",
+        "json",
+        "sh"
+    ]
+    var readMeFileName: String = "README.md"
+    var jsonFileName: String = "talks.json"
     
     mutating func run() throws {
-        let decoder = YAMLDecoder()
+        let allEvents: [Event] = try GenerateReadMeCommand.events(from: path, skipFileWithExtensions: skipFileWithExtensions)
         
-        let contents = try FileManager.default.contentsOfDirectory(atPath: path).sorted()
-        let filtered = contents.filter { !skipPaths.contains($0) }
-        
-        var allEvents: [Event] = []
-        
-        for event in filtered {
-            let subcontents = try FileManager.default.contentsOfDirectory(atPath: path.appending("/\(event)"))
-            let talks = subcontents.filter { !skipPaths.contains($0) }
-            
-            var parsedTalks: [Talk] = []
-            
-            for talk in talks {
-                let subcontents = try FileManager.default.contentsOfDirectory(atPath: path.appending("/\(event)/\(talk)"))
-                let items = subcontents.filter { !skipPaths.contains($0) }
-                
-                if let speaker = items.first(where: { $0.contains("Speaker") }) {
-                    if let contentsData = FileManager.default.contents(atPath: path.appending("/\(event)/\(talk)/\(speaker)")) {
-                        let speakers = try decoder.decode(Speakers.self, from: contentsData)
-                        let parsedTalk = Talk(title: talk, speakers: speakers)
-                        parsedTalks.append(parsedTalk)
-                    }
-                }
-            }
-            
-            let parsedEvent = Event(title: event, talks: parsedTalks)
-            allEvents.append(parsedEvent)
-        }
-        
-        let destinationPath = self.path.appending("/README.md")
-        let destinationContent = allEvents.sorted(by: {$0.title > $1.title}).map { $0.description }.joined(separator: "\n").data(using: .utf8)
+        let destinationPath = self.path.appending("/\(readMeFileName)")
+        let destinationContent = allEvents.sorted(by: {$0.title > $1.title}).map { $0.description }.joined(separator: "\n")
         if !FileManager.default.fileExists(atPath: destinationPath) {
             FileManager.default.createFile(atPath: destinationPath, contents: nil)
         }
-        try destinationContent?.write(to: URL(fileURLWithPath: destinationPath))
+        try destinationContent.data(using: .utf8)?.write(to: URL(fileURLWithPath: destinationPath))
         
-        let jsonDestinationPath = self.path.appending("/talks.json")
+        let jsonDestinationPath = self.path.appending("/\(jsonFileName)")
         let jsonEncoder = JSONEncoder()
         let encoded = try jsonEncoder.encode(allEvents)
         try encoded.write(to: URL(fileURLWithPath: jsonDestinationPath))
+    }
+}
+
+enum GenerateReadMeCommand {
+    static func events(from path: String, skipFileWithExtensions: [String]) throws -> [Event] {
+        let decoder = YAMLDecoder()
+        var allEvents: [Event] = []
+        
+        for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
+            debugPrint(eventURL.lastPathComponent)
+            var parsedTalks: [Talk] = []
+            
+            for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions) {
+                debugPrint("\t", talkURL.lastPathComponent)
+                
+                for talkContentURL in try validContentsOfDirectory(at: talkURL, skipping: skipFileWithExtensions) {
+                    debugPrint("\t\t", talkContentURL.lastPathComponent)
+                    if talkContentURL.lastPathComponent.contains("Speaker") {
+                        if let contentData = FileManager.default.contents(atPath: talkContentURL.path(percentEncoded: false)) {
+                            let speakers = try decoder.decode([Speaker].self, from: contentData)
+                            let parsedTalk = Talk(title: talkURL.lastPathComponent, speakers: speakers)
+                            parsedTalks.append(parsedTalk)
+                        } else {
+                            debugPrint("Can not get the speakers from: \(talkContentURL.path)")
+                        }
+                    }
+                }
+                
+                let parsedEvent = Event(title: eventURL.lastPathComponent, talks: parsedTalks)
+                allEvents.append(parsedEvent)
+            }
+        }
+        
+        return allEvents
+    }
+    
+    static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String]) throws -> [URL] {
+        let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+        return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) })
     }
 }

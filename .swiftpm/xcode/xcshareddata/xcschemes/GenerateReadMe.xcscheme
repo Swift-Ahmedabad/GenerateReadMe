@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/ratneshjain/Development/Swift-Ahmedabad-Talks"
+            argument = "/Users/ratneshjain/Development/Github/Swift\ Ahmedabad/Talks"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

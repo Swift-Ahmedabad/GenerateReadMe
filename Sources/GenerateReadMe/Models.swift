@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Speaker: Codable {
-    struct Socials: Codable {
-        var linkedIn: String?
-        var github: String?
-        var portfolio: String?
-        var twitter: String?
+public struct Speaker: Codable, Sendable {
+    public struct Socials: Codable, Sendable {
+        public var linkedIn: String?
+        public var github: String?
+        public var portfolio: String?
+        public var twitter: String?
         
         enum CodingKeys: String, CodingKey {
             case linkedIn = "LinkedIn"
@@ -20,21 +20,34 @@ struct Speaker: Codable {
             case portfolio = "Portfolio"
             case twitter = "Twitter"
         }
+        
+        public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil) {
+            self.linkedIn = linkedIn
+            self.github = github
+            self.portfolio = portfolio
+            self.twitter = twitter
+        }
     }
     
-    var speaker: String
-    var socials: Socials?
-    var about: String?
+    public var speaker: String
+    public var socials: Socials?
+    public var about: String?
     
     enum CodingKeys: String, CodingKey {
         case speaker = "Speaker"
         case socials = "Socials"
         case about = "About"
     }
+    
+    public init(speaker: String, socials: Socials? = nil, about: String? = nil) {
+        self.speaker = speaker
+        self.socials = socials
+        self.about = about
+    }
 }
 
 extension Speaker.Socials: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         var strings: [String] = []
         if let linkedIn {
             strings.append("[LinkedIn](\(linkedIn))")
@@ -53,7 +66,7 @@ extension Speaker.Socials: CustomStringConvertible {
 }
 
 extension Speaker: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         var string = """
         ### By: **\(speaker)**
         """
@@ -67,43 +80,37 @@ extension Speaker: CustomStringConvertible {
     }
 }
 
-struct Speakers: Codable {
-    var speakers: [Speaker]
+public struct Talk: Codable {
+    public var title: String
+    public var speakers: [Speaker]
     
-    enum CodingKeys: String, CodingKey {
-        case speakers = "Speakers"
+    public init(title: String, speakers: [Speaker]) {
+        self.title = title
+        self.speakers = speakers
     }
-}
-
-extension Speakers: CustomStringConvertible {
-    var description: String {
-        var string = ""
-        string.append(speakers.map { $0.description }.joined(separator: "\n"))
-        return string
-    }
-}
-
-struct Talk: Codable {
-    var title: String
-    var speakers: Speakers
 }
 
 extension Talk: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         """
         ## \(title.description)
-        \(speakers.description)
+        \(speakers.map { $0.description }.joined(separator: "\n"))
         """
     }
 }
 
-struct Event: Codable {
-    var title: String
-    var talks: [Talk]
+public struct Event: Codable {
+    public var title: String
+    public var talks: [Talk]
+    
+    public init(title: String, talks: [Talk]) {
+        self.title = title
+        self.talks = talks
+    }
 }
 
 extension Event: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         """
         # \(title)
         \(talks.map { $0.description }.joined(separator: "\n") )
