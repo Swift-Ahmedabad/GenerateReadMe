@@ -101,10 +101,12 @@ extension Talk: CustomStringConvertible {
 
 public struct Event: Codable {
     public var title: String
+    public var date: Date
     public var talks: [Talk]
     
-    public init(title: String, talks: [Talk]) {
+    public init(title: String, date: Date, talks: [Talk]) {
         self.title = title
+        self.date = date
         self.talks = talks
     }
 }

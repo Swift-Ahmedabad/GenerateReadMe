@@ -39,6 +39,7 @@ enum GenerateReadMeCommand {
         
         for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
             debugPrint(eventURL.lastPathComponent)
+            guard let date = eventURL.lastPathComponent.date else { continue }
             var parsedTalks: [Talk] = []
             
             for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions) {
@@ -59,7 +60,7 @@ enum GenerateReadMeCommand {
                 
             }
             
-            let parsedEvent = Event(title: eventURL.lastPathComponent, talks: parsedTalks)
+            let parsedEvent = Event(title: eventURL.lastPathComponent, date: date, talks: parsedTalks)
             allEvents.append(parsedEvent)
         }
         
@@ -83,5 +84,21 @@ enum GenerateReadMeCommand {
         let encoder = JSONEncoder()
         let data = try encoder.encode(events)
         try data.write(to: path)
+    }
+}
+
+enum Formatter {
+    static let dateFormatter = DateFormatter()
+}
+
+extension String {
+    public var date: Date? {
+        if let last = self.split(separator: ". ").last {
+            let dateString = String(last)
+            let formatter = Formatter.dateFormatter
+            formatter.dateFormat = "MMM dd, yyyy"
+            return formatter.date(from: dateString)
+        }
+        return nil
     }
 }
