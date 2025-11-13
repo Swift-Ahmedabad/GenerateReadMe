@@ -12,7 +12,7 @@ import InlineSnapshotTesting
 import SnapshotTestingCustomDump
 import Testing
 
-@Suite(.snapshots(record: .failed))
+@Suite(.snapshots(record: .never))
 struct GenerateReadMeTests {
 
     @Test
@@ -45,6 +45,7 @@ struct GenerateReadMeTests {
                   [0]: Event(
                     title: "1. Jan 01 2025",
                     date: Date(2024-12-31T18:30:00.000Z),
+                    id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                     talks: [
                       [0]: Talk(
                         title: "Talk1",
@@ -103,6 +104,7 @@ struct GenerateReadMeTests {
                   [0]: Event(
                     title: "1. Jan 01 2025",
                     date: Date(2024-12-31T18:30:00.000Z),
+                    id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                     talks: [
                       [0]: Talk(
                         title: "Talk1",
@@ -171,6 +173,7 @@ struct GenerateReadMeTests {
                   [0]: Event(
                     title: "3. Jan 3 2025",
                     date: Date(2025-01-02T18:30:00.000Z),
+                    id: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b",
                     talks: [
                       [0]: Talk(
                         title: "Talk1",
@@ -222,6 +225,7 @@ struct GenerateReadMeTests {
                   [1]: Event(
                     title: "1. Jan 1 2025",
                     date: Date(2024-12-31T18:30:00.000Z),
+                    id: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c",
                     talks: [
                       [0]: Talk(
                         title: "Talk1",
@@ -273,6 +277,7 @@ struct GenerateReadMeTests {
                   [2]: Event(
                     title: "2. Jan 2 2025",
                     date: Date(2025-01-01T18:30:00.000Z),
+                    id: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa",
                     talks: [
                       [0]: Talk(
                         title: "Talk1",

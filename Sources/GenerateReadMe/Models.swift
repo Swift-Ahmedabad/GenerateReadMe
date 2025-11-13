@@ -99,15 +99,17 @@ extension Talk: CustomStringConvertible {
     }
 }
 
-public struct Event: Codable {
+public struct Event: Codable, Identifiable {
     public var title: String
     public var date: Date
+    public var id: String
     public var talks: [Talk]
     
     public init(title: String, date: Date, talks: [Talk]) {
         self.title = title
         self.date = date
         self.talks = talks
+        self.id = StableID(title, date).id
     }
 }
 
