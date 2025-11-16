@@ -19,7 +19,7 @@ struct GenerateReadMe: ParsableCommand {
         let allEvents: [Event] = try GenerateReadMeCommand.events(
             from: path,
             skipFileWithExtensions: skipFileWithExtensions
-        )
+        ).0
         .sorted(by: {$0.title > $1.title })
         
         try GenerateReadMeCommand.generateReadMe(for: allEvents, at: URL(filePath: path).appending(path: readMeFileName))
@@ -33,9 +33,10 @@ enum GenerateReadMeCommand {
         case noSpeakerFile
     }
     
-    static func events(from path: String, skipFileWithExtensions: [String]) throws -> [Event] {
+    static func events(from path: String, skipFileWithExtensions: [String]) throws -> ([Event], Set<Speaker>) {
         let decoder = YAMLDecoder()
         var allEvents: [Event] = []
+        var speakers: Set<Speaker> = []
         
         for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
             debugPrint(eventURL.lastPathComponent)
@@ -49,9 +50,10 @@ enum GenerateReadMeCommand {
                     debugPrint("\t\t", talkContentURL.lastPathComponent)
                     if talkContentURL.lastPathComponent.contains("Speaker") {
                         if let contentData = FileManager.default.contents(atPath: talkContentURL.path(percentEncoded: false)) {
-                            let speakers = try decoder.decode([Speaker].self, from: contentData)
-                            let parsedTalk = Talk(title: talkURL.lastPathComponent, speakers: speakers)
+                            let decodedSpeakers = try decoder.decode([Speaker].self, from: contentData)
+                            let parsedTalk = Talk(title: talkURL.lastPathComponent, speakers: decodedSpeakers)
                             parsedTalks.append(parsedTalk)
+                            speakers.insert(contentsOf: decodedSpeakers)
                         } else {
                             throw GeneratorError.noSpeakerFile
                         }
@@ -64,7 +66,7 @@ enum GenerateReadMeCommand {
             allEvents.append(parsedEvent)
         }
         
-        return allEvents
+        return (allEvents, speakers)
     }
     
     static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String]) throws -> [URL] {
@@ -100,5 +102,13 @@ extension String {
             return formatter.date(from: dateString)
         }
         return nil
+    }
+}
+
+extension Set {
+    mutating func insert(contentsOf elements: Array<Element>) {
+        for element in elements {
+            self.insert(element)
+        }
     }
 }

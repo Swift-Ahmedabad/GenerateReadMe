@@ -8,7 +8,7 @@
 import CryptoKit
 import Foundation
 
-public struct StableID: Identifiable, Hashable, CustomStringConvertible {
+public struct StableID: CustomStringConvertible, Codable, Identifiable, Hashable, Sendable {
     
     public var id: String
     

@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct Speaker: Codable, Sendable {
-    public struct Socials: Codable, Sendable {
+public struct Speaker: Codable, Hashable, Sendable {
+    public struct Socials: Codable, Hashable, Sendable {
         public var linkedIn: String?
         public var github: String?
         public var portfolio: String?
@@ -29,11 +29,13 @@ public struct Speaker: Codable, Sendable {
         }
     }
     
+    public var id: String
     public var speaker: String
     public var socials: Socials?
     public var about: String?
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case speaker = "Speaker"
         case socials = "Socials"
         case about = "About"
@@ -43,6 +45,15 @@ public struct Speaker: Codable, Sendable {
         self.speaker = speaker
         self.socials = socials
         self.about = about
+        self.id = StableID(speaker, socials?.linkedIn ?? "").id
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.speaker = try container.decode(String.self, forKey: .speaker)
+        self.socials = try container.decodeIfPresent(Speaker.Socials.self, forKey: .socials)
+        self.about = try container.decodeIfPresent(String.self, forKey: .about)
+        self.id = StableID(speaker, socials?.linkedIn ?? "").id
     }
 }
 
@@ -81,12 +92,14 @@ extension Speaker: CustomStringConvertible {
 }
 
 public struct Talk: Codable {
+    public var id: String
     public var title: String
     public var speakers: [Speaker]
     
     public init(title: String, speakers: [Speaker]) {
         self.title = title
         self.speakers = speakers
+        self.id = StableID(title, speakers.map { $0.id }.joined(separator: "-")).id
     }
 }
 
@@ -100,9 +113,9 @@ extension Talk: CustomStringConvertible {
 }
 
 public struct Event: Codable, Identifiable {
+    public var id: String
     public var title: String
     public var date: Date
-    public var id: String
     public var talks: [Talk]
     
     public init(title: String, date: Date, talks: [Talk]) {
