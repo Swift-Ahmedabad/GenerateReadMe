@@ -1,114 +1,80 @@
 import ArgumentParser
 import Foundation
-import Yams
+import Models
 
+/// A command-line utility that parses a directory of talk-related files and generates a README along with JSON exports.
+///
+/// This tool scans a given path for event, speaker, and talk information, skipping specified file extensions,
+/// and produces:
+/// - A README.md (or custom filename) summarizing events and talks.
+/// - JSON files for events, speakers, talks, and talk-speaker relationships.
+///
+/// Usage:
+/// - Provide the path to the talks directory.
+/// - Optionally customize filenames and skipped file extensions via options.
+///
+/// Arguments:
+/// - `path`: The filesystem path to the directory containing talk data to parse.
+///
+/// Options:
+/// - `skipFileWithExtensions`: File extensions to ignore during parsing. Defaults to ["md", "json", "sh"].
+/// - `readMeFileName`: Output filename for the generated README. Default: "README.md".
+/// - `eventsjsonFileName`: Output filename for the events JSON. Default: "events.json".
+/// - `speakersJsonFileName`: Output filename for the speakers JSON. Default: "speakers.json".
+/// - `talksJsonFileName`: Output filename for the talks JSON. Default: "talks.json".
+/// - `talkSpeakersFileName`: Output filename for the talk-speaker relationships JSON. Default: "talkspeakers.json".
+///
+/// Behavior:
+/// - Parses events using `Parser.events(from:skipFileWithExtensions:)`.
+/// - Sorts events by date before generating the README using `Generator.generateReadMe(for:at:)`.
+/// - Writes JSON files for events, speakers, talks, and talk-speaker mappings using `Generator.generateJson(for:at:)`.
+///
+/// Throws:
+/// - Rethrows any parsing or file I/O errors encountered during generation.
+///
+/// Notes:
+/// - The command relies on the `Models` module for domain types and the `Parser`/`Generator` utilities for processing.
+/// - Paths are resolved relative to the provided `path` argument using `URL(filePath:)`.
 @main
 struct GenerateReadMe: ParsableCommand {
-    @Argument
+    @Argument(help: "Path of the Talks Directory")
     var path: String
     
+    @Option(help: "file extension that needs to skip parsing. Default: md, json, sh")
     var skipFileWithExtensions: [String] = [
         "md",
         "json",
         "sh"
     ]
+    
+    @Option(help: "Name of the Read me file. Default: README.md")
     var readMeFileName: String = "README.md"
-    var jsonFileName: String = "talks.json"
+    
+    @Option(help: "Name of the events json file. Default: events.json")
+    var eventsjsonFileName: String = "events.json"
+    
+    @Option(help: "Name of the speakers json file. Default: speakers.json")
+    var speakersJsonFileName: String = "speakers.json"
+    
+    @Option(help: "Name of the talks json file. Default: talks.json")
+    var talksJsonFileName: String = "talks.json"
+    
+    @Option(help: "Name of the talkspeakers json file. default: talkspeakers.json")
+    var talkSpeakersFileName: String = "talkspeakers.json"
     
     mutating func run() throws {
-        let allEvents: [Event] = try GenerateReadMeCommand.events(
+        let allEvents = try Parser.events(
             from: path,
             skipFileWithExtensions: skipFileWithExtensions
-        ).0
-        .sorted(by: {$0.title > $1.title })
+        )
         
-        try GenerateReadMeCommand.generateReadMe(for: allEvents, at: URL(filePath: path).appending(path: readMeFileName))
+        try Generator.generateReadMe(for: allEvents.eventsWithTalks.sorted(by: {$0.event.date < $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
         
-        try GenerateReadMeCommand.generateJson(for: allEvents, at: URL(filePath: path).appending(path: jsonFileName))
-    }
-}
-
-enum GenerateReadMeCommand {
-    enum GeneratorError: LocalizedError {
-        case noSpeakerFile
-    }
-    
-    static func events(from path: String, skipFileWithExtensions: [String]) throws -> ([Event], Set<Speaker>) {
-        let decoder = YAMLDecoder()
-        var allEvents: [Event] = []
-        var speakers: Set<Speaker> = []
+        let pathURL = URL(filePath: path)
         
-        for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
-            debugPrint(eventURL.lastPathComponent)
-            guard let date = eventURL.lastPathComponent.date else { continue }
-            var parsedTalks: [Talk] = []
-            
-            for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions) {
-                debugPrint("\t", talkURL.lastPathComponent)
-                
-                for talkContentURL in try validContentsOfDirectory(at: talkURL, skipping: skipFileWithExtensions) {
-                    debugPrint("\t\t", talkContentURL.lastPathComponent)
-                    if talkContentURL.lastPathComponent.contains("Speaker") {
-                        if let contentData = FileManager.default.contents(atPath: talkContentURL.path(percentEncoded: false)) {
-                            let decodedSpeakers = try decoder.decode([Speaker].self, from: contentData)
-                            let parsedTalk = Talk(title: talkURL.lastPathComponent, speakers: decodedSpeakers)
-                            parsedTalks.append(parsedTalk)
-                            speakers.insert(contentsOf: decodedSpeakers)
-                        } else {
-                            throw GeneratorError.noSpeakerFile
-                        }
-                    }
-                }
-                
-            }
-            
-            let parsedEvent = Event(title: eventURL.lastPathComponent, date: date, talks: parsedTalks)
-            allEvents.append(parsedEvent)
-        }
-        
-        return (allEvents, speakers)
-    }
-    
-    static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String]) throws -> [URL] {
-        let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-        return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) })
-    }
-    
-    static func generateReadMe(for events: [Event], at path: URL) throws {
-        if FileManager.default.fileExists(atPath: path.path(percentEncoded: false)) {
-            try FileManager.default.removeItem(at: path)
-        }
-        let content = events.map { $0.description }.joined(separator: "\n")
-        try content.write(to: path, atomically: true, encoding: .utf8)
-    }
-    
-    static func generateJson(for events: [Event], at path: URL) throws {
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(events)
-        try data.write(to: path)
-    }
-}
-
-enum Formatter {
-    static let dateFormatter = DateFormatter()
-}
-
-extension String {
-    public var date: Date? {
-        if let last = self.split(separator: ". ").last {
-            let dateString = String(last)
-            let formatter = Formatter.dateFormatter
-            formatter.dateFormat = "MMM dd, yyyy"
-            return formatter.date(from: dateString)
-        }
-        return nil
-    }
-}
-
-extension Set {
-    mutating func insert(contentsOf elements: Array<Element>) {
-        for element in elements {
-            self.insert(element)
-        }
+        try Generator.generateJson(for: allEvents.events, at: pathURL.appending(path: eventsjsonFileName))
+        try Generator.generateJson(for: allEvents.speakers, at: pathURL.appending(path: speakersJsonFileName))
+        try Generator.generateJson(for: allEvents.talks, at: pathURL.appending(path: talksJsonFileName))
+        try Generator.generateJson(for: allEvents.talkSpeakers, at: pathURL.appending(path: talkSpeakersFileName))
     }
 }
