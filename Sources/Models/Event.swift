@@ -97,14 +97,14 @@ extension Event: CustomStringConvertible {
 public struct EventWithTalks: Identifiable {
     public var event: Event
     public var talks: [TalkWithSpeakers]
-    public var photoURL: URL?
+    public var eventInfo: EventInfo?
     
     public var id: Event.ID { event.id }
     
-    public init(event: Event, talks: [TalkWithSpeakers], photoURL: URL?) {
+    public init(event: Event, talks: [TalkWithSpeakers], eventInfo: EventInfo?) {
         self.event = event
         self.talks = talks
-        self.photoURL = photoURL
+        self.eventInfo = eventInfo
     }
 }
 
@@ -135,8 +135,10 @@ extension EventWithTalks: CustomStringConvertible {
     public var description: String {
         """
         \(event.description)
+        \((eventInfo?.about).map {" 💻 \($0)"}, default: "")
+        \(eventInfo?.photoURL.map {"### 📸 [Event Photos](\($0))"}, default: "")
         \(talks.map { $0.description }.joined(separator: "\n") )
-        \(photoURL.map {"[Event Photos](\($0))"}, default: "")
+        ---
         """
     }
 }

@@ -44,12 +44,14 @@ struct GenerateReadMeTests {
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
                 """
                 # 1. Apr 20 2025
+
+
                 ## Talk1
                 ### By: **Johny Appleseed**
                 Apple Engineer
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io)
-
+                ---
                 """
             }
         }
@@ -88,6 +90,8 @@ struct GenerateReadMeTests {
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
                 """
                 # 10. Dec 31 2025
+
+
                 ## Talk1
                 ### By: **Johny Appleseed**
                 Apple Engineer
@@ -97,7 +101,7 @@ struct GenerateReadMeTests {
                 Git Inventor
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/linus-torvalds-0a0123456/)
-
+                ---
                 """
             }
         }
@@ -136,6 +140,8 @@ struct GenerateReadMeTests {
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
                 """
                 # 2. Oct 2 2025
+
+
                 ## Talk1
                 ### By: **Event2 Speaker 1**
                 Talented Speaker-1
@@ -151,8 +157,10 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
-
+                ---
                 # 1. Oct 1 2025
+
+
                 ## Talk1
                 ### By: **Event1 Speaker 1**
                 Talented Speaker-1
@@ -168,8 +176,10 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
-
+                ---
                 # 3. Oct 3 2025
+
+
                 ## Talk1
                 ### By: **Event3 Speaker 1**
                 Talented Speaker-1
@@ -185,7 +195,7 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
-
+                ---
                 """
             }
         }

@@ -79,7 +79,7 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: nil
+                      eventInfo: nil
                     )
                   ],
                   speakers: [
@@ -218,7 +218,7 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: nil
+                      eventInfo: nil
                     )
                   ],
                   speakers: [
@@ -423,7 +423,7 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: nil
+                      eventInfo: nil
                     ),
                     [1]: EventWithTalks(
                       event: Event(
@@ -493,7 +493,7 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: nil
+                      eventInfo: nil
                     ),
                     [2]: EventWithTalks(
                       event: Event(
@@ -563,7 +563,7 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: nil
+                      eventInfo: nil
                     )
                   ],
                   speakers: [
@@ -1042,7 +1042,27 @@ struct ParsingTests {
                           ]
                         )
                       ],
-                      photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
+                      eventInfo: EventInfo(
+                        id: "a536787a0e3f9005c995a40754ca3fb00d19875ecb1a267aba16cf3870ceb2df",
+                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                        date: Date(2025-10-10T18:30:00.000Z),
+                        about: "Swift Ahmedabad October\'25 MeetUp",
+                        location: EventInfo.Location(
+                          name: "CricHeroes Pvt. Ltd",
+                          map: URL(https://www.google.com/maps/search/?api=1&query=CricHeroes%20Pvt.%20Ltd.&query_place_id=ChIJWbxyziaFXjkRedJ8Zxm-gEk),
+                          address: "TF1 (3rd Floor, off Sindhu Bhavan Marg, near Avalon Hotel, Bodakdev, Ahmedabad, Gujarat 380059",
+                          coordinates: EventInfo.Location.Coordinates(
+                            latitude: 23.0453052,
+                            longitude: 72.5080271,
+                            zoom: 17.0
+                          )
+                        ),
+                        sponsors: Sponsors(
+                          vanue: "CricHeroes Pvt. Ltd",
+                          food: "CricHeroes Pvt. Ltd"
+                        ),
+                        photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
+                      )
                     )
                   ],
                   speakers: [
