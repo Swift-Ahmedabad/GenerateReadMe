@@ -37,6 +37,11 @@ import Models
 /// - Paths are resolved relative to the provided `path` argument using `URL(filePath:)`.
 @main
 struct GenerateReadMe: ParsableCommand {
+    
+    static var configuration: CommandConfiguration {
+        CommandConfiguration(commandName: "GenerateReadMe")
+    }
+    
     @Argument(help: "Path of the Talks Directory")
     var path: String
     
