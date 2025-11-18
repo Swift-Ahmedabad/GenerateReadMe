@@ -65,9 +65,12 @@ enum Parser {
         var talksWithSpeakers: [TalkWithSpeakers] = []
         var talks: [Talk] = []
         var talkSpeakers: [TalkSpeaker] = []
+        var eventInfos: [EventInfo] = []
+        var agendas: [Agenda] = []
+        var sponsors: [Sponsors] = []
     }
     
-    static func events(from path: String, skipFileWithExtensions: [String]) throws -> EventsInfo {
+    static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
         let decoder = YAMLDecoder()
         var info = EventsInfo()
         
@@ -76,8 +79,18 @@ enum Parser {
             guard let date = eventURL.lastPathComponent.date else { continue }
             var parsedTalks: [TalkWithSpeakers] = []
             let parsedEvent = Event(title: eventURL.lastPathComponent, date: date)
+            var photoURL: URL?
             
-            for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions) {
+            let infoYMLURL = eventURL.appending(path: "Info.yml")
+            if let infoContent = FileManager.default.contents(atPath: infoYMLURL.path(percentEncoded: false)) {
+                let eventInfo = try decoder.decode(EventInfoWithAgendas.self, from: infoContent, userInfo: [CodingUserInfoKey(rawValue: Models.EventInfo.CodingKeys.eventID.stringValue)! : parsedEvent.id])
+                photoURL = eventInfo.eventInfo.photoURL
+                info.eventInfos.append(eventInfo.eventInfo)
+                info.agendas.append(contentsOf: eventInfo.agenda)
+                info.sponsors.append(eventInfo.eventInfo.sponsors)
+            }
+            
+            for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions, additionalSkipFileNames: ["Info.yml"]) {
                 debugPrint("\t", talkURL.lastPathComponent)
                 
                 for talkContentURL in try validContentsOfDirectory(at: talkURL, skipping: skipFileWithExtensions) {
@@ -106,7 +119,7 @@ enum Parser {
                 
             }
             
-            let eventWithTalks = EventWithTalks(event: parsedEvent, talks: parsedTalks)
+            let eventWithTalks = EventWithTalks(event: parsedEvent, talks: parsedTalks, photoURL: photoURL)
             info.eventsWithTalks.append(eventWithTalks)
             info.events.append(parsedEvent)
         }
@@ -133,8 +146,8 @@ enum Parser {
     ///   - The filter checks `URL.pathExtension` directly and compares it against the provided list.
     ///   - Hidden files are skipped via `.skipsHiddenFiles`; package-private or OS metadata entries will not be included.
     ///   - The order of returned URLs is the same as provided by FileManager and is not guaranteed to be sorted.
-    static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String]) throws -> [URL] {
+    static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String], additionalSkipFileNames: [String] = []) throws -> [URL] {
         let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-        return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) })
+        return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) }).filter { !additionalSkipFileNames.contains($0.lastPathComponent) }
     }
 }

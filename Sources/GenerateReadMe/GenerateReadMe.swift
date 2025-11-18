@@ -23,6 +23,9 @@ import Models
 /// - `speakersJsonFileName`: Output filename for the speakers JSON. Default: "speakers.json".
 /// - `talksJsonFileName`: Output filename for the talks JSON. Default: "talks.json".
 /// - `talkSpeakersFileName`: Output filename for the talk-speaker relationships JSON. Default: "talkspeakers.json".
+/// - `eventInfosFileName`: Output filename for the eventInfos JSON. Default: "eventInfos.json".
+/// - `sponsorsFileName`: Output filename for the sponsors JSON. Default: "sponsors.json".
+/// - `agendasFileName`: Output filename for the agendas JSON. Default: "agendas.json".
 ///
 /// Behavior:
 /// - Parses events using `Parser.events(from:skipFileWithExtensions:)`.
@@ -46,11 +49,7 @@ struct GenerateReadMe: ParsableCommand {
     var path: String
     
     @Option(help: "file extension that needs to skip parsing. Default: md, json, sh")
-    var skipFileWithExtensions: [String] = [
-        "md",
-        "json",
-        "sh"
-    ]
+    var skipFileWithExtensions: [String] = .defaultSkippingExtensions
     
     @Option(help: "Name of the Read me file. Default: README.md")
     var readMeFileName: String = "README.md"
@@ -64,8 +63,17 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the talks json file. Default: talks.json")
     var talksJsonFileName: String = "talks.json"
     
-    @Option(help: "Name of the talkspeakers json file. default: talkspeakers.json")
+    @Option(help: "Name of the talkspeakers json file. Default: talkspeakers.json")
     var talkSpeakersFileName: String = "talkspeakers.json"
+    
+    @Option(help: "Name of the eventInfos json file. Default: eventInfos.json")
+    var eventInfosFileName: String = "eventInfos.json"
+    
+    @Option(help: "Name of the sponsors json file. Default: sponsors.json")
+    var sponsorsFileName: String = "sponsors.json"
+    
+    @Option(help: "Name of the agendas json file, Default: agandas.json")
+    var agendasFileName: String = "agandas.json"
     
     mutating func run() throws {
         let allEvents = try Parser.events(
@@ -73,13 +81,27 @@ struct GenerateReadMe: ParsableCommand {
             skipFileWithExtensions: skipFileWithExtensions
         )
         
-        try Generator.generateReadMe(for: allEvents.eventsWithTalks.sorted(by: {$0.event.date < $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
+        try Generator.generateReadMe(for: allEvents.eventsWithTalks.sorted(by: {$0.event.date > $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
         
-        let pathURL = URL(filePath: path)
+        let pathURL = URL(filePath: path).appending(path: ".generated")
+        try? FileManager.default.createDirectory(at: pathURL, withIntermediateDirectories: true)
         
         try Generator.generateJson(for: allEvents.events, at: pathURL.appending(path: eventsjsonFileName))
         try Generator.generateJson(for: allEvents.speakers, at: pathURL.appending(path: speakersJsonFileName))
         try Generator.generateJson(for: allEvents.talks, at: pathURL.appending(path: talksJsonFileName))
         try Generator.generateJson(for: allEvents.talkSpeakers, at: pathURL.appending(path: talkSpeakersFileName))
+        try Generator.generateJson(for: allEvents.eventInfos, at: pathURL.appending(path: eventInfosFileName))
+        try Generator.generateJson(for: allEvents.sponsors, at: pathURL.appending(path: sponsorsFileName))
+        try Generator.generateJson(for: allEvents.agendas, at: pathURL.appending(path: agendasFileName))
+    }
+}
+
+extension [String] {
+    static var defaultSkippingExtensions: [String] {
+        [
+            "md",
+            "json",
+            "sh"
+        ]
     }
 }

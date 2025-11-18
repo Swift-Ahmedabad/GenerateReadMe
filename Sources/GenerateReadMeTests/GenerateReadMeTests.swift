@@ -12,7 +12,7 @@ import InlineSnapshotTesting
 import SnapshotTestingCustomDump
 import Testing
 
-@Suite(.snapshots(record: .never))
+@Suite(.snapshots(record: .failed))
 struct GenerateReadMeTests {
     
     @Test
@@ -38,7 +38,7 @@ struct GenerateReadMeTests {
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
         
         try withSnapshotTesting(record: .failed) {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"]).eventsWithTalks
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false)).eventsWithTalks
             let readMeURL = fileURL.appending(path: "README.md")
             try Generator.generateReadMe(for: events, at: readMeURL)
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
@@ -49,6 +49,7 @@ struct GenerateReadMeTests {
                 Apple Engineer
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io)
+
                 """
             }
         }
@@ -81,7 +82,7 @@ struct GenerateReadMeTests {
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
                 
         try withSnapshotTesting {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"]).eventsWithTalks
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false)).eventsWithTalks
             let readMeURL = fileURL.appending(path: "README.md")
             try Generator.generateReadMe(for: events, at: readMeURL)
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
@@ -96,6 +97,7 @@ struct GenerateReadMeTests {
                 Git Inventor
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/linus-torvalds-0a0123456/)
+
                 """
             }
         }
@@ -128,7 +130,7 @@ struct GenerateReadMeTests {
         }
         
         try withSnapshotTesting {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"]).eventsWithTalks
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false)).eventsWithTalks
             let readMeURL = fileURL.appending(path: "README.md")
             try Generator.generateReadMe(for: events, at: readMeURL)
             assertInlineSnapshot(of: readMeURL, as: .urlContent) {
@@ -149,6 +151,7 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+
                 # 1. Oct 1 2025
                 ## Talk1
                 ### By: **Event1 Speaker 1**
@@ -165,6 +168,7 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+
                 # 3. Oct 3 2025
                 ## Talk1
                 ### By: **Event3 Speaker 1**
@@ -181,6 +185,7 @@ struct GenerateReadMeTests {
                 Talented Speaker-3
 
                 Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+
                 """
             }
         }

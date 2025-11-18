@@ -97,12 +97,14 @@ extension Event: CustomStringConvertible {
 public struct EventWithTalks: Identifiable {
     public var event: Event
     public var talks: [TalkWithSpeakers]
+    public var photoURL: URL?
     
     public var id: Event.ID { event.id }
     
-    public init(event: Event, talks: [TalkWithSpeakers]) {
+    public init(event: Event, talks: [TalkWithSpeakers], photoURL: URL?) {
         self.event = event
         self.talks = talks
+        self.photoURL = photoURL
     }
 }
 
@@ -120,12 +122,12 @@ extension EventWithTalks: CustomStringConvertible {
     /// Example output:
     /// # Swift Community Meetup
     /// Learn about Swift Concurrency
-    /// ##[Photos](https://example.com/album)
     /// ## Talk Title 1
     /// Speaker: Jane Doe
-    /// ...
+    ///
     /// ## Talk Title 2
     /// Speaker: John Smith
+    /// ##[Event Photos](https://example.com/album)
     ///
     /// - Note: If there are no talks, only the event’s description is rendered.
     /// - Returns: A single Markdown string that concatenates the event’s description
@@ -134,6 +136,7 @@ extension EventWithTalks: CustomStringConvertible {
         """
         \(event.description)
         \(talks.map { $0.description }.joined(separator: "\n") )
+        \(photoURL.map {"[Event Photos](\($0))"}, default: "")
         """
     }
 }

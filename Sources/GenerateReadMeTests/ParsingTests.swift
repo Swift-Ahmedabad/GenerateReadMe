@@ -39,7 +39,7 @@ struct ParsingTests {
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
         
         try withSnapshotTesting {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"])
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false))
             assertInlineSnapshot(of: events, as: .customDump) {
                 """
                 Parser.EventsInfo(
@@ -78,7 +78,8 @@ struct ParsingTests {
                             )
                           ]
                         )
-                      ]
+                      ],
+                      photoURL: nil
                     )
                   ],
                   speakers: [
@@ -129,7 +130,10 @@ struct ParsingTests {
                       talkId: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
                       speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                     )
-                  ]
+                  ],
+                  eventInfos: [],
+                  agendas: [],
+                  sponsors: []
                 )
                 """
             }
@@ -163,7 +167,7 @@ struct ParsingTests {
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
                 
         try withSnapshotTesting {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"])
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false))
             assertInlineSnapshot(of: events, as: .customDump) {
                 """
                 Parser.EventsInfo(
@@ -213,7 +217,8 @@ struct ParsingTests {
                             )
                           ]
                         )
-                      ]
+                      ],
+                      photoURL: nil
                     )
                   ],
                   speakers: [
@@ -291,7 +296,10 @@ struct ParsingTests {
                       talkId: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
                       speakerID: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2"
                     )
-                  ]
+                  ],
+                  eventInfos: [],
+                  agendas: [],
+                  sponsors: []
                 )
                 """
             }
@@ -325,7 +333,7 @@ struct ParsingTests {
         }
         
         try withSnapshotTesting {
-            let events = try Parser.events(from: fileURL.path(percentEncoded: false), skipFileWithExtensions: ["md", "json", "sh"])
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false))
             assertInlineSnapshot(of: events, as: .customDump) {
                 """
                 Parser.EventsInfo(
@@ -414,7 +422,8 @@ struct ParsingTests {
                             )
                           ]
                         )
-                      ]
+                      ],
+                      photoURL: nil
                     ),
                     [1]: EventWithTalks(
                       event: Event(
@@ -483,7 +492,8 @@ struct ParsingTests {
                             )
                           ]
                         )
-                      ]
+                      ],
+                      photoURL: nil
                     ),
                     [2]: EventWithTalks(
                       event: Event(
@@ -552,7 +562,8 @@ struct ParsingTests {
                             )
                           ]
                         )
-                      ]
+                      ],
+                      photoURL: nil
                     )
                   ],
                   speakers: [
@@ -931,9 +942,209 @@ struct ParsingTests {
                       talkId: "b45986c47d464ede2b45b1708ac6b00c37a07c661534d5f1e133f5ac827c17d4",
                       speakerID: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c"
                     )
-                  ]
+                  ],
+                  eventInfos: [],
+                  agendas: [],
+                  sponsors: []
                 )
                 """
+            }
+        }
+    }
+    
+    @Test func parseEventInfo() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let eventsURL = fileURL.appending(path: "1. Jan 01 2025")
+        let event1URL = eventsURL.appending(path: "Talk1")
+        try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
+        let speakerYML =
+        """
+        - Speaker: Johny Appleseed
+          Socials:
+            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            Github: https://github.com/johny-appleseed
+            Portfolio: https://johny-appleseed.github.io
+          About: Apple Engineer
+        """
+        let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
+        try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
+        
+        let infoYML =
+        """
+        about: "Swift Ahmedabad October'25 MeetUp"
+        date: "October 11, 2025"
+        location:
+            name: "CricHeroes Pvt. Ltd"
+            map: "https://www.google.com/maps/search/?api=1&query=CricHeroes%20Pvt.%20Ltd.&query_place_id=ChIJWbxyziaFXjkRedJ8Zxm-gEk"
+            address: "TF1 (3rd Floor, off Sindhu Bhavan Marg, near Avalon Hotel, Bodakdev, Ahmedabad, Gujarat 380059"
+            coordinates:
+                latitude: 23.0453052
+                longitude: 72.5080271
+                zoom: 17
+        agenda:
+            - time: "10:00 AM "
+              title: "Welcome & Registration"
+            - time: "10:15 AM "
+              title: "Talk 1"
+            - time: "12:00 PM "
+              title: "Networking & Refreshments"
+        sponsors:
+            vanue: "CricHeroes Pvt. Ltd"
+            food: "CricHeroes Pvt. Ltd"
+        photoURL: "https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9"
+        """
+        let infoYMLURL = eventsURL.appending(path: "Info.yml")
+        try infoYML.write(to: infoYMLURL, atomically: true, encoding: .utf8)
+        
+        try withSnapshotTesting {
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false))
+            assertInlineSnapshot(of: events, as: .customDump) {
+                #"""
+                Parser.EventsInfo(
+                  events: [
+                    [0]: Event(
+                      id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      title: "1. Jan 01 2025",
+                      date: Date(2024-12-31T18:30:00.000Z)
+                    )
+                  ],
+                  eventsWithTalks: [
+                    [0]: EventWithTalks(
+                      event: Event(
+                        id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                        title: "1. Jan 01 2025",
+                        date: Date(2024-12-31T18:30:00.000Z)
+                      ),
+                      talks: [
+                        [0]: TalkWithSpeakers(
+                          talk: Talk(
+                            id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                            title: "Talk1",
+                            eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                          ),
+                          speakers: [
+                            [0]: Speaker(
+                              id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
+                              speaker: "Johny Appleseed",
+                              socials: Speaker.Socials(
+                                linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
+                                github: "https://github.com/johny-appleseed",
+                                portfolio: "https://johny-appleseed.github.io",
+                                twitter: nil
+                              ),
+                              about: "Apple Engineer"
+                            )
+                          ]
+                        )
+                      ],
+                      photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
+                    )
+                  ],
+                  speakers: [
+                    [0]: Speaker(
+                      id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
+                      speaker: "Johny Appleseed",
+                      socials: Speaker.Socials(
+                        linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
+                        github: "https://github.com/johny-appleseed",
+                        portfolio: "https://johny-appleseed.github.io",
+                        twitter: nil
+                      ),
+                      about: "Apple Engineer"
+                    )
+                  ],
+                  talksWithSpeakers: [
+                    [0]: TalkWithSpeakers(
+                      talk: Talk(
+                        id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                        title: "Talk1",
+                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                      ),
+                      speakers: [
+                        [0]: Speaker(
+                          id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
+                          speaker: "Johny Appleseed",
+                          socials: Speaker.Socials(
+                            linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
+                            github: "https://github.com/johny-appleseed",
+                            portfolio: "https://johny-appleseed.github.io",
+                            twitter: nil
+                          ),
+                          about: "Apple Engineer"
+                        )
+                      ]
+                    )
+                  ],
+                  talks: [
+                    [0]: Talk(
+                      id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      title: "Talk1",
+                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                    )
+                  ],
+                  talkSpeakers: [
+                    [0]: TalkSpeaker(
+                      id: "ce3e25fc078c362f895300696b827876c9e1f407bbb172257bef21f7910c6043",
+                      talkId: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
+                    )
+                  ],
+                  eventInfos: [
+                    [0]: EventInfo(
+                      id: "a536787a0e3f9005c995a40754ca3fb00d19875ecb1a267aba16cf3870ceb2df",
+                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      date: Date(2025-10-10T18:30:00.000Z),
+                      about: "Swift Ahmedabad October\'25 MeetUp",
+                      location: EventInfo.Location(
+                        name: "CricHeroes Pvt. Ltd",
+                        map: URL(https://www.google.com/maps/search/?api=1&query=CricHeroes%20Pvt.%20Ltd.&query_place_id=ChIJWbxyziaFXjkRedJ8Zxm-gEk),
+                        address: "TF1 (3rd Floor, off Sindhu Bhavan Marg, near Avalon Hotel, Bodakdev, Ahmedabad, Gujarat 380059",
+                        coordinates: EventInfo.Location.Coordinates(
+                          latitude: 23.0453052,
+                          longitude: 72.5080271,
+                          zoom: 17.0
+                        )
+                      ),
+                      sponsors: Sponsors(
+                        vanue: "CricHeroes Pvt. Ltd",
+                        food: "CricHeroes Pvt. Ltd"
+                      ),
+                      photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
+                    )
+                  ],
+                  agendas: [
+                    [0]: Agenda(
+                      id: "f1f7367197c270dadef5aa94b134a819a2d2c970a94a16a18023ccd047586b90",
+                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      time: Date(2000-01-01T04:30:00.000Z),
+                      title: "Welcome & Registration"
+                    ),
+                    [1]: Agenda(
+                      id: "879f2026a4bcb8babe63d4fc20da2eabca97adf4256b02017c84c4e164422962",
+                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      time: Date(2000-01-01T04:45:00.000Z),
+                      title: "Talk 1"
+                    ),
+                    [2]: Agenda(
+                      id: "91de961b3125336eb6790ae5069c7b42c6c56157755a56189c0ee302349539e3",
+                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      time: Date(2000-01-01T06:30:00.000Z),
+                      title: "Networking & Refreshments"
+                    )
+                  ],
+                  sponsors: [
+                    [0]: Sponsors(
+                      vanue: "CricHeroes Pvt. Ltd",
+                      food: "CricHeroes Pvt. Ltd"
+                    )
+                  ]
+                )
+                """#
             }
         }
     }

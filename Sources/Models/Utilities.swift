@@ -17,8 +17,8 @@ import Foundation
 /// - Note: Formatters are not inherently thread-safe. If you plan to access
 ///   these shared instances from multiple threads concurrently, consider
 ///   adding synchronization or using per-thread instances as needed.
-enum Formatter {
-    static let dateFormatter = DateFormatter()
+public enum Formatter {
+    public static let dateFormatter = DateFormatter()
 }
 
 /// A namespace for shared encoder/decoder utilities used across the project.
@@ -37,8 +37,8 @@ enum Formatter {
 ///   - Use `Coder.jsonEncoder` to encode Swift types to JSON with a shared encoder.
 ///   - Consider extending `Coder` with additional encoders/decoders or
 ///     preconfigured strategies as your project’s needs grow.
-enum Coder {
-    static let jsonEncoder = JSONEncoder()
+public enum Coder {
+    public static let jsonEncoder = JSONEncoder()
 }
 
 extension String {
