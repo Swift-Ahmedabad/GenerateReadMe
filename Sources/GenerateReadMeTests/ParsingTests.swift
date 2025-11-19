@@ -33,6 +33,7 @@ struct ParsingTests {
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
+          image: johnyappleseed.jpeg 
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -73,7 +74,8 @@ struct ParsingTests {
                                 portfolio: "https://johny-appleseed.github.io",
                                 twitter: nil
                               ),
-                              about: "Apple Engineer"
+                              about: "Apple Engineer",
+                              image: "johnyappleseed.jpeg"
                             )
                           ]
                         )
@@ -91,7 +93,8 @@ struct ParsingTests {
                         portfolio: "https://johny-appleseed.github.io",
                         twitter: nil
                       ),
-                      about: "Apple Engineer"
+                      about: "Apple Engineer",
+                      image: "johnyappleseed.jpeg"
                     )
                   ],
                   talksWithSpeakers: [
@@ -111,7 +114,8 @@ struct ParsingTests {
                             portfolio: "https://johny-appleseed.github.io",
                             twitter: nil
                           ),
-                          about: "Apple Engineer"
+                          about: "Apple Engineer",
+                          image: "johnyappleseed.jpeg"
                         )
                       ]
                     )
@@ -156,10 +160,12 @@ struct ParsingTests {
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
+          image: johnyappleseed.jpeg
         - speaker: Linus Torvalds
           socials:
             linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
           about: Git Inventor
+          image: linustorwards.jpeg
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -200,7 +206,8 @@ struct ParsingTests {
                                 portfolio: "https://johny-appleseed.github.io",
                                 twitter: nil
                               ),
-                              about: "Apple Engineer"
+                              about: "Apple Engineer",
+                              image: "johnyappleseed.jpeg"
                             ),
                             [1]: Speaker(
                               id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
@@ -211,7 +218,8 @@ struct ParsingTests {
                                 portfolio: nil,
                                 twitter: nil
                               ),
-                              about: "Git Inventor"
+                              about: "Git Inventor",
+                              image: "linustorwards.jpeg"
                             )
                           ]
                         )
@@ -229,7 +237,8 @@ struct ParsingTests {
                         portfolio: "https://johny-appleseed.github.io",
                         twitter: nil
                       ),
-                      about: "Apple Engineer"
+                      about: "Apple Engineer",
+                      image: "johnyappleseed.jpeg"
                     ),
                     [1]: Speaker(
                       id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
@@ -240,7 +249,8 @@ struct ParsingTests {
                         portfolio: nil,
                         twitter: nil
                       ),
-                      about: "Git Inventor"
+                      about: "Git Inventor",
+                      image: "linustorwards.jpeg"
                     )
                   ],
                   talksWithSpeakers: [
@@ -260,7 +270,8 @@ struct ParsingTests {
                             portfolio: "https://johny-appleseed.github.io",
                             twitter: nil
                           ),
-                          about: "Apple Engineer"
+                          about: "Apple Engineer",
+                          image: "johnyappleseed.jpeg"
                         ),
                         [1]: Speaker(
                           id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
@@ -271,7 +282,8 @@ struct ParsingTests {
                             portfolio: nil,
                             twitter: nil
                           ),
-                          about: "Git Inventor"
+                          about: "Git Inventor",
+                          image: "linustorwards.jpeg"
                         )
                       ]
                     )
@@ -323,6 +335,7 @@ struct ParsingTests {
                     github: https://github.com/speaker\(t)
                     portfolio: https://speaker-\(t).github.io
                   about: Talented Speaker-\(t)
+                  image: telentedspeaker\(t).png
                 """
                 let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
                 try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -375,7 +388,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-1.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-1"
+                              about: "Talented Speaker-1",
+                              image: "telentedspeaker1.png"
                             )
                           ]
                         ),
@@ -395,7 +409,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-2.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-2"
+                              about: "Talented Speaker-2",
+                              image: "telentedspeaker2.png"
                             )
                           ]
                         ),
@@ -415,7 +430,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-3.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-3"
+                              about: "Talented Speaker-3",
+                              image: "telentedspeaker3.png"
                             )
                           ]
                         )
@@ -445,7 +461,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-1.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-1"
+                              about: "Talented Speaker-1",
+                              image: "telentedspeaker1.png"
                             )
                           ]
                         ),
@@ -465,7 +482,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-2.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-2"
+                              about: "Talented Speaker-2",
+                              image: "telentedspeaker2.png"
                             )
                           ]
                         ),
@@ -485,7 +503,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-3.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-3"
+                              about: "Talented Speaker-3",
+                              image: "telentedspeaker3.png"
                             )
                           ]
                         )
@@ -515,7 +534,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-1.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-1"
+                              about: "Talented Speaker-1",
+                              image: "telentedspeaker1.png"
                             )
                           ]
                         ),
@@ -535,7 +555,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-2.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-2"
+                              about: "Talented Speaker-2",
+                              image: "telentedspeaker2.png"
                             )
                           ]
                         ),
@@ -555,7 +576,8 @@ struct ParsingTests {
                                 portfolio: "https://speaker-3.github.io",
                                 twitter: nil
                               ),
-                              about: "Talented Speaker-3"
+                              about: "Talented Speaker-3",
+                              image: "telentedspeaker3.png"
                             )
                           ]
                         )
@@ -573,7 +595,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-1.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-1"
+                      about: "Talented Speaker-1",
+                      image: "telentedspeaker1.png"
                     ),
                     [1]: Speaker(
                       id: "dbdd5e35ea6abcf1af549739f16b1fdcdfd984ef867a14009e085cf23913c497",
@@ -584,7 +607,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-2.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-2"
+                      about: "Talented Speaker-2",
+                      image: "telentedspeaker2.png"
                     ),
                     [2]: Speaker(
                       id: "a286a248e3551b27be8d0f302f48223aedebe26279f5d4610ab695495fa1f079",
@@ -595,7 +619,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-3.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-3"
+                      about: "Talented Speaker-3",
+                      image: "telentedspeaker3.png"
                     ),
                     [3]: Speaker(
                       id: "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f",
@@ -606,7 +631,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-1.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-1"
+                      about: "Talented Speaker-1",
+                      image: "telentedspeaker1.png"
                     ),
                     [4]: Speaker(
                       id: "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3",
@@ -617,7 +643,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-2.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-2"
+                      about: "Talented Speaker-2",
+                      image: "telentedspeaker2.png"
                     ),
                     [5]: Speaker(
                       id: "992f1e3c743cbb83854592acf4b0b60529e2b8adab842ab01ad2c94be34c5d32",
@@ -628,7 +655,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-3.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-3"
+                      about: "Talented Speaker-3",
+                      image: "telentedspeaker3.png"
                     ),
                     [6]: Speaker(
                       id: "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d",
@@ -639,7 +667,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-1.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-1"
+                      about: "Talented Speaker-1",
+                      image: "telentedspeaker1.png"
                     ),
                     [7]: Speaker(
                       id: "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52",
@@ -650,7 +679,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-2.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-2"
+                      about: "Talented Speaker-2",
+                      image: "telentedspeaker2.png"
                     ),
                     [8]: Speaker(
                       id: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c",
@@ -661,7 +691,8 @@ struct ParsingTests {
                         portfolio: "https://speaker-3.github.io",
                         twitter: nil
                       ),
-                      about: "Talented Speaker-3"
+                      about: "Talented Speaker-3",
+                      image: "telentedspeaker3.png"
                     )
                   ],
                   talksWithSpeakers: [
@@ -681,7 +712,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-1.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-1"
+                          about: "Talented Speaker-1",
+                          image: "telentedspeaker1.png"
                         )
                       ]
                     ),
@@ -701,7 +733,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-2.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-2"
+                          about: "Talented Speaker-2",
+                          image: "telentedspeaker2.png"
                         )
                       ]
                     ),
@@ -721,7 +754,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-3.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-3"
+                          about: "Talented Speaker-3",
+                          image: "telentedspeaker3.png"
                         )
                       ]
                     ),
@@ -741,7 +775,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-1.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-1"
+                          about: "Talented Speaker-1",
+                          image: "telentedspeaker1.png"
                         )
                       ]
                     ),
@@ -761,7 +796,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-2.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-2"
+                          about: "Talented Speaker-2",
+                          image: "telentedspeaker2.png"
                         )
                       ]
                     ),
@@ -781,7 +817,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-3.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-3"
+                          about: "Talented Speaker-3",
+                          image: "telentedspeaker3.png"
                         )
                       ]
                     ),
@@ -801,7 +838,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-1.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-1"
+                          about: "Talented Speaker-1",
+                          image: "telentedspeaker1.png"
                         )
                       ]
                     ),
@@ -821,7 +859,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-2.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-2"
+                          about: "Talented Speaker-2",
+                          image: "telentedspeaker2.png"
                         )
                       ]
                     ),
@@ -841,7 +880,8 @@ struct ParsingTests {
                             portfolio: "https://speaker-3.github.io",
                             twitter: nil
                           ),
-                          about: "Talented Speaker-3"
+                          about: "Talented Speaker-3",
+                          image: "telentedspeaker3.png"
                         )
                       ]
                     )
@@ -967,6 +1007,7 @@ struct ParsingTests {
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
+          image: johnyappleseed.jpeg
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -1034,7 +1075,8 @@ struct ParsingTests {
                                 portfolio: "https://johny-appleseed.github.io",
                                 twitter: nil
                               ),
-                              about: "Apple Engineer"
+                              about: "Apple Engineer",
+                              image: "johnyappleseed.jpeg"
                             )
                           ]
                         )
@@ -1072,7 +1114,8 @@ struct ParsingTests {
                         portfolio: "https://johny-appleseed.github.io",
                         twitter: nil
                       ),
-                      about: "Apple Engineer"
+                      about: "Apple Engineer",
+                      image: "johnyappleseed.jpeg"
                     )
                   ],
                   talksWithSpeakers: [
@@ -1092,7 +1135,8 @@ struct ParsingTests {
                             portfolio: "https://johny-appleseed.github.io",
                             twitter: nil
                           ),
-                          about: "Apple Engineer"
+                          about: "Apple Engineer",
+                          image: "johnyappleseed.jpeg"
                         )
                       ]
                     )

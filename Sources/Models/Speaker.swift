@@ -98,11 +98,13 @@ public struct Speaker: Codable, Hashable, Identifiable, Sendable {
     public var speaker: String
     public var socials: Socials?
     public var about: String?
+    public var image: String?
     
-    public init(speaker: String, socials: Socials? = nil, about: String? = nil) {
+    public init(speaker: String, socials: Socials? = nil, about: String? = nil, image: String? = nil) {
         self.speaker = speaker
         self.socials = socials
         self.about = about
+        self.image = image
         self.id = StableID(using: speaker, socials?.linkedIn ?? "").id
     }
     
@@ -111,6 +113,7 @@ public struct Speaker: Codable, Hashable, Identifiable, Sendable {
         self.speaker = try container.decode(String.self, forKey: .speaker)
         self.socials = try container.decodeIfPresent(Speaker.Socials.self, forKey: .socials)
         self.about = try container.decodeIfPresent(String.self, forKey: .about)
+        self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.id = StableID(using: speaker, socials?.linkedIn ?? "").id
     }
 }
