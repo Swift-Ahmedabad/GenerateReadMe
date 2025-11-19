@@ -13,11 +13,10 @@ import SnapshotTestingCustomDump
 import Testing
 
 
-@Suite(.snapshots(record: .failed))
+@Suite(.snapshots(record: .never))
 struct ParsingTests {
 
-    @Test
-    func eventsParsing() async throws {
+    @Test func eventsParsing() async throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -28,12 +27,12 @@ struct ParsingTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - Speaker: Johny Appleseed
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
-            Github: https://github.com/johny-appleseed
-            Portfolio: https://johny-appleseed.github.io
-          About: Apple Engineer
+        - speaker: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -140,8 +139,7 @@ struct ParsingTests {
          }
     }
     
-    @Test
-    func eventsParsingWithMultipleSpeakers() async throws {
+    @Test func eventsParsingWithMultipleSpeakers() async throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -152,16 +150,16 @@ struct ParsingTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - Speaker: Johny Appleseed
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
-            Github: https://github.com/johny-appleseed
-            Portfolio: https://johny-appleseed.github.io
-          About: Apple Engineer
-        - Speaker: Linus Torvalds
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
-          About: Git Inventor
+        - speaker: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - speaker: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -306,8 +304,7 @@ struct ParsingTests {
          }
     }
     
-    @Test
-    func multipleEventsParsing() throws {
+    @Test func multipleEventsParsing() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -320,12 +317,12 @@ struct ParsingTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - Speaker: Event\(e) Speaker \(t)
-                  Socials:
-                    LinkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
-                    Github: https://github.com/speaker\(t)
-                    Portfolio: https://speaker-\(t).github.io
-                  About: Talented Speaker-\(t)
+                - speaker: Event\(e) Speaker \(t)
+                  socials:
+                    linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
+                    github: https://github.com/speaker\(t)
+                    portfolio: https://speaker-\(t).github.io
+                  about: Talented Speaker-\(t)
                 """
                 let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
                 try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -964,12 +961,12 @@ struct ParsingTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - Speaker: Johny Appleseed
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
-            Github: https://github.com/johny-appleseed
-            Portfolio: https://johny-appleseed.github.io
-          About: Apple Engineer
+        - speaker: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)

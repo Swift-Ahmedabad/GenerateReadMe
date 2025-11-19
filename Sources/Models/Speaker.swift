@@ -86,13 +86,6 @@ public struct Speaker: Codable, Hashable, Identifiable, Sendable {
         public var portfolio: String?
         public var twitter: String?
         
-        enum CodingKeys: String, CodingKey {
-            case linkedIn = "LinkedIn"
-            case github = "Github"
-            case portfolio = "Portfolio"
-            case twitter = "Twitter"
-        }
-        
         public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil) {
             self.linkedIn = linkedIn
             self.github = github
@@ -105,13 +98,6 @@ public struct Speaker: Codable, Hashable, Identifiable, Sendable {
     public var speaker: String
     public var socials: Socials?
     public var about: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case speaker = "Speaker"
-        case socials = "Socials"
-        case about = "About"
-    }
     
     public init(speaker: String, socials: Socials? = nil, about: String? = nil) {
         self.speaker = speaker

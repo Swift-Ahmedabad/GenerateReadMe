@@ -12,10 +12,10 @@ import InlineSnapshotTesting
 import SnapshotTestingCustomDump
 import Testing
 
-@Suite(.snapshots(record: .failed))
+@Suite(.snapshots(record: .never))
 struct GenerateJsonTests {
-    @Test
-    func generateSpeakersJson() throws {
+    
+    @Test func generateSpeakersJson() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -26,16 +26,16 @@ struct GenerateJsonTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - Speaker: Johny Appleseed
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
-            Github: https://github.com/johny-appleseed
-            Portfolio: https://johny-appleseed.github.io
-          About: Apple Engineer
-        - Speaker: Linus Torvalds
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
-          About: Git Inventor
+        - speaker: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - speaker: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -48,22 +48,22 @@ struct GenerateJsonTests {
                 #"""
                 [
                   {
-                    "About" : "Apple Engineer",
+                    "about" : "Apple Engineer",
                     "id" : "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
-                    "Socials" : {
-                      "Github" : "https:\/\/github.com\/johny-appleseed",
-                      "LinkedIn" : "https:\/\/www.linkedin.com\/in\/johny-appleseed-0a0123456\/",
-                      "Portfolio" : "https:\/\/johny-appleseed.github.io"
+                    "socials" : {
+                      "github" : "https:\/\/github.com\/johny-appleseed",
+                      "linkedIn" : "https:\/\/www.linkedin.com\/in\/johny-appleseed-0a0123456\/",
+                      "portfolio" : "https:\/\/johny-appleseed.github.io"
                     },
-                    "Speaker" : "Johny Appleseed"
+                    "speaker" : "Johny Appleseed"
                   },
                   {
-                    "About" : "Git Inventor",
+                    "about" : "Git Inventor",
                     "id" : "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
-                    "Socials" : {
-                      "LinkedIn" : "https:\/\/www.linkedin.com\/in\/linus-torvalds-0a0123456\/"
+                    "socials" : {
+                      "linkedIn" : "https:\/\/www.linkedin.com\/in\/linus-torvalds-0a0123456\/"
                     },
-                    "Speaker" : "Linus Torvalds"
+                    "speaker" : "Linus Torvalds"
                   }
                 ]
                 """#
@@ -71,8 +71,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test
-    func generateTalksJSON() throws {
+    @Test func generateTalksJSON() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -85,12 +84,12 @@ struct GenerateJsonTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - Speaker: Event\(e) Speaker \(t)
-                  Socials:
-                    LinkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
-                    Github: https://github.com/speaker\(t)
-                    Portfolio: https://speaker-\(t).github.io
-                  About: Talented Speaker-\(t)
+                - speaker: Event\(e) Speaker \(t)
+                  socials:
+                    linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
+                    github: https://github.com/speaker\(t)
+                    portfolio: https://speaker-\(t).github.io
+                  about: Talented Speaker-\(t)
                 """
                 let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
                 try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -155,8 +154,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test
-    func generateEventJSON() async throws {
+    @Test func generateEventJSON() async throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -167,17 +165,6 @@ struct GenerateJsonTests {
             for t in 1...3 {
                 let event1URL = fileURL.appending(path: "\(e). Oct \(e) 2025/Talk\(t)")
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
-                let speakerYML =
-                """
-                - Speaker: Event\(e) Speaker \(t)
-                  Socials:
-                    LinkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
-                    Github: https://github.com/speaker\(t)
-                    Portfolio: https://speaker-\(t).github.io
-                  About: Talented Speaker-\(t)
-                """
-                let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
-                try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
             }
         }
         
@@ -209,8 +196,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test
-    func generateTalkSpeakerJSON() async throws {
+    @Test func generateTalkSpeakerJSON() async throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -223,12 +209,12 @@ struct GenerateJsonTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - Speaker: Event\(e) Speaker \(t)
-                  Socials:
-                    LinkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
-                    Github: https://github.com/speaker\(t)
-                    Portfolio: https://speaker-\(t).github.io
-                  About: Talented Speaker-\(t)
+                - speaker: Event\(e) Speaker \(t)
+                  socials:
+                    linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
+                    github: https://github.com/speaker\(t)
+                    portfolio: https://speaker-\(t).github.io
+                  about: Talented Speaker-\(t)
                 """
                 let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
                 try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
@@ -268,8 +254,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test
-    func generateEventInfoJSON() async throws {
+    @Test func generateEventInfoJSON() async throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -281,16 +266,16 @@ struct GenerateJsonTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - Speaker: Johny Appleseed
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
-            Github: https://github.com/johny-appleseed
-            Portfolio: https://johny-appleseed.github.io
-          About: Apple Engineer
-        - Speaker: Linus Torvalds
-          Socials:
-            LinkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
-          About: Git Inventor
+        - speaker: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - speaker: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
         """
         let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
         try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)

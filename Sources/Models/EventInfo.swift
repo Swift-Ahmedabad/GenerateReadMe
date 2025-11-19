@@ -7,46 +7,6 @@
 
 import Foundation
 
-public struct Agenda: Identifiable, Codable {
-    public var id: String
-    public var eventID: Event.ID
-    public var time: Date
-    public var title: String
-    
-    public enum CodingKeys: CodingKey {
-        case id
-        case eventID
-        case time
-        case title
-    }
-    
-    public init(time: Date, title: String, eventID: Event.ID) {
-        self.id = StableID(using: title, time, eventID).id
-        self.eventID = eventID
-        self.time = time
-        self.title = title
-    }
-    
-    public init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.eventID = decoder.userInfo[CodingUserInfoKey(rawValue: CodingKeys.eventID.stringValue)!] as! Event.ID
-        let timeString = try container.decode(String.self, forKey: .time)
-        let dateFormatter = Formatter.dateFormatter
-        dateFormatter.dateFormat = "hh:mm a"
-        guard let time = dateFormatter.date(from: timeString) else {
-            throw DecodingError.dataCorrupted(
-                .init(
-                    codingPath: [Agenda.CodingKeys.time],
-                    debugDescription: "Invalid time format, it should be of \"hh:mm a\""
-                )
-            )
-        }
-        self.time = time
-        self.title = try container.decode(String.self, forKey: .title)
-        self.id = StableID(using: title, time, eventID).id
-    }
-}
-
 public struct Sponsors: Codable {
     public var vanue: String
     public var food: String?
@@ -122,7 +82,7 @@ public struct EventInfoWithAgendas: Codable {
         let location = try eventInfoContainer.decode(EventInfo.Location.self, forKey: .location)
         let sponsors = try eventInfoContainer.decode(Sponsors.self, forKey: .sponsors)
         let photoURL = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .photoURL)
-        let dateFormatter = Formatter.dateFormatter
+        let dateFormatter = DateFormatter()
         guard let eventID = decoder.userInfo[CodingUserInfoKey(rawValue: EventInfo.CodingKeys.eventID.stringValue)!] as? Event.ID else {
             throw DecodingError.valueNotFound(
                 Event.ID.self,

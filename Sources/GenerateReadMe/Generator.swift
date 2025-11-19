@@ -33,14 +33,10 @@ import Models
 ///
 /// Generates a JSON file for any `Encodable` value.
 ///
-/// This function:
-/// - Uses a configured `JSONEncoder` (by default `Coder.jsonEncoder`) to encode the provided value.
-/// - Writes the resulting JSON data to the target URL, replacing any existing file.
-///
 /// - Parameters:
 ///   - item: The encodable value to serialize as JSON.
 ///   - path: The destination file URL for the JSON output.
-///   - encoder: The `JSONEncoder` to use. Defaults to `Coder.jsonEncoder`.
+///   - encoder: The `JSONEncoder` to use. Defaults to `JSONEncoder()`.
 /// - Throws: An error if encoding fails or if writing the data to disk fails.
 /// - Note: This function does not pretty‑print unless the provided encoder is configured to do so.
 enum Generator {
@@ -52,8 +48,7 @@ enum Generator {
         try content.write(to: path, atomically: true, encoding: .utf8)
     }
     
-    static func generateJson<T: Encodable>(for item: T, at path: URL, encoder: JSONEncoder = Coder.jsonEncoder) throws {
-        let encoder = Coder.jsonEncoder
+    static func generateJson<T: Encodable>(for item: T, at path: URL, encoder: JSONEncoder = JSONEncoder()) throws {
         let data = try encoder.encode(item)
         try data.write(to: path)
     }
