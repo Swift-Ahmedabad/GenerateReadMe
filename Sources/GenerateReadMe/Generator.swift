@@ -49,6 +49,7 @@ enum Generator {
     }
     
     static func generateJson<T: Encodable>(for item: T, at path: URL, encoder: JSONEncoder = JSONEncoder()) throws {
+        encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
         let data = try encoder.encode(item)
         try data.write(to: path)
     }
