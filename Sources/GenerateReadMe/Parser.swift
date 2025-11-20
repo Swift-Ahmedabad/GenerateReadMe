@@ -108,7 +108,7 @@ enum Parser {
                             parsedTalks.append(talkWithSpeakers)
                             
                             for speaker in decodedSpeakers {
-                                let talkSpeaker = TalkSpeaker(talkId: parsedTalk.id, speakerID: speaker.id)
+                                let talkSpeaker = TalkSpeaker(talkID: parsedTalk.id, speakerID: speaker.id)
                                 info.talkSpeakers.append(talkSpeaker)
                             }
                         } else {

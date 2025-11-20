@@ -27,12 +27,12 @@ import Foundation
 ///   computing a stable `id` from the provided identifiers.
 public struct TalkSpeaker: Codable, Identifiable {
     public var id: String
-    public var talkId: Talk.ID
+    public var talkID: Talk.ID
     public var speakerID: Speaker.ID
     
-    public init(talkId: Talk.ID, speakerID: Speaker.ID) {
-        self.id = StableID(using: talkId, speakerID).id
-        self.talkId = talkId
+    public init(talkID: Talk.ID, speakerID: Speaker.ID) {
+        self.id = StableID(using: talkID, speakerID).id
+        self.talkID = talkID
         self.speakerID = speakerID
     }
 }

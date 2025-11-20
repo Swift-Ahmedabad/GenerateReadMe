@@ -26,7 +26,7 @@ struct GenerateReadMeTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - speaker: Johny Appleseed
+        - name: Johny Appleseed
           socials:
             linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
             github: https://github.com/johny-appleseed
@@ -67,13 +67,13 @@ struct GenerateReadMeTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - speaker: Johny Appleseed
+        - name: Johny Appleseed
           socials:
             linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
-        - speaker: Linus Torvalds
+        - name: Linus Torvalds
           socials:
             linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
           about: Git Inventor
@@ -118,7 +118,7 @@ struct GenerateReadMeTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - speaker: Event\(e) Speaker \(t)
+                - name: Event\(e) Speaker \(t)
                   socials:
                     linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
                     github: https://github.com/speaker\(t)

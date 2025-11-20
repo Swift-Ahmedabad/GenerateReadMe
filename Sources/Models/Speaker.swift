@@ -95,26 +95,26 @@ public struct Speaker: Codable, Hashable, Identifiable, Sendable {
     }
     
     public var id: String
-    public var speaker: String
+    public var name: String
     public var socials: Socials?
     public var about: String?
     public var image: String?
     
-    public init(speaker: String, socials: Socials? = nil, about: String? = nil, image: String? = nil) {
-        self.speaker = speaker
+    public init(name: String, socials: Socials? = nil, about: String? = nil, image: String? = nil) {
+        self.name = name
         self.socials = socials
         self.about = about
         self.image = image
-        self.id = StableID(using: speaker, socials?.linkedIn ?? "").id
+        self.id = StableID(using: name, socials?.linkedIn ?? "").id
     }
     
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.speaker = try container.decode(String.self, forKey: .speaker)
+        self.name = try container.decode(String.self, forKey: .name)
         self.socials = try container.decodeIfPresent(Speaker.Socials.self, forKey: .socials)
         self.about = try container.decodeIfPresent(String.self, forKey: .about)
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
-        self.id = StableID(using: speaker, socials?.linkedIn ?? "").id
+        self.id = StableID(using: name, socials?.linkedIn ?? "").id
     }
 }
 
@@ -171,7 +171,7 @@ extension Speaker: CustomStringConvertible {
     /// - Returns: A single string containing the formatted Markdown representation.
     public var description: String {
         var string = """
-        ### By: **\(speaker)**
+        ### By: **\(name)**
         """
         if let about = about {
             string.append("\n\(about)")

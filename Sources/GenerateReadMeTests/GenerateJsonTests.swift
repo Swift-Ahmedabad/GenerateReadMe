@@ -26,13 +26,13 @@ struct GenerateJsonTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - speaker: Johny Appleseed
+        - name: Johny Appleseed
           socials:
             linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
-        - speaker: Linus Torvalds
+        - name: Linus Torvalds
           socials:
             linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
           about: Git Inventor
@@ -50,20 +50,20 @@ struct GenerateJsonTests {
                   {
                     "about" : "Apple Engineer",
                     "id" : "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
+                    "name" : "Johny Appleseed",
                     "socials" : {
                       "github" : "https:\/\/github.com\/johny-appleseed",
                       "linkedIn" : "https:\/\/www.linkedin.com\/in\/johny-appleseed-0a0123456\/",
                       "portfolio" : "https:\/\/johny-appleseed.github.io"
-                    },
-                    "speaker" : "Johny Appleseed"
+                    }
                   },
                   {
                     "about" : "Git Inventor",
                     "id" : "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
+                    "name" : "Linus Torvalds",
                     "socials" : {
                       "linkedIn" : "https:\/\/www.linkedin.com\/in\/linus-torvalds-0a0123456\/"
-                    },
-                    "speaker" : "Linus Torvalds"
+                    }
                   }
                 ]
                 """#
@@ -84,7 +84,7 @@ struct GenerateJsonTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - speaker: Event\(e) Speaker \(t)
+                - name: Event\(e) Speaker \(t)
                   socials:
                     linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
                     github: https://github.com/speaker\(t)
@@ -209,7 +209,7 @@ struct GenerateJsonTests {
                 try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
                 let speakerYML =
                 """
-                - speaker: Event\(e) Speaker \(t)
+                - name: Event\(e) Speaker \(t)
                   socials:
                     linkedIn: https://www.linkedin.com/in/speaker-0a012345\(t)/
                     github: https://github.com/speaker\(t)
@@ -231,22 +231,22 @@ struct GenerateJsonTests {
                   {
                     "id" : "c1a446994b5dd8e6bd768bba8b9e31d4a5009661112944b61e03bd6ba1e11831",
                     "speakerID" : "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d",
-                    "talkId" : "770d53c37b2149f72b72261dd2ae2cbdb538c7d5ff9b378b9e2ca501129b5bcd"
+                    "talkID" : "770d53c37b2149f72b72261dd2ae2cbdb538c7d5ff9b378b9e2ca501129b5bcd"
                   },
                   {
                     "id" : "3ddeefccf06d973252802a1a4add1b84bff45522e018fe2afc797f76ee22fa44",
                     "speakerID" : "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52",
-                    "talkId" : "4cd4dcdb6f7af0f00b222d9206389bf415d5f223cd2bb825d4c64e2762367b51"
+                    "talkID" : "4cd4dcdb6f7af0f00b222d9206389bf415d5f223cd2bb825d4c64e2762367b51"
                   },
                   {
                     "id" : "8848df37e1a40bfd1a89598c831d1b1118f5c57a8aa2e5ca742ea955a5594c16",
                     "speakerID" : "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f",
-                    "talkId" : "aebdbdd3ef3749e780369fef497fc11384f6a972d8e8dbe96acd2c3a66a5a849"
+                    "talkID" : "aebdbdd3ef3749e780369fef497fc11384f6a972d8e8dbe96acd2c3a66a5a849"
                   },
                   {
                     "id" : "56e25722239da72da3f433fde6d7ee7be169d24ca9c0871f8d3543d666225ffa",
                     "speakerID" : "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3",
-                    "talkId" : "f5423d20c986a21c919b637ed3893a3873f64c86ad942496d92b4bfeca83dc7f"
+                    "talkID" : "f5423d20c986a21c919b637ed3893a3873f64c86ad942496d92b4bfeca83dc7f"
                   }
                 ]
                 """
@@ -266,13 +266,13 @@ struct GenerateJsonTests {
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
         """
-        - speaker: Johny Appleseed
+        - name: Johny Appleseed
           socials:
             linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
             github: https://github.com/johny-appleseed
             portfolio: https://johny-appleseed.github.io
           about: Apple Engineer
-        - speaker: Linus Torvalds
+        - name: Linus Torvalds
           socials:
             linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
           about: Git Inventor
