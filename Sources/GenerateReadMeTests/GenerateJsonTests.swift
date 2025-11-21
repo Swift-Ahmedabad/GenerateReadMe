@@ -381,10 +381,12 @@ struct GenerateJsonTests {
               title: "Welcome & Registration"
             - time: "10:15 AM "
               title: "Talk 1"
-              speaker: Johny Appleseed
+              speakers:
+                - "Johny Appleseed"
             - time: "11:15 AM"
               title: "Talk 2"
-              speaker: "Linus Torvalds"
+              speakers: 
+                - "Linus Torvalds"
             - time: "12:00 PM "
               title: "Networking & Refreshments"
         sponsors:

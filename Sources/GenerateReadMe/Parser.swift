@@ -121,7 +121,7 @@ enum Parser {
             }
             
             let eventWithTalks = EventWithTalks(event: parsedEvent, talks: parsedTalks, eventInfo: parsedEventInfo)
-            info.agendaSpeakerIDs.append(contentsOf: agandaSpeakerIDs(from: info.agendas, speakers: info.speakers))
+            info.agendaSpeakerIDs.append(contentsOf: agendaSpeakerIDs(from: info.agendas, speakers: info.speakers))
             
             info.eventsWithTalks.append(eventWithTalks)
             info.events.append(parsedEvent)
@@ -154,17 +154,22 @@ enum Parser {
         return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) }).filter { !additionalSkipFileNames.contains($0.lastPathComponent) }
     }
     
-    static private func agandaSpeakerIDs(from agendas: [Agenda], speakers: [Speaker]) -> [AgendaSpeakerID] {
-        agendas.compactMap { agenda in
-            let speakerID = speakers.compactMap ({ speaker in
-                if agenda.speaker == speaker.name {
+    static private func agendaSpeakerIDs(from agendas: [Agenda], speakers: [Speaker]) -> [AgendaSpeakerID] {
+        let agendaSpeakers = agendas.map { ($0.speakers, $0.id) }.reduce(into: [(String, String)]()) { partialResult, next in
+            for item in (next.0 ?? []) {
+                partialResult.append((item, next.1))
+            }
+        }
+        let result = agendaSpeakers.compactMap { speakerName, agendaID in
+            let speakerIDs: [String] = speakers.compactMap ({ speaker in
+                if speakerName == speaker.name {
                     return speaker.id
                 } else {
                     return nil
                 }
-            }).first
-            guard let speakerID else { return nil }
-            return AgendaSpeakerID(agendaID: agenda.id, speakerID: speakerID)
+            })
+            return speakerIDs.map { AgendaSpeakerID(agendaID: agendaID, speakerID: $0)}
         }
+        return result.flatMap({$0})
     }
 }

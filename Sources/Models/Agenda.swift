@@ -12,14 +12,14 @@ public struct Agenda: Identifiable, Codable {
     public var eventID: Event.ID
     public var time: Date
     public var title: String
-    public var speaker: String?
+    public var speakers: [String]?
     
     public enum CodingKeys: CodingKey {
         case id
         case eventID
         case time
         case title
-        case speaker
+        case speakers
     }
     
     public init(time: Date, title: String, eventID: Event.ID) {
@@ -45,8 +45,17 @@ public struct Agenda: Identifiable, Codable {
         }
         self.time = time
         self.title = try container.decode(String.self, forKey: .title)
-        self.speaker = try container.decodeIfPresent(String.self, forKey: .speaker)
+        self.speakers = try container.decodeIfPresent([String].self, forKey: .speakers)
         self.id = StableID(using: title, time, eventID).id
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.eventID, forKey: .eventID)
+        try container.encode(self.time, forKey: .time)
+        try container.encode(self.title, forKey: .title)
+        //NOTE: Will not encode speakers array since we have AgendaSpeakerID to retrieve from
     }
 }
 
