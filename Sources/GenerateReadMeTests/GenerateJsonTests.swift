@@ -12,7 +12,7 @@ import InlineSnapshotTesting
 import SnapshotTestingCustomDump
 import Testing
 
-@Suite(.snapshots(record: .never))
+@Suite(.snapshots(record: .failed))
 struct GenerateJsonTests {
     
     @Test func generateSpeakersJson() throws {
@@ -335,6 +335,82 @@ struct GenerateJsonTests {
                   }
                 ]
                 """#
+            }
+        }
+    }
+    
+    @Test func generateAgendaSpeakerIDsJSON() async throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let eventsURL = fileURL.appending(path: "1. Apr 20 2025")
+        let event1URL = eventsURL.appending(path: "Talk1")
+        try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
+        let speakerYML =
+        """
+        - name: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - name: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
+        """
+        let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
+        try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
+        
+        let infoYML = """
+        about: "Swift Ahmedabad October'25 MeetUp"
+        date: "October 11, 2025"
+        location:
+            name: "CricHeroes Pvt. Ltd"
+            map: "https://www.google.com/maps/search/?api=1&query=CricHeroes%20Pvt.%20Ltd.&query_place_id=ChIJWbxyziaFXjkRedJ8Zxm-gEk"
+            address: "TF1, 3rd Floor, off Sindhu Bhavan Marg, near Avalon Hotel, Bodakdev, Ahmedabad, Gujarat 380059"
+            coordinates:
+                latitude: 23.0453052
+                longitude: 72.5080271
+                zoom: 17
+        agenda:
+            - time: "10:00 AM "
+              title: "Welcome & Registration"
+            - time: "10:15 AM "
+              title: "Talk 1"
+              speaker: Johny Appleseed
+            - time: "11:15 AM"
+              title: "Talk 2"
+              speaker: "Linus Torvalds"
+            - time: "12:00 PM "
+              title: "Networking & Refreshments"
+        sponsors:
+            vanue: "CricHeroes Pvt. Ltd"
+            food: "CricHeroes Pvt. Ltd"
+        photoURL: "https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9"
+        """
+        try infoYML.write(to: eventsURL.appending(path: "Info.yml"), atomically: true, encoding: .utf8)
+        
+        try withSnapshotTesting {
+            let events = try Parser.events(from: fileURL.path(percentEncoded: false)).agendaSpeakerIDs
+            let jsonURL = fileURL.appending(path: "agendaSpeakerIds.json")
+            try Generator.generateJson(for: events, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                """
+                [
+                  {
+                    "agendaID" : "244410975b2939056fbf2a6f007d7bec00cee267bd4e6db0805d633d05119697",
+                    "speakerID" : "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
+                  },
+                  {
+                    "agendaID" : "8cf74ba80f7086068692787dd11418b3818939ced203c625db65ec2944af7a54",
+                    "speakerID" : "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2"
+                  }
+                ]
+                """
             }
         }
     }

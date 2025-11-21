@@ -75,6 +75,9 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the agendas json file, Default: agandas.json")
     var agendasFileName: String = "agandas.json"
     
+    @Option(help: "Name of the agenda speaker id json file. Default: agendaSpeakerIDs.json")
+    var agendaSpeakerIDsFileName: String = "agendaSpeakerIDs.json"
+    
     mutating func run() throws {
         let allEvents = try Parser.events(
             from: path,
@@ -93,6 +96,7 @@ struct GenerateReadMe: ParsableCommand {
         try Generator.generateJson(for: allEvents.eventInfos, at: pathURL.appending(path: eventInfosFileName))
         try Generator.generateJson(for: allEvents.sponsors, at: pathURL.appending(path: sponsorsFileName))
         try Generator.generateJson(for: allEvents.agendas, at: pathURL.appending(path: agendasFileName))
+        try Generator.generateJson(for: allEvents.agendaSpeakerIDs, at: pathURL.appending(path: agendaSpeakerIDsFileName))
     }
 }
 

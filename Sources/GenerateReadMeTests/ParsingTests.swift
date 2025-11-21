@@ -13,7 +13,7 @@ import SnapshotTestingCustomDump
 import Testing
 
 
-@Suite(.snapshots(record: .never))
+@Suite(.snapshots(record: .failed))
 struct ParsingTests {
 
     @Test func eventsParsing() async throws {
@@ -136,7 +136,8 @@ struct ParsingTests {
                   ],
                   eventInfos: [],
                   agendas: [],
-                  sponsors: []
+                  sponsors: [],
+                  agendaSpeakerIDs: []
                 )
                 """
             }
@@ -309,7 +310,8 @@ struct ParsingTests {
                   ],
                   eventInfos: [],
                   agendas: [],
-                  sponsors: []
+                  sponsors: [],
+                  agendaSpeakerIDs: []
                 )
                 """
             }
@@ -982,7 +984,8 @@ struct ParsingTests {
                   ],
                   eventInfos: [],
                   agendas: [],
-                  sponsors: []
+                  sponsors: [],
+                  agendaSpeakerIDs: []
                 )
                 """
             }
@@ -1183,19 +1186,22 @@ struct ParsingTests {
                       id: "f1f7367197c270dadef5aa94b134a819a2d2c970a94a16a18023ccd047586b90",
                       eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                       time: Date(2000-01-01T04:30:00.000Z),
-                      title: "Welcome & Registration"
+                      title: "Welcome & Registration",
+                      speaker: nil
                     ),
                     [1]: Agenda(
                       id: "879f2026a4bcb8babe63d4fc20da2eabca97adf4256b02017c84c4e164422962",
                       eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                       time: Date(2000-01-01T04:45:00.000Z),
-                      title: "Talk 1"
+                      title: "Talk 1",
+                      speaker: nil
                     ),
                     [2]: Agenda(
                       id: "91de961b3125336eb6790ae5069c7b42c6c56157755a56189c0ee302349539e3",
                       eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                       time: Date(2000-01-01T06:30:00.000Z),
-                      title: "Networking & Refreshments"
+                      title: "Networking & Refreshments",
+                      speaker: nil
                     )
                   ],
                   sponsors: [
@@ -1203,7 +1209,8 @@ struct ParsingTests {
                       vanue: "CricHeroes Pvt. Ltd",
                       food: "CricHeroes Pvt. Ltd"
                     )
-                  ]
+                  ],
+                  agendaSpeakerIDs: []
                 )
                 """#
             }

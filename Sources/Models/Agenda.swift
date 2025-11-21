@@ -12,12 +12,14 @@ public struct Agenda: Identifiable, Codable {
     public var eventID: Event.ID
     public var time: Date
     public var title: String
+    public var speaker: String?
     
     public enum CodingKeys: CodingKey {
         case id
         case eventID
         case time
         case title
+        case speaker
     }
     
     public init(time: Date, title: String, eventID: Event.ID) {
@@ -43,6 +45,17 @@ public struct Agenda: Identifiable, Codable {
         }
         self.time = time
         self.title = try container.decode(String.self, forKey: .title)
+        self.speaker = try container.decodeIfPresent(String.self, forKey: .speaker)
         self.id = StableID(using: title, time, eventID).id
+    }
+}
+
+public struct AgendaSpeakerID: Codable {
+    public var agendaID: Agenda.ID
+    public var speakerID: Speaker.ID
+    
+    public init(agendaID: Agenda.ID, speakerID: Speaker.ID) {
+        self.agendaID = agendaID
+        self.speakerID = speakerID
     }
 }

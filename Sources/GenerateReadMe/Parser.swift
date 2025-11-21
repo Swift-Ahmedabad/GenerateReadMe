@@ -68,6 +68,7 @@ enum Parser {
         var eventInfos: [EventInfo] = []
         var agendas: [Agenda] = []
         var sponsors: [Sponsors] = []
+        var agendaSpeakerIDs: [AgendaSpeakerID] = []
     }
     
     static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
@@ -120,6 +121,8 @@ enum Parser {
             }
             
             let eventWithTalks = EventWithTalks(event: parsedEvent, talks: parsedTalks, eventInfo: parsedEventInfo)
+            info.agendaSpeakerIDs.append(contentsOf: agandaSpeakerIDs(from: info.agendas, speakers: info.speakers))
+            
             info.eventsWithTalks.append(eventWithTalks)
             info.events.append(parsedEvent)
         }
@@ -149,5 +152,19 @@ enum Parser {
     static func validContentsOfDirectory(at url: URL, skipping skipFilesWithExtensions: [String], additionalSkipFileNames: [String] = []) throws -> [URL] {
         let contents = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
         return contents.filter({ !skipFilesWithExtensions.contains($0.pathExtension) }).filter { !additionalSkipFileNames.contains($0.lastPathComponent) }
+    }
+    
+    static private func agandaSpeakerIDs(from agendas: [Agenda], speakers: [Speaker]) -> [AgendaSpeakerID] {
+        agendas.compactMap { agenda in
+            let speakerID = speakers.compactMap ({ speaker in
+                if agenda.speaker == speaker.name {
+                    return speaker.id
+                } else {
+                    return nil
+                }
+            }).first
+            guard let speakerID else { return nil }
+            return AgendaSpeakerID(agendaID: agenda.id, speakerID: speakerID)
+        }
     }
 }
