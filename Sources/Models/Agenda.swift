@@ -7,12 +7,21 @@
 
 import Foundation
 
+public enum AgendaType: String, Codable {
+    case registration
+    case talk
+    case sponsorTalk
+    case `break`
+    case networking
+}
+
 public struct Agenda: Identifiable, Codable {
     public var id: String
     public var eventID: Event.ID
     public var time: Date
     public var title: String
     public var speakers: [String]?
+    public var type: AgendaType
     
     public enum CodingKeys: CodingKey {
         case id
@@ -20,13 +29,15 @@ public struct Agenda: Identifiable, Codable {
         case time
         case title
         case speakers
+        case type
     }
     
-    public init(time: Date, title: String, eventID: Event.ID) {
+    public init(time: Date, title: String, eventID: Event.ID, type: AgendaType) {
         self.id = StableID(using: title, time, eventID).id
         self.eventID = eventID
         self.time = time
         self.title = title
+        self.type = type
     }
     
     public init(from decoder: any Decoder) throws {
@@ -46,6 +57,7 @@ public struct Agenda: Identifiable, Codable {
         self.time = time
         self.title = try container.decode(String.self, forKey: .title)
         self.speakers = try container.decodeIfPresent([String].self, forKey: .speakers)
+        self.type = try container.decode(AgendaType.self, forKey: .type)
         self.id = StableID(using: title, time, eventID).id
     }
     
@@ -55,6 +67,7 @@ public struct Agenda: Identifiable, Codable {
         try container.encode(self.eventID, forKey: .eventID)
         try container.encode(self.time, forKey: .time)
         try container.encode(self.title, forKey: .title)
+        try container.encode(self.type, forKey: .type)
         //NOTE: Will not encode speakers array since we have AgendaSpeakerID to retrieve from
     }
 }

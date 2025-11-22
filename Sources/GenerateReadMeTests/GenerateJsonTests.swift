@@ -294,10 +294,13 @@ struct GenerateJsonTests {
         agenda:
             - time: "10:00 AM "
               title: "Welcome & Registration"
+              type: "registration"
             - time: "10:15 AM "
               title: "Talk 1"
+              type: "talk"
             - time: "12:00 PM "
               title: "Networking & Refreshments"
+              type: "networking"
         sponsors:
             vanue: "CricHeroes Pvt. Ltd"
             food: "CricHeroes Pvt. Ltd"
@@ -379,16 +382,20 @@ struct GenerateJsonTests {
         agenda:
             - time: "10:00 AM "
               title: "Welcome & Registration"
+              type: "registration"
             - time: "10:15 AM "
               title: "Talk 1"
+              type: "talk" 
               speakers:
                 - "Johny Appleseed"
             - time: "11:15 AM"
               title: "Talk 2"
+              type: "talk"
               speakers: 
                 - "Linus Torvalds"
             - time: "12:00 PM "
               title: "Networking & Refreshments"
+              type: "networking"
         sponsors:
             vanue: "CricHeroes Pvt. Ltd"
             food: "CricHeroes Pvt. Ltd"
