@@ -21,3 +21,10 @@ extension String {
         return nil
     }
 }
+
+extension Date {
+    public func addingTime(from date: Date) -> Date {
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute, .second], from: date)
+        return Calendar.current.date(byAdding: dateComponents, to: self)!
+    }
+}

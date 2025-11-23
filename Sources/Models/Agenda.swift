@@ -15,7 +15,7 @@ public enum AgendaType: String, Codable {
     case networking
 }
 
-public struct Agenda: Identifiable, Codable {
+public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
     public var id: String
     public var eventID: Event.ID
     public var time: Date
@@ -40,13 +40,13 @@ public struct Agenda: Identifiable, Codable {
         self.type = type
     }
     
-    public init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder, configuration: String) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.eventID = decoder.userInfo[CodingUserInfoKey(rawValue: CodingKeys.eventID.stringValue)!] as! Event.ID
+        self.eventID = decoder.userInfo[Self.eventIDUserInfoKey] as! Event.ID
         let timeString = try container.decode(String.self, forKey: .time)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        guard let time = dateFormatter.date(from: timeString) else {
+        dateFormatter.dateFormat = "MMMM dd, yyyy hh:mm a"
+        guard let time = dateFormatter.date(from: "\(configuration) \(timeString)") else {
             throw DecodingError.dataCorrupted(
                 .init(
                     codingPath: [Agenda.CodingKeys.time],
@@ -69,6 +69,12 @@ public struct Agenda: Identifiable, Codable {
         try container.encode(self.title, forKey: .title)
         try container.encode(self.type, forKey: .type)
         //NOTE: Will not encode speakers array since we have AgendaSpeakerID to retrieve from
+    }
+}
+
+extension Agenda {
+    public static var eventIDUserInfoKey: CodingUserInfoKey {
+        CodingUserInfoKey(rawValue: CodingKeys.eventID.stringValue)!
     }
 }
 

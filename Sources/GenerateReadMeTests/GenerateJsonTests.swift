@@ -411,11 +411,11 @@ struct GenerateJsonTests {
                 """
                 [
                   {
-                    "agendaID" : "244410975b2939056fbf2a6f007d7bec00cee267bd4e6db0805d633d05119697",
+                    "agendaID" : "1ba097a3c86b6bc161f361abeb0c6734627a75239bf98abd9fe8f2a3b95a0c47",
                     "speakerID" : "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                   },
                   {
-                    "agendaID" : "8cf74ba80f7086068692787dd11418b3818939ced203c625db65ec2944af7a54",
+                    "agendaID" : "d4d4f43ab8ace262da69e5e8cd49e45759e0c142f21e27de035bbc76fc47c587",
                     "speakerID" : "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2"
                   }
                 ]

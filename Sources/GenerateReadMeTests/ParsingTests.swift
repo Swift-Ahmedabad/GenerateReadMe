@@ -999,7 +999,7 @@ struct ParsingTests {
         }
         
         let fileURL = testURL.appending(path: "Events")
-        let eventsURL = fileURL.appending(path: "1. Jan 01 2025")
+        let eventsURL = fileURL.appending(path: "1. Oct 11 2025")
         let event1URL = eventsURL.appending(path: "Talk1")
         try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
         let speakerYML =
@@ -1052,24 +1052,24 @@ struct ParsingTests {
                 Parser.EventsInfo(
                   events: [
                     [0]: Event(
-                      id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
-                      title: "1. Jan 01 2025",
-                      date: Date(2024-12-31T18:30:00.000Z)
+                      id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      title: "1. Oct 11 2025",
+                      date: Date(2025-10-10T18:30:00.000Z)
                     )
                   ],
                   eventsWithTalks: [
                     [0]: EventWithTalks(
                       event: Event(
-                        id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
-                        title: "1. Jan 01 2025",
-                        date: Date(2024-12-31T18:30:00.000Z)
+                        id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                        title: "1. Oct 11 2025",
+                        date: Date(2025-10-10T18:30:00.000Z)
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                            id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
                             title: "Talk1",
-                            eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                            eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -1088,8 +1088,8 @@ struct ParsingTests {
                         )
                       ],
                       eventInfo: EventInfo(
-                        id: "a536787a0e3f9005c995a40754ca3fb00d19875ecb1a267aba16cf3870ceb2df",
-                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                        id: "02e736efadf843bf33129c630906f915bb05c1831953a9f844de7d4b190ac593",
+                        eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                         date: Date(2025-10-10T18:30:00.000Z),
                         about: "Swift Ahmedabad October\'25 MeetUp",
                         location: EventInfo.Location(
@@ -1127,9 +1127,9 @@ struct ParsingTests {
                   talksWithSpeakers: [
                     [0]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                        id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
                         title: "Talk1",
-                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                        eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1149,22 +1149,22 @@ struct ParsingTests {
                   ],
                   talks: [
                     [0]: Talk(
-                      id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
                       title: "Talk1",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
                     )
                   ],
                   talkSpeakers: [
                     [0]: TalkSpeaker(
-                      id: "ce3e25fc078c362f895300696b827876c9e1f407bbb172257bef21f7910c6043",
-                      talkID: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "b583b9a696ee93f2122f402aac49778fda5d41ae9e5ceeabf708e303c1082d15",
+                      talkID: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
                       speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                     )
                   ],
                   eventInfos: [
                     [0]: EventInfo(
-                      id: "a536787a0e3f9005c995a40754ca3fb00d19875ecb1a267aba16cf3870ceb2df",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      id: "02e736efadf843bf33129c630906f915bb05c1831953a9f844de7d4b190ac593",
+                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                       date: Date(2025-10-10T18:30:00.000Z),
                       about: "Swift Ahmedabad October\'25 MeetUp",
                       location: EventInfo.Location(
@@ -1186,25 +1186,25 @@ struct ParsingTests {
                   ],
                   agendas: [
                     [0]: Agenda(
-                      id: "f1f7367197c270dadef5aa94b134a819a2d2c970a94a16a18023ccd047586b90",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
-                      time: Date(2000-01-01T04:30:00.000Z),
+                      id: "6cdc33ff72be104bb5f7cfd3d3f9cc02d1d819aa8c558abcd9ceb69d931ba7a7",
+                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      time: Date(2025-10-11T04:30:00.000Z),
                       title: "Welcome & Registration",
                       speakers: nil,
                       type: .registration
                     ),
                     [1]: Agenda(
-                      id: "879f2026a4bcb8babe63d4fc20da2eabca97adf4256b02017c84c4e164422962",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
-                      time: Date(2000-01-01T04:45:00.000Z),
+                      id: "c8f22ecd8d3f1bba32ca6c228c272374ab49b058c2b22906d4f390820c0e8133",
+                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      time: Date(2025-10-11T04:45:00.000Z),
                       title: "Talk 1",
                       speakers: nil,
                       type: .talk
                     ),
                     [2]: Agenda(
-                      id: "91de961b3125336eb6790ae5069c7b42c6c56157755a56189c0ee302349539e3",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
-                      time: Date(2000-01-01T06:30:00.000Z),
+                      id: "628dbe0410aad225eb6de8a80865c840d4fb0740f0c7f74cac111b0d458d8548",
+                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      time: Date(2025-10-11T06:30:00.000Z),
                       title: "Networking & Refreshments",
                       speakers: nil,
                       type: .networking

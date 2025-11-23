@@ -18,24 +18,6 @@ public struct Sponsors: Codable {
 }
 
 public struct EventInfo: Identifiable, Codable {
-    public struct Location: Codable {
-        public struct Coordinates: Codable {
-            public var latitude: Double
-            public var longitude: Double
-            public var zoom: Double
-            
-            public init(latitude: Double, longitude: Double, zoom: Double) {
-                self.latitude = latitude
-                self.longitude = longitude
-                self.zoom = zoom
-            }
-        }
-        
-        public var name: String
-        public var map: URL
-        public var address: String
-        public var coordinates: Coordinates
-    }
     
     public var id: String
     public var eventID: Event.ID
@@ -66,6 +48,37 @@ public struct EventInfo: Identifiable, Codable {
     }
 }
 
+extension EventInfo {
+    public struct Location: Codable {
+        public struct Coordinates: Codable {
+            public var latitude: Double
+            public var longitude: Double
+            public var zoom: Double
+            
+            public init(latitude: Double, longitude: Double, zoom: Double) {
+                self.latitude = latitude
+                self.longitude = longitude
+                self.zoom = zoom
+            }
+        }
+        
+        public var name: String
+        public var map: URL
+        public var address: String
+        public var coordinates: Coordinates
+    }
+}
+
+extension EventInfo {
+    public static var eventIDUserInfoKey: CodingUserInfoKey {
+        CodingUserInfoKey(rawValue: CodingKeys.eventID.stringValue)!
+    }
+    
+    public static var eventDateUserInfoKey: CodingUserInfoKey {
+        CodingUserInfoKey(rawValue: "eventDate")!
+    }
+}
+
 public struct EventInfoWithAgendas: Codable {
     public var eventInfo: EventInfo
     public var agenda: [Agenda]
@@ -83,7 +96,7 @@ public struct EventInfoWithAgendas: Codable {
         let sponsors = try eventInfoContainer.decode(Sponsors.self, forKey: .sponsors)
         let photoURL = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .photoURL)
         let dateFormatter = DateFormatter()
-        guard let eventID = decoder.userInfo[CodingUserInfoKey(rawValue: EventInfo.CodingKeys.eventID.stringValue)!] as? Event.ID else {
+        guard let eventID = decoder.userInfo[EventInfo.eventIDUserInfoKey] as? Event.ID else {
             throw DecodingError.valueNotFound(
                 Event.ID.self,
                 .init(
@@ -109,7 +122,7 @@ public struct EventInfoWithAgendas: Codable {
         }
         
         let agendaContainer = try decoder.container(keyedBy: CodingKeys.self)
-        let agendas = try agendaContainer.decode([Agenda].self, forKey: .agenda)
+        let agendas = try agendaContainer.decode([Agenda].self, forKey: .agenda, configuration: dateString)
         self.agenda = agendas
     }
 }
