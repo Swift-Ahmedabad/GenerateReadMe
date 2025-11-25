@@ -87,7 +87,7 @@ enum Parser {
                 let eventInfo = try decoder.decode(EventInfoWithAgendas.self, from: infoContent, userInfo: [Models.EventInfo.eventIDUserInfoKey : parsedEvent.id])
                 parsedEventInfo = eventInfo.eventInfo
                 parsedEvent.date = eventInfo.eventInfo.date
-                parsedEvent.endDate = eventInfo.agenda.last?.time
+                parsedEvent.endDate = eventInfo.agenda.last?.time.addingTimeInterval(30 * 60)
                 info.eventInfos.append(eventInfo.eventInfo)
                 info.agendas.append(contentsOf: eventInfo.agenda)
                 info.sponsors.append(eventInfo.eventInfo.sponsors)
