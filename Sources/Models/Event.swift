@@ -37,10 +37,12 @@ public struct Event: Codable, Identifiable {
     public var id: String
     public var title: String
     public var date: Date
+    public var endDate: Date?
     
-    public init(title: String, date: Date) {
+    public init(title: String, date: Date, endDate: Date? = nil) {
         self.title = title
         self.date = date
+        self.endDate = endDate
         self.id = StableID(using: title, date).id
     }
 }

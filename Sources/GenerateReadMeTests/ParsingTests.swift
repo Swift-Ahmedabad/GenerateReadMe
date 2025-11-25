@@ -47,7 +47,8 @@ struct ParsingTests {
                     [0]: Event(
                       id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                       title: "1. Jan 01 2025",
-                      date: Date(2024-12-31T18:30:00.000Z)
+                      date: Date(2024-12-31T18:30:00.000Z),
+                      endDate: nil
                     )
                   ],
                   eventsWithTalks: [
@@ -55,7 +56,8 @@ struct ParsingTests {
                       event: Event(
                         id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                         title: "1. Jan 01 2025",
-                        date: Date(2024-12-31T18:30:00.000Z)
+                        date: Date(2024-12-31T18:30:00.000Z),
+                        endDate: nil
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
@@ -180,7 +182,8 @@ struct ParsingTests {
                     [0]: Event(
                       id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                       title: "1. Jan 01 2025",
-                      date: Date(2024-12-31T18:30:00.000Z)
+                      date: Date(2024-12-31T18:30:00.000Z),
+                      endDate: nil
                     )
                   ],
                   eventsWithTalks: [
@@ -188,7 +191,8 @@ struct ParsingTests {
                       event: Event(
                         id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
                         title: "1. Jan 01 2025",
-                        date: Date(2024-12-31T18:30:00.000Z)
+                        date: Date(2024-12-31T18:30:00.000Z),
+                        endDate: nil
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
@@ -353,17 +357,20 @@ struct ParsingTests {
                     [0]: Event(
                       id: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b",
                       title: "3. Jan 3 2025",
-                      date: Date(2025-01-02T18:30:00.000Z)
+                      date: Date(2025-01-02T18:30:00.000Z),
+                      endDate: nil
                     ),
                     [1]: Event(
                       id: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c",
                       title: "1. Jan 1 2025",
-                      date: Date(2024-12-31T18:30:00.000Z)
+                      date: Date(2024-12-31T18:30:00.000Z),
+                      endDate: nil
                     ),
                     [2]: Event(
                       id: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa",
                       title: "2. Jan 2 2025",
-                      date: Date(2025-01-01T18:30:00.000Z)
+                      date: Date(2025-01-01T18:30:00.000Z),
+                      endDate: nil
                     )
                   ],
                   eventsWithTalks: [
@@ -371,7 +378,8 @@ struct ParsingTests {
                       event: Event(
                         id: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b",
                         title: "3. Jan 3 2025",
-                        date: Date(2025-01-02T18:30:00.000Z)
+                        date: Date(2025-01-02T18:30:00.000Z),
+                        endDate: nil
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
@@ -444,7 +452,8 @@ struct ParsingTests {
                       event: Event(
                         id: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c",
                         title: "1. Jan 1 2025",
-                        date: Date(2024-12-31T18:30:00.000Z)
+                        date: Date(2024-12-31T18:30:00.000Z),
+                        endDate: nil
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
@@ -517,7 +526,8 @@ struct ParsingTests {
                       event: Event(
                         id: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa",
                         title: "2. Jan 2 2025",
-                        date: Date(2025-01-01T18:30:00.000Z)
+                        date: Date(2025-01-01T18:30:00.000Z),
+                        endDate: nil
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
@@ -1054,7 +1064,8 @@ struct ParsingTests {
                     [0]: Event(
                       id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                       title: "1. Oct 11 2025",
-                      date: Date(2025-10-10T18:30:00.000Z)
+                      date: Date(2025-10-10T18:30:00.000Z),
+                      endDate: Date(2025-10-11T06:30:00.000Z)
                     )
                   ],
                   eventsWithTalks: [
@@ -1062,7 +1073,8 @@ struct ParsingTests {
                       event: Event(
                         id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                         title: "1. Oct 11 2025",
-                        date: Date(2025-10-10T18:30:00.000Z)
+                        date: Date(2025-10-10T18:30:00.000Z),
+                        endDate: Date(2025-10-11T06:30:00.000Z)
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(

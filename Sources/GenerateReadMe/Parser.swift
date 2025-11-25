@@ -79,7 +79,7 @@ enum Parser {
             debugPrint(eventURL.lastPathComponent)
             guard let date = eventURL.lastPathComponent.date else { continue }
             var parsedTalks: [TalkWithSpeakers] = []
-            var parsedEvent = Event(title: eventURL.lastPathComponent, date: date)
+            var parsedEvent = Event(title: eventURL.lastPathComponent, date: date, endDate: nil)
             var parsedEventInfo: EventInfo?
             
             let infoYMLURL = eventURL.appending(path: "Info.yml")
@@ -87,6 +87,7 @@ enum Parser {
                 let eventInfo = try decoder.decode(EventInfoWithAgendas.self, from: infoContent, userInfo: [Models.EventInfo.eventIDUserInfoKey : parsedEvent.id])
                 parsedEventInfo = eventInfo.eventInfo
                 parsedEvent.date = eventInfo.eventInfo.date
+                parsedEvent.endDate = eventInfo.agenda.last?.time
                 info.eventInfos.append(eventInfo.eventInfo)
                 info.agendas.append(contentsOf: eventInfo.agenda)
                 info.sponsors.append(eventInfo.eventInfo.sponsors)
