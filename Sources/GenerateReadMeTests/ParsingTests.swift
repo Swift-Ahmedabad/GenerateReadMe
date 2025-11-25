@@ -1065,7 +1065,7 @@ struct ParsingTests {
                       id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                       title: "1. Oct 11 2025",
                       date: Date(2025-10-10T18:30:00.000Z),
-                      endDate: Date(2025-10-11T06:30:00.000Z)
+                      endDate: Date(2025-10-11T07:00:00.000Z)
                     )
                   ],
                   eventsWithTalks: [
@@ -1074,7 +1074,7 @@ struct ParsingTests {
                         id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
                         title: "1. Oct 11 2025",
                         date: Date(2025-10-10T18:30:00.000Z),
-                        endDate: Date(2025-10-11T06:30:00.000Z)
+                        endDate: Date(2025-10-11T07:00:00.000Z)
                       ),
                       talks: [
                         [0]: TalkWithSpeakers(
