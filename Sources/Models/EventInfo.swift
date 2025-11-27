@@ -7,11 +7,33 @@
 
 import Foundation
 
-public struct Sponsors: Codable {
-    public var vanue: String
-    public var food: String?
+public struct Sponsor: Codable, Identifiable, Hashable {
+    public var id: String
+    public var name: String
+    public var website: URL
+    public var image: String
     
-    public init(vanue: String, food: String? = nil) {
+    public init(name: String, website: URL, image: String) {
+        self.id = StableID(using: name, website, image).id
+        self.name = name
+        self.website = website
+        self.image = image
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.website = try container.decode(URL.self, forKey: .website)
+        self.image = try container.decode(String.self, forKey: .image)
+        self.id = StableID(using: name, website, image).id
+    }
+}
+
+public struct Sponsors: Codable {
+    public var vanue: Sponsor
+    public var food: Sponsor?
+    
+    public init(vanue: Sponsor, food: Sponsor? = nil) {
         self.vanue = vanue
         self.food = food
     }
@@ -45,6 +67,27 @@ public struct EventInfo: Identifiable, Codable {
         self.location = location
         self.sponsors = sponsors
         self.photoURL = photoURL
+    }
+    
+    public func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.id, forKey: .id)
+        try container.encode(self.eventID, forKey: .eventID)
+        try container.encode(self.date, forKey: .date)
+        try container.encode(self.about, forKey: .about)
+        try container.encode(self.location, forKey: .location)
+        try container.encode(SponsorIDs(from: self.sponsors), forKey: .sponsors)
+        try container.encodeIfPresent(self.photoURL, forKey: .photoURL)
+    }
+}
+
+public struct SponsorIDs: Codable {
+    public var vanueSponsorID: Sponsor.ID
+    public var foodSponsorID: Sponsor.ID?
+}
+extension SponsorIDs {
+    init(from sponsors: Sponsors) {
+        self.init(vanueSponsorID: sponsors.vanue.id, foodSponsorID: sponsors.food?.id)
     }
 }
 

@@ -70,7 +70,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                               name: "Johny Appleseed",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
@@ -89,7 +89,7 @@ struct ParsingTests {
                     [0]: Speaker(
                       id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                       name: "Johny Appleseed",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
@@ -110,7 +110,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                           name: "Johny Appleseed",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
@@ -205,7 +205,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                               name: "Johny Appleseed",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
@@ -217,7 +217,7 @@ struct ParsingTests {
                             [1]: Speaker(
                               id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
                               name: "Linus Torvalds",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                                 github: nil,
                                 portfolio: nil,
@@ -236,7 +236,7 @@ struct ParsingTests {
                     [0]: Speaker(
                       id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                       name: "Johny Appleseed",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
@@ -248,7 +248,7 @@ struct ParsingTests {
                     [1]: Speaker(
                       id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
                       name: "Linus Torvalds",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                         github: nil,
                         portfolio: nil,
@@ -269,7 +269,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                           name: "Johny Appleseed",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
@@ -281,7 +281,7 @@ struct ParsingTests {
                         [1]: Speaker(
                           id: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2",
                           name: "Linus Torvalds",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                             github: nil,
                             portfolio: nil,
@@ -392,7 +392,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "0efb512fe5ae1b65c754b900a68a440ce733b440f386c30fd40f302e5f7d07b6",
                               name: "Event3 Speaker 1",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
@@ -413,7 +413,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "dbdd5e35ea6abcf1af549739f16b1fdcdfd984ef867a14009e085cf23913c497",
                               name: "Event3 Speaker 2",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
@@ -434,7 +434,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "a286a248e3551b27be8d0f302f48223aedebe26279f5d4610ab695495fa1f079",
                               name: "Event3 Speaker 3",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
@@ -466,7 +466,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f",
                               name: "Event1 Speaker 1",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
@@ -487,7 +487,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3",
                               name: "Event1 Speaker 2",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
@@ -508,7 +508,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "992f1e3c743cbb83854592acf4b0b60529e2b8adab842ab01ad2c94be34c5d32",
                               name: "Event1 Speaker 3",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
@@ -540,7 +540,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d",
                               name: "Event2 Speaker 1",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
@@ -561,7 +561,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52",
                               name: "Event2 Speaker 2",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
@@ -582,7 +582,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c",
                               name: "Event2 Speaker 3",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
@@ -601,7 +601,7 @@ struct ParsingTests {
                     [0]: Speaker(
                       id: "0efb512fe5ae1b65c754b900a68a440ce733b440f386c30fd40f302e5f7d07b6",
                       name: "Event3 Speaker 1",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
@@ -613,7 +613,7 @@ struct ParsingTests {
                     [1]: Speaker(
                       id: "dbdd5e35ea6abcf1af549739f16b1fdcdfd984ef867a14009e085cf23913c497",
                       name: "Event3 Speaker 2",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
@@ -625,7 +625,7 @@ struct ParsingTests {
                     [2]: Speaker(
                       id: "a286a248e3551b27be8d0f302f48223aedebe26279f5d4610ab695495fa1f079",
                       name: "Event3 Speaker 3",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
@@ -637,7 +637,7 @@ struct ParsingTests {
                     [3]: Speaker(
                       id: "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f",
                       name: "Event1 Speaker 1",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
@@ -649,7 +649,7 @@ struct ParsingTests {
                     [4]: Speaker(
                       id: "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3",
                       name: "Event1 Speaker 2",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
@@ -661,7 +661,7 @@ struct ParsingTests {
                     [5]: Speaker(
                       id: "992f1e3c743cbb83854592acf4b0b60529e2b8adab842ab01ad2c94be34c5d32",
                       name: "Event1 Speaker 3",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
@@ -673,7 +673,7 @@ struct ParsingTests {
                     [6]: Speaker(
                       id: "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d",
                       name: "Event2 Speaker 1",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
@@ -685,7 +685,7 @@ struct ParsingTests {
                     [7]: Speaker(
                       id: "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52",
                       name: "Event2 Speaker 2",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
@@ -697,7 +697,7 @@ struct ParsingTests {
                     [8]: Speaker(
                       id: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c",
                       name: "Event2 Speaker 3",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
@@ -718,7 +718,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "0efb512fe5ae1b65c754b900a68a440ce733b440f386c30fd40f302e5f7d07b6",
                           name: "Event3 Speaker 1",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
@@ -739,7 +739,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "dbdd5e35ea6abcf1af549739f16b1fdcdfd984ef867a14009e085cf23913c497",
                           name: "Event3 Speaker 2",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
@@ -760,7 +760,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "a286a248e3551b27be8d0f302f48223aedebe26279f5d4610ab695495fa1f079",
                           name: "Event3 Speaker 3",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
@@ -781,7 +781,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f",
                           name: "Event1 Speaker 1",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
@@ -802,7 +802,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3",
                           name: "Event1 Speaker 2",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
@@ -823,7 +823,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "992f1e3c743cbb83854592acf4b0b60529e2b8adab842ab01ad2c94be34c5d32",
                           name: "Event1 Speaker 3",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
@@ -844,7 +844,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d",
                           name: "Event2 Speaker 1",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
@@ -865,7 +865,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52",
                           name: "Event2 Speaker 2",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
@@ -886,7 +886,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c",
                           name: "Event2 Speaker 3",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
@@ -1048,8 +1048,14 @@ struct ParsingTests {
               title: "Networking & Refreshments"
               type: "networking"
         sponsors:
-            vanue: "CricHeroes Pvt. Ltd"
-            food: "CricHeroes Pvt. Ltd"
+            vanue:
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
+            food:
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
         photoURL: "https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9"
         """
         let infoYMLURL = eventsURL.appending(path: "Info.yml")
@@ -1087,7 +1093,7 @@ struct ParsingTests {
                             [0]: Speaker(
                               id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                               name: "Johny Appleseed",
-                              socials: Speaker.Socials(
+                              socials: Socials(
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
@@ -1115,8 +1121,18 @@ struct ParsingTests {
                           )
                         ),
                         sponsors: Sponsors(
-                          vanue: "CricHeroes Pvt. Ltd",
-                          food: "CricHeroes Pvt. Ltd"
+                          vanue: Sponsor(
+                            id: "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                            name: "CricHeroes Pvt. Ltd",
+                            website: URL(https://cricheroes.com),
+                            image: "cricheros.jpeg"
+                          ),
+                          food: Sponsor(
+                            id: "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                            name: "CricHeroes Pvt. Ltd",
+                            website: URL(https://cricheroes.com),
+                            image: "cricheros.jpeg"
+                          )
                         ),
                         photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
                       )
@@ -1126,7 +1142,7 @@ struct ParsingTests {
                     [0]: Speaker(
                       id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                       name: "Johny Appleseed",
-                      socials: Speaker.Socials(
+                      socials: Socials(
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
@@ -1147,7 +1163,7 @@ struct ParsingTests {
                         [0]: Speaker(
                           id: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173",
                           name: "Johny Appleseed",
-                          socials: Speaker.Socials(
+                          socials: Socials(
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
@@ -1190,8 +1206,18 @@ struct ParsingTests {
                         )
                       ),
                       sponsors: Sponsors(
-                        vanue: "CricHeroes Pvt. Ltd",
-                        food: "CricHeroes Pvt. Ltd"
+                        vanue: Sponsor(
+                          id: "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                          name: "CricHeroes Pvt. Ltd",
+                          website: URL(https://cricheroes.com),
+                          image: "cricheros.jpeg"
+                        ),
+                        food: Sponsor(
+                          id: "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                          name: "CricHeroes Pvt. Ltd",
+                          website: URL(https://cricheroes.com),
+                          image: "cricheros.jpeg"
+                        )
                       ),
                       photoURL: URL(https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9)
                     )
@@ -1223,9 +1249,11 @@ struct ParsingTests {
                     )
                   ],
                   sponsors: [
-                    [0]: Sponsors(
-                      vanue: "CricHeroes Pvt. Ltd",
-                      food: "CricHeroes Pvt. Ltd"
+                    [0]: Sponsor(
+                      id: "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                      name: "CricHeroes Pvt. Ltd",
+                      website: URL(https://cricheroes.com),
+                      image: "cricheros.jpeg"
                     )
                   ],
                   agendaSpeakerIDs: []

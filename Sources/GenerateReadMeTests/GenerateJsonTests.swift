@@ -302,8 +302,14 @@ struct GenerateJsonTests {
               title: "Networking & Refreshments"
               type: "networking"
         sponsors:
-            vanue: "CricHeroes Pvt. Ltd"
-            food: "CricHeroes Pvt. Ltd"
+            vanue:
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
+            food: 
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
         photoURL: "https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9"
         """
         try infoYML.write(to: eventsURL.appending(path: "Info.yml"), atomically: true, encoding: .utf8)
@@ -332,8 +338,8 @@ struct GenerateJsonTests {
                     },
                     "photoURL" : "https:\/\/photos.app.goo.gl\/owW6Ef9U45Aj68Ha9",
                     "sponsors" : {
-                      "food" : "CricHeroes Pvt. Ltd",
-                      "vanue" : "CricHeroes Pvt. Ltd"
+                      "foodSponsorID" : "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461",
+                      "vanueSponsorID" : "c7f1f50db329ea7bd00cf49711f6637dfc75f86fff344b425353319b561e0461"
                     }
                   }
                 ]
@@ -397,8 +403,14 @@ struct GenerateJsonTests {
               title: "Networking & Refreshments"
               type: "networking"
         sponsors:
-            vanue: "CricHeroes Pvt. Ltd"
-            food: "CricHeroes Pvt. Ltd"
+            vanue: 
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
+            food:
+                name: "CricHeroes Pvt. Ltd"
+                website: "https://cricheroes.com"
+                image: "cricheros.jpeg"
         photoURL: "https://photos.app.goo.gl/owW6Ef9U45Aj68Ha9"
         """
         try infoYML.write(to: eventsURL.appending(path: "Info.yml"), atomically: true, encoding: .utf8)

@@ -67,7 +67,7 @@ enum Parser {
         var talkSpeakers: [TalkSpeaker] = []
         var eventInfos: [EventInfo] = []
         var agendas: [Agenda] = []
-        var sponsors: [Sponsors] = []
+        var sponsors: [Sponsor] = []
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
     }
     
@@ -81,6 +81,7 @@ enum Parser {
             var parsedTalks: [TalkWithSpeakers] = []
             var parsedEvent = Event(title: eventURL.lastPathComponent, date: date, endDate: nil)
             var parsedEventInfo: EventInfo?
+            var parsedSponsors: Set<Sponsor> = .init()
             
             let infoYMLURL = eventURL.appending(path: "Info.yml")
             if let infoContent = FileManager.default.contents(atPath: infoYMLURL.path(percentEncoded: false)) {
@@ -90,7 +91,10 @@ enum Parser {
                 parsedEvent.endDate = eventInfo.agenda.last?.time.addingTimeInterval(30 * 60)
                 info.eventInfos.append(eventInfo.eventInfo)
                 info.agendas.append(contentsOf: eventInfo.agenda)
-                info.sponsors.append(eventInfo.eventInfo.sponsors)
+                parsedSponsors.insert(eventInfo.eventInfo.sponsors.vanue)
+                if let foodSponsor = eventInfo.eventInfo.sponsors.food {
+                    parsedSponsors.insert(foodSponsor)
+                }
             }
             
             for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions, additionalSkipFileNames: ["Info.yml"]) {
@@ -127,6 +131,7 @@ enum Parser {
             
             info.eventsWithTalks.append(eventWithTalks)
             info.events.append(parsedEvent)
+            info.sponsors.append(contentsOf: parsedSponsors)
         }
         
         return info
