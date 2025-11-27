@@ -74,7 +74,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Apple Engineer",
                               image: "johnyappleseed.jpeg"
@@ -93,7 +98,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Apple Engineer",
                       image: "johnyappleseed.jpeg"
@@ -114,7 +124,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Apple Engineer",
                           image: "johnyappleseed.jpeg"
@@ -139,7 +154,8 @@ struct ParsingTests {
                   eventInfos: [],
                   agendas: [],
                   sponsors: [],
-                  agendaSpeakerIDs: []
+                  agendaSpeakerIDs: [],
+                  about: nil
                 )
                 """
             }
@@ -209,7 +225,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Apple Engineer",
                               image: "johnyappleseed.jpeg"
@@ -221,7 +242,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                                 github: nil,
                                 portfolio: nil,
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Git Inventor",
                               image: "linustorwards.jpeg"
@@ -240,7 +266,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Apple Engineer",
                       image: "johnyappleseed.jpeg"
@@ -252,7 +283,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                         github: nil,
                         portfolio: nil,
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Git Inventor",
                       image: "linustorwards.jpeg"
@@ -273,7 +309,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Apple Engineer",
                           image: "johnyappleseed.jpeg"
@@ -285,7 +326,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/linus-torvalds-0a0123456/",
                             github: nil,
                             portfolio: nil,
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Git Inventor",
                           image: "linustorwards.jpeg"
@@ -315,7 +361,8 @@ struct ParsingTests {
                   eventInfos: [],
                   agendas: [],
                   sponsors: [],
-                  agendaSpeakerIDs: []
+                  agendaSpeakerIDs: [],
+                  about: nil
                 )
                 """
             }
@@ -396,7 +443,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-1",
                               image: "telentedspeaker1.png"
@@ -417,7 +469,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-2",
                               image: "telentedspeaker2.png"
@@ -438,7 +495,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-3",
                               image: "telentedspeaker3.png"
@@ -470,7 +532,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-1",
                               image: "telentedspeaker1.png"
@@ -491,7 +558,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-2",
                               image: "telentedspeaker2.png"
@@ -512,7 +584,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-3",
                               image: "telentedspeaker3.png"
@@ -544,7 +621,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                                 github: "https://github.com/speaker1",
                                 portfolio: "https://speaker-1.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-1",
                               image: "telentedspeaker1.png"
@@ -565,7 +647,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                                 github: "https://github.com/speaker2",
                                 portfolio: "https://speaker-2.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-2",
                               image: "telentedspeaker2.png"
@@ -586,7 +673,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                                 github: "https://github.com/speaker3",
                                 portfolio: "https://speaker-3.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Talented Speaker-3",
                               image: "telentedspeaker3.png"
@@ -605,7 +697,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-1",
                       image: "telentedspeaker1.png"
@@ -617,7 +714,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-2",
                       image: "telentedspeaker2.png"
@@ -629,7 +731,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-3",
                       image: "telentedspeaker3.png"
@@ -641,7 +748,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-1",
                       image: "telentedspeaker1.png"
@@ -653,7 +765,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-2",
                       image: "telentedspeaker2.png"
@@ -665,7 +782,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-3",
                       image: "telentedspeaker3.png"
@@ -677,7 +799,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                         github: "https://github.com/speaker1",
                         portfolio: "https://speaker-1.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-1",
                       image: "telentedspeaker1.png"
@@ -689,7 +816,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                         github: "https://github.com/speaker2",
                         portfolio: "https://speaker-2.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-2",
                       image: "telentedspeaker2.png"
@@ -701,7 +833,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                         github: "https://github.com/speaker3",
                         portfolio: "https://speaker-3.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Talented Speaker-3",
                       image: "telentedspeaker3.png"
@@ -722,7 +859,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-1",
                           image: "telentedspeaker1.png"
@@ -743,7 +885,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-2",
                           image: "telentedspeaker2.png"
@@ -764,7 +911,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-3",
                           image: "telentedspeaker3.png"
@@ -785,7 +937,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-1",
                           image: "telentedspeaker1.png"
@@ -806,7 +963,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-2",
                           image: "telentedspeaker2.png"
@@ -827,7 +989,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-3",
                           image: "telentedspeaker3.png"
@@ -848,7 +1015,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123451/",
                             github: "https://github.com/speaker1",
                             portfolio: "https://speaker-1.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-1",
                           image: "telentedspeaker1.png"
@@ -869,7 +1041,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123452/",
                             github: "https://github.com/speaker2",
                             portfolio: "https://speaker-2.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-2",
                           image: "telentedspeaker2.png"
@@ -890,7 +1067,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/speaker-0a0123453/",
                             github: "https://github.com/speaker3",
                             portfolio: "https://speaker-3.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Talented Speaker-3",
                           image: "telentedspeaker3.png"
@@ -995,7 +1177,8 @@ struct ParsingTests {
                   eventInfos: [],
                   agendas: [],
                   sponsors: [],
-                  agendaSpeakerIDs: []
+                  agendaSpeakerIDs: [],
+                  about: nil
                 )
                 """
             }
@@ -1097,7 +1280,12 @@ struct ParsingTests {
                                 linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                                 github: "https://github.com/johny-appleseed",
                                 portfolio: "https://johny-appleseed.github.io",
-                                twitter: nil
+                                twitter: nil,
+                                luma: nil,
+                                whatsApp: nil,
+                                instagram: nil,
+                                arattai: nil,
+                                discord: nil
                               ),
                               about: "Apple Engineer",
                               image: "johnyappleseed.jpeg"
@@ -1146,7 +1334,12 @@ struct ParsingTests {
                         linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                         github: "https://github.com/johny-appleseed",
                         portfolio: "https://johny-appleseed.github.io",
-                        twitter: nil
+                        twitter: nil,
+                        luma: nil,
+                        whatsApp: nil,
+                        instagram: nil,
+                        arattai: nil,
+                        discord: nil
                       ),
                       about: "Apple Engineer",
                       image: "johnyappleseed.jpeg"
@@ -1167,7 +1360,12 @@ struct ParsingTests {
                             linkedIn: "https://www.linkedin.com/in/johny-appleseed-0a0123456/",
                             github: "https://github.com/johny-appleseed",
                             portfolio: "https://johny-appleseed.github.io",
-                            twitter: nil
+                            twitter: nil,
+                            luma: nil,
+                            whatsApp: nil,
+                            instagram: nil,
+                            arattai: nil,
+                            discord: nil
                           ),
                           about: "Apple Engineer",
                           image: "johnyappleseed.jpeg"
@@ -1256,7 +1454,8 @@ struct ParsingTests {
                       image: "cricheros.jpeg"
                     )
                   ],
-                  agendaSpeakerIDs: []
+                  agendaSpeakerIDs: [],
+                  about: nil
                 )
                 """#
             }

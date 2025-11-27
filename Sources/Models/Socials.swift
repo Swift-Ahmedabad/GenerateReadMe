@@ -12,26 +12,26 @@ public struct Socials: Codable, Hashable, Sendable {
     public var github: String?
     public var portfolio: String?
     public var twitter: String?
-    
-    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil) {
+    public var luma: String?
+    public var whatsApp: String?
+    public var instagram: String?
+    public var arattai: String?
+    public var discord: String?
+
+    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil, luma: String? = nil, whatsApp: String? = nil, instagram: String? = nil, arattai: String? = nil, discord: String? = nil) {
         self.linkedIn = linkedIn
         self.github = github
         self.portfolio = portfolio
         self.twitter = twitter
+        self.luma = luma
+        self.whatsApp = whatsApp
+        self.instagram = instagram
+        self.arattai = arattai
+        self.discord = discord
     }
 }
 
 extension Socials: CustomStringConvertible {
-    /// A comma-separated Markdown-formatted list of available social links.
-    ///
-    /// - Returns: A string where each present social handle is represented as a Markdown link:
-    ///   - `[LinkedIn](<url>)` if `linkedIn` is non-nil
-    ///   - `[Github](<url>)` if `github` is non-nil
-    ///   - `[Portfolio](<url>)` if `portfolio` is non-nil
-    ///   - `[Twitter](<url>)` if `twitter` is non-nil
-    ///
-    /// The links are ordered as LinkedIn, GitHub, Portfolio, then Twitter, and
-    /// are joined by ", ". If none are present, the result is an empty string.
     public var description: String {
         var strings: [String] = []
         if let linkedIn {
@@ -45,6 +45,21 @@ extension Socials: CustomStringConvertible {
         }
         if let twitter {
             strings.append("[Twitter](\(twitter))")
+        }
+        if let luma {
+            strings.append("[Luma](\(luma)")
+        }
+        if let whatsApp {
+            strings.append("[WhatsApp](\(whatsApp)")
+        }
+        if let instagram {
+            strings.append("[Instagram](\(instagram)")
+        }
+        if let arattai {
+            strings.append("[Arattai](\(arattai)")
+        }
+        if let discord {
+            strings.append("[Discord](\(discord)")
         }
         return strings.joined(separator: ", ")
     }

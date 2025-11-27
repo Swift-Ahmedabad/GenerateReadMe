@@ -154,7 +154,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test func generateEventJSON() async throws {
+    @Test func generateEventJSON() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -196,7 +196,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test func generateTalkSpeakerJSON() async throws {
+    @Test func generateTalkSpeakerJSON() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -254,7 +254,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test func generateEventInfoJSON() async throws {
+    @Test func generateEventInfoJSON() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -348,7 +348,7 @@ struct GenerateJsonTests {
         }
     }
     
-    @Test func generateAgendaSpeakerIDsJSON() async throws {
+    @Test func generateAgendaSpeakerIDsJSON() throws {
         let testURL = URL(filePath: ".").appending(path: #function)
         defer {
             try? FileManager.default.removeItem(at: testURL)
@@ -432,6 +432,128 @@ struct GenerateJsonTests {
                   }
                 ]
                 """
+            }
+        }
+    }
+    
+    @Test func generateAboutJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let aboutURL = fileURL.appending(path: ".about")
+        try FileManager.default.createDirectory(at: aboutURL, withIntermediateDirectories: true)
+        try """
+        name: "Swift Ahmedabad"
+        description: "A welcoming space where everyone who is interested in Swift or Apple Ecosystem can connect and grow together."
+        organizers:
+            - name: "Devanshi Modha"
+              about: "Software Engineer (iOS) | Women Techmakers Ambassador | Tech Evangelist"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/devanshimodha/"
+            - name: "Bhavin Vaghela"
+              about: "Sr iOS DEVELOPER & Assistant project manager at Hyperlink Infosystem"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/bhavin-vaghela/"
+            - name: "Kajal Seth"
+              about: "Software Engineer"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/kajal-sheth/"
+            - name: "Ratnesh Jain"
+              about: "Sr. iOS Engineer"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/ratnesh-jain-7a2270146/"
+        volunteers:
+            - "Riya Kheskwani"
+            - "Jinkal Hirani"
+            - "Priyanka Poojara"
+        socialMedias:
+            linkedIn: "https://www.linkedin.com/company/103221799/admin/dashboard/"
+            luma: "https://luma.com/user/swiftahmedabad"
+            twitter: "https://x.com/swift_ahmedabad"
+            whatsApp: "https://chat.whatsapp.com/FlZuWzMf8ak8C8yAmfRRVf"
+            instagram: "https://www.instagram.com/swift.ahmedabad/"
+            arattai: "https://web.arattai.in/@swift_ahmedabad"
+            discord: "https://discord.com/invite/pswxUQxEny"
+        """
+            .data(using: .utf8)!.write(to: aboutURL.appending(path: "About.yaml"))
+        
+        let eventsURL = fileURL.appending(path: "1. Apr 20 2025")
+        let event1URL = eventsURL.appending(path: "Talk1")
+        try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
+        let speakerYML =
+        """
+        - name: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - name: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
+        """
+        let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
+        try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
+                
+        try withSnapshotTesting {
+            let about = try Parser.events(from: fileURL.path(percentEncoded: false)).about
+            let jsonURL = fileURL.appending(path: "agendaSpeakerIds.json")
+            try Generator.generateJson(for: about, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                #"""
+                {
+                  "description" : "A welcoming space where everyone who is interested in Swift or Apple Ecosystem can connect and grow together.",
+                  "name" : "Swift Ahmedabad",
+                  "organizers" : [
+                    {
+                      "about" : "Software Engineer (iOS) | Women Techmakers Ambassador | Tech Evangelist",
+                      "name" : "Devanshi Modha",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/devanshimodha\/"
+                      }
+                    },
+                    {
+                      "about" : "Sr iOS DEVELOPER & Assistant project manager at Hyperlink Infosystem",
+                      "name" : "Bhavin Vaghela",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/bhavin-vaghela\/"
+                      }
+                    },
+                    {
+                      "about" : "Software Engineer",
+                      "name" : "Kajal Seth",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/kajal-sheth\/"
+                      }
+                    },
+                    {
+                      "about" : "Sr. iOS Engineer",
+                      "name" : "Ratnesh Jain",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/ratnesh-jain-7a2270146\/"
+                      }
+                    }
+                  ],
+                  "socialMedias" : {
+                    "arattai" : "https:\/\/web.arattai.in\/@swift_ahmedabad",
+                    "discord" : "https:\/\/discord.com\/invite\/pswxUQxEny",
+                    "instagram" : "https:\/\/www.instagram.com\/swift.ahmedabad\/",
+                    "linkedIn" : "https:\/\/www.linkedin.com\/company\/103221799\/admin\/dashboard\/",
+                    "luma" : "https:\/\/luma.com\/user\/swiftahmedabad",
+                    "twitter" : "https:\/\/x.com\/swift_ahmedabad",
+                    "whatsApp" : "https:\/\/chat.whatsapp.com\/FlZuWzMf8ak8C8yAmfRRVf"
+                  },
+                  "volunteers" : [
+                    "Riya Kheskwani",
+                    "Jinkal Hirani",
+                    "Priyanka Poojara"
+                  ]
+                }
+                """#
             }
         }
     }

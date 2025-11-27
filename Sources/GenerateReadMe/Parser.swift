@@ -69,11 +69,18 @@ enum Parser {
         var agendas: [Agenda] = []
         var sponsors: [Sponsor] = []
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
+        var about: AboutPage?
     }
     
     static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
         let decoder = YAMLDecoder()
         var info = EventsInfo()
+        
+        let aboutPath = URL(filePath: path).appending(path: ".about").appending(path: "About.yaml")
+        if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percentEncoded: false)) {
+            let aboutPage = try decoder.decode(AboutPage.self, from: aboutContent)
+            info.about = aboutPage
+        }
         
         for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
             debugPrint(eventURL.lastPathComponent)
