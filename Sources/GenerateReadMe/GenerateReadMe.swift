@@ -1,55 +1,117 @@
 import ArgumentParser
 import Foundation
-import Yams
+import Models
 
+/// A command-line utility that parses a directory of talk-related files and generates a README along with JSON exports.
+///
+/// This tool scans a given path for event, speaker, and talk information, skipping specified file extensions,
+/// and produces:
+/// - A README.md (or custom filename) summarizing events and talks.
+/// - JSON files for events, speakers, talks, and talk-speaker relationships.
+///
+/// Usage:
+/// - Provide the path to the talks directory.
+/// - Optionally customize filenames and skipped file extensions via options.
+///
+/// Arguments:
+/// - `path`: The filesystem path to the directory containing talk data to parse.
+///
+/// Options:
+/// - `skipFileWithExtensions`: File extensions to ignore during parsing. Defaults to ["md", "json", "sh"].
+/// - `readMeFileName`: Output filename for the generated README. Default: "README.md".
+/// - `eventsjsonFileName`: Output filename for the events JSON. Default: "events.json".
+/// - `speakersJsonFileName`: Output filename for the speakers JSON. Default: "speakers.json".
+/// - `talksJsonFileName`: Output filename for the talks JSON. Default: "talks.json".
+/// - `talkSpeakersFileName`: Output filename for the talk-speaker relationships JSON. Default: "talkspeakers.json".
+/// - `eventInfosFileName`: Output filename for the eventInfos JSON. Default: "eventInfos.json".
+/// - `sponsorsFileName`: Output filename for the sponsors JSON. Default: "sponsors.json".
+/// - `agendasFileName`: Output filename for the agendas JSON. Default: "agendas.json".
+///
+/// Behavior:
+/// - Parses events using `Parser.events(from:skipFileWithExtensions:)`.
+/// - Sorts events by date before generating the README using `Generator.generateReadMe(for:at:)`.
+/// - Writes JSON files for events, speakers, talks, and talk-speaker mappings using `Generator.generateJson(for:at:)`.
+///
+/// Throws:
+/// - Rethrows any parsing or file I/O errors encountered during generation.
+///
+/// Notes:
+/// - The command relies on the `Models` module for domain types and the `Parser`/`Generator` utilities for processing.
+/// - Paths are resolved relative to the provided `path` argument using `URL(filePath:)`.
 @main
 struct GenerateReadMe: ParsableCommand {
-    @Argument
+    
+    static var configuration: CommandConfiguration {
+        CommandConfiguration(commandName: "GenerateReadMe")
+    }
+    
+    @Argument(help: "Path of the Talks Directory")
     var path: String
     
-    var skipPaths: [String] = [".DS_Store", "README.md", "talks.json", ".scripts", "generate-readme.sh", ".git", ".gitattributes", "instruction.md"]
+    @Option(help: "file extension that needs to skip parsing. Default: md, json, sh")
+    var skipFileWithExtensions: [String] = .defaultSkippingExtensions
     
-    mutating func run() throws {
-        let decoder = YAMLDecoder()
+    @Option(help: "Name of the Read me file. Default: README.md")
+    var readMeFileName: String = "README.md"
+    
+    @Option(help: "Name of the events json file. Default: events.json")
+    var eventsjsonFileName: String = "events.json"
+    
+    @Option(help: "Name of the speakers json file. Default: speakers.json")
+    var speakersJsonFileName: String = "speakers.json"
+    
+    @Option(help: "Name of the talks json file. Default: talks.json")
+    var talksJsonFileName: String = "talks.json"
+    
+    @Option(help: "Name of the talkspeakers json file. Default: talkspeakers.json")
+    var talkSpeakersFileName: String = "talkspeakers.json"
+    
+    @Option(help: "Name of the eventInfos json file. Default: eventInfos.json")
+    var eventInfosFileName: String = "eventInfos.json"
+    
+    @Option(help: "Name of the sponsors json file. Default: sponsors.json")
+    var sponsorsFileName: String = "sponsors.json"
+    
+    @Option(help: "Name of the agendas json file, Default: agandas.json")
+    var agendasFileName: String = "agandas.json"
+    
+    @Option(help: "Name of the agenda speaker id json file. Default: agendaSpeakerIDs.json")
+    var agendaSpeakerIDsFileName: String = "agendaSpeakerIDs.json"
+    
+    @Option(help: "Name of the about file. Default: about.json")
+    var aboutFileName: String = "about.json"
+    
+    func run() throws {
+        let allEvents = try Parser.events(
+            from: path,
+            skipFileWithExtensions: skipFileWithExtensions
+        )
         
-        let contents = try FileManager.default.contentsOfDirectory(atPath: path).sorted()
-        let filtered = contents.filter { !skipPaths.contains($0) }
+        try Generator.generateReadMe(for: allEvents.eventsWithTalks.sorted(by: {$0.event.date > $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
         
-        var allEvents: [Event] = []
+        let pathURL = URL(filePath: path).appending(path: ".generated")
+        try? FileManager.default.createDirectory(at: pathURL, withIntermediateDirectories: true)
         
-        for event in filtered {
-            let subcontents = try FileManager.default.contentsOfDirectory(atPath: path.appending("/\(event)"))
-            let talks = subcontents.filter { !skipPaths.contains($0) }
-            
-            var parsedTalks: [Talk] = []
-            
-            for talk in talks {
-                let subcontents = try FileManager.default.contentsOfDirectory(atPath: path.appending("/\(event)/\(talk)"))
-                let items = subcontents.filter { !skipPaths.contains($0) }
-                
-                if let speaker = items.first(where: { $0.contains("Speaker") }) {
-                    if let contentsData = FileManager.default.contents(atPath: path.appending("/\(event)/\(talk)/\(speaker)")) {
-                        let speakers = try decoder.decode(Speakers.self, from: contentsData)
-                        let parsedTalk = Talk(title: talk, speakers: speakers)
-                        parsedTalks.append(parsedTalk)
-                    }
-                }
-            }
-            
-            let parsedEvent = Event(title: event, talks: parsedTalks)
-            allEvents.append(parsedEvent)
+        try Generator.generateJson(for: allEvents.events, at: pathURL.appending(path: eventsjsonFileName))
+        try Generator.generateJson(for: allEvents.speakers, at: pathURL.appending(path: speakersJsonFileName))
+        try Generator.generateJson(for: allEvents.talks, at: pathURL.appending(path: talksJsonFileName))
+        try Generator.generateJson(for: allEvents.talkSpeakers, at: pathURL.appending(path: talkSpeakersFileName))
+        try Generator.generateJson(for: allEvents.eventInfos, at: pathURL.appending(path: eventInfosFileName))
+        try Generator.generateJson(for: allEvents.sponsors, at: pathURL.appending(path: sponsorsFileName))
+        try Generator.generateJson(for: allEvents.agendas, at: pathURL.appending(path: agendasFileName))
+        try Generator.generateJson(for: allEvents.agendaSpeakerIDs, at: pathURL.appending(path: agendaSpeakerIDsFileName))
+        if let about = allEvents.about {
+            try Generator.generateJson(for: about, at: pathURL.appending(path: aboutFileName))
         }
-        
-        let destinationPath = self.path.appending("/README.md")
-        let destinationContent = allEvents.sorted(by: {$0.title > $1.title}).map { $0.description }.joined(separator: "\n").data(using: .utf8)
-        if !FileManager.default.fileExists(atPath: destinationPath) {
-            FileManager.default.createFile(atPath: destinationPath, contents: nil)
-        }
-        try destinationContent?.write(to: URL(fileURLWithPath: destinationPath))
-        
-        let jsonDestinationPath = self.path.appending("/talks.json")
-        let jsonEncoder = JSONEncoder()
-        let encoded = try jsonEncoder.encode(allEvents)
-        try encoded.write(to: URL(fileURLWithPath: jsonDestinationPath))
+    }
+}
+
+extension [String] {
+    static var defaultSkippingExtensions: [String] {
+        [
+            "md",
+            "json",
+            "sh"
+        ]
     }
 }
