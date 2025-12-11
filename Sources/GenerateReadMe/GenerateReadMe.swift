@@ -81,7 +81,7 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the about file. Default: about.json")
     var aboutFileName: String = "about.json"
     
-    mutating func run() throws {
+    func run() throws {
         let allEvents = try Parser.events(
             from: path,
             skipFileWithExtensions: skipFileWithExtensions
