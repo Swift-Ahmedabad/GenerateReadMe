@@ -149,13 +149,13 @@ if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percen
 2. `generateJson<T>(for:at:encoder)`
 
 - To generate the Markdown file from the defined Models, Models structures conforms to `CustomStringConvertible` protocol and it's description is having markdown syntax for its content.
-```
+```swift
 let content = events.map { $0.description }.joined(separator: "\n")
 try content.write(to: path, atomically: true, encoding: .utf8)
 ```
 
 - To generate the json file, using simple JSONEncoder with `.prettyPrinted` and `.sortedKeys` output formatting options
-```
+```swift
 encoder.outputFormatting = [.sortedKeys, .prettyPrinted]
 let data = try encoder.encode(item)
 try data.write(to: path)
@@ -165,7 +165,7 @@ try data.write(to: path)
 - There are some cases when simple JSONDecoder is not enough. 
 - For example, `Agenda` type does not include the date components (`MMMM dd, yyyy`) in `time` variable (`hh:mm a`) in the YML file, so it is passed from the parent JSONDecoder. [See `Agenda.swift` file from **Models** directory].
 - `DecodableWithConfiguration` comes with a special initializer with extra `configuration` parameter.
-```
+```swift
 public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
     public var id: String
     public var eventID: Event.ID
