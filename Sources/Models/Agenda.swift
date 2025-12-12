@@ -79,10 +79,12 @@ extension Agenda {
 }
 
 public struct AgendaSpeakerID: Codable {
+    public var id: String
     public var agendaID: Agenda.ID
     public var speakerID: Speaker.ID
     
     public init(agendaID: Agenda.ID, speakerID: Speaker.ID) {
+        self.id = StableID(using: agendaID, speakerID).id
         self.agendaID = agendaID
         self.speakerID = speakerID
     }
