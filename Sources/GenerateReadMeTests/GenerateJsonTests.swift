@@ -424,10 +424,12 @@ struct GenerateJsonTests {
                 [
                   {
                     "agendaID" : "1ba097a3c86b6bc161f361abeb0c6734627a75239bf98abd9fe8f2a3b95a0c47",
+                    "id" : "374c0ce17be6c680f9f9454b8e6c173d199d6afcb24283503b4d532788fbdefd",
                     "speakerID" : "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                   },
                   {
                     "agendaID" : "d4d4f43ab8ace262da69e5e8cd49e45759e0c142f21e27de035bbc76fc47c587",
+                    "id" : "9076ba46d8aaea331c272a73389c3daf1daeb5fa300fd8fa2653bc7a5eb3fa93",
                     "speakerID" : "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2"
                   }
                 ]
