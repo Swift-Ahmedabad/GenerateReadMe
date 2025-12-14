@@ -12,7 +12,7 @@ import InlineSnapshotTesting
 import SnapshotTestingCustomDump
 import Testing
 
-@Suite(.snapshots(record: .never))
+@Suite(.snapshots(record: .failed))
 struct GenerateReadMeTests {
     
     @Test func generateReadMe() throws {
@@ -49,7 +49,8 @@ struct GenerateReadMeTests {
                 ### By: **Johny Appleseed**
                 Apple Engineer
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io) 
+
                 ---
                 """
             }
@@ -94,11 +95,13 @@ struct GenerateReadMeTests {
                 ### By: **Johny Appleseed**
                 Apple Engineer
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/johny-appleseed-0a0123456/), [Github](https://github.com/johny-appleseed), [Portfolio](https://johny-appleseed.github.io) 
+
                 ### By: **Linus Torvalds**
                 Git Inventor
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/linus-torvalds-0a0123456/)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/linus-torvalds-0a0123456/) 
+
                 ---
                 """
             }
@@ -143,17 +146,20 @@ struct GenerateReadMeTests {
                 ### By: **Event2 Speaker 1**
                 Talented Speaker-1
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io) 
+
                 ## Talk2
                 ### By: **Event2 Speaker 2**
                 Talented Speaker-2
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io) 
+
                 ## Talk3
                 ### By: **Event2 Speaker 3**
                 Talented Speaker-3
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io) 
+
                 ---
                 # 1. Oct 1 2025
 
@@ -162,17 +168,20 @@ struct GenerateReadMeTests {
                 ### By: **Event1 Speaker 1**
                 Talented Speaker-1
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io) 
+
                 ## Talk2
                 ### By: **Event1 Speaker 2**
                 Talented Speaker-2
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io) 
+
                 ## Talk3
                 ### By: **Event1 Speaker 3**
                 Talented Speaker-3
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io) 
+
                 ---
                 # 3. Oct 3 2025
 
@@ -181,17 +190,20 @@ struct GenerateReadMeTests {
                 ### By: **Event3 Speaker 1**
                 Talented Speaker-1
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123451/), [Github](https://github.com/speaker1), [Portfolio](https://speaker-1.github.io) 
+
                 ## Talk2
                 ### By: **Event3 Speaker 2**
                 Talented Speaker-2
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123452/), [Github](https://github.com/speaker2), [Portfolio](https://speaker-2.github.io) 
+
                 ## Talk3
                 ### By: **Event3 Speaker 3**
                 Talented Speaker-3
 
-                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io)
+                Follow on: [LinkedIn](https://www.linkedin.com/in/speaker-0a0123453/), [Github](https://github.com/speaker3), [Portfolio](https://speaker-3.github.io) 
+
                 ---
                 """
             }
