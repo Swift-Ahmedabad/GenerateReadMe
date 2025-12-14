@@ -135,7 +135,7 @@ extension Speaker: CustomStringConvertible {
             string.append("\n\(about)")
         }
         if let socialDescription = socials?.description {
-            string.append("\n\nFollow on: \(socialDescription)")
+            string.append("\n\nFollow on: \(socialDescription) \n")
         }
         return string
     }
