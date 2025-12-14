@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import Dependencies
 @testable import GenerateReadMe
 import InlineSnapshotTesting
-@preconcurrency import SnapshotTesting
+import Models
 import SnapshotTestingCustomDump
+@preconcurrency import SnapshotTesting
 import Testing
 
 @Suite(.snapshots(record: .failed))
@@ -556,6 +558,38 @@ struct GenerateJsonTests {
                   ]
                 }
                 """#
+            }
+        }
+    }
+    
+    @Test func generateUpdatedAtJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        try FileManager.default.createDirectory(at: testURL, withIntermediateDirectories: true)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        try withDependencies {
+            $0.date.now = Date(timeIntervalSince1970: 1234567890)
+        } operation: {
+            @Dependency(\.date) var date
+            let updatedAt = UpdatedAt(date: date.now)
+            let url = testURL.appending(path: "lastUpdatedAt.json")
+            do {
+                try Generator.generateJson(for: updatedAt, at: url)
+            } catch {
+                print(error)
+                throw error
+            }
+            
+            withSnapshotTesting {
+                assertInlineSnapshot(of: url, as: .jsonURLContent) {
+                    """
+                    {
+                      "date" : 256260690
+                    }
+                    """
+                }
             }
         }
     }
