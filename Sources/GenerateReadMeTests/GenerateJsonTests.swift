@@ -593,4 +593,54 @@ struct GenerateJsonTests {
             }
         }
     }
+    
+    @Test func generateNewsSourceJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let newsSourceURL = fileURL.appending(path: ".newsSource")
+        try FileManager.default.createDirectory(at: newsSourceURL, withIntermediateDirectories: true)
+        let newsYMLURL = newsSourceURL.appending(path: "NewsSource.yml")
+        try """
+        - title: "The.Swift.Dev."
+          url: "https://theswiftdev.com/rss.xml"
+          
+        - title: "OhMySwift"
+          url: "https://ohmyswift.com/blog/feed.xml"
+          
+        - title: "Swift Tool Kit"
+          url: "https://www.swifttoolkit.dev/feed.rss"
+        """
+        .data(using: .utf8)?.write(to: newsYMLURL)
+        
+        try withSnapshotTesting {
+            let newsSources = try Parser.events(from: fileURL.path(percentEncoded: false)).newsSources
+            let jsonURL = fileURL.appending(path: "newsSource.json")
+            try Generator.generateJson(for: newsSources, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                #"""
+                [
+                  {
+                    "id" : "3b806bee1754b7a2896a721ed9bc4f4ed6141b6eac46af244a7a0063c3b2c898",
+                    "title" : "The.Swift.Dev.",
+                    "url" : "https:\/\/theswiftdev.com\/rss.xml"
+                  },
+                  {
+                    "id" : "83bb8ed52101a4a8bc1d5ac32b22b15d02854b25055a18da5a7fc6cf6736cdb7",
+                    "title" : "OhMySwift",
+                    "url" : "https:\/\/ohmyswift.com\/blog\/feed.xml"
+                  },
+                  {
+                    "id" : "8c197ae58a41dabab034b5ea824cfa52dd32f6d9006991a9cdc7495b35f533a9",
+                    "title" : "Swift Tool Kit",
+                    "url" : "https:\/\/www.swifttoolkit.dev\/feed.rss"
+                  }
+                ]
+                """#
+            }
+        }
+    }
 }
