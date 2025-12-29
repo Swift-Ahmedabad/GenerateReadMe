@@ -71,6 +71,7 @@ enum Parser {
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
         var about: AboutPage?
         var newsSources: [NewsSource] = []
+        var yearsInReview: [YearInReview] = []
     }
     
     static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
@@ -81,6 +82,15 @@ enum Parser {
         if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percentEncoded: false)) {
             let aboutPage = try decoder.decode(AboutPage.self, from: aboutContent)
             info.about = aboutPage
+        }
+        
+        let yearsInReviewPath = URL(filePath: path).appending(path: ".yearsInReview")
+        let urls = try? validContentsOfDirectory(at: yearsInReviewPath, skipping: skipFileWithExtensions)
+        for yearInReviewURL in (urls ?? []) {
+            if let yearInReviewData = FileManager.default.contents(atPath: yearInReviewURL.path(percentEncoded: false)) {
+                let decoded = try decoder.decode(YearInReview.self, from: yearInReviewData)
+                info.yearsInReview.append(decoded)
+            }
         }
         
         let newsSourcePath = URL(filePath: path).appending(path: ".newsSource").appending(path: "NewsSource.yml")

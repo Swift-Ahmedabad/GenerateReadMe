@@ -156,7 +156,8 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: []
+                  newsSources: [],
+                  yearsInReview: []
                 )
                 """
             }
@@ -364,7 +365,8 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: []
+                  newsSources: [],
+                  yearsInReview: []
                 )
                 """
             }
@@ -1181,7 +1183,8 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: []
+                  newsSources: [],
+                  yearsInReview: []
                 )
                 """
             }
@@ -1459,7 +1462,8 @@ struct ParsingTests {
                   ],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: []
+                  newsSources: [],
+                  yearsInReview: []
                 )
                 """#
             }

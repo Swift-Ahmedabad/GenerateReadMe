@@ -643,4 +643,57 @@ struct GenerateJsonTests {
             }
         }
     }
+    
+    @Test func generateYearInReviewJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let yearsInReviewURL = fileURL.appending(path: ".yearsInReview")
+        try FileManager.default.createDirectory(at: yearsInReviewURL, withIntermediateDirectories: true)
+        let year2024URL = yearsInReviewURL.appending(path: "year2024.yml")
+        try """
+        year: 2024
+        org: Swift Ahmedabad
+
+        eventStats:
+            totalEvents: 4
+            totalParticipants: 188
+            averageParticipants: 47
+            totalSpeakers: 10
+            topicsCovered: 9
+            totalVenues: 3
+            totalSponsors: 3
+        """
+        .data(using: .utf8)?.write(to: year2024URL)
+        
+        try withSnapshotTesting {
+            let yearsInReview = try Parser.events(from: fileURL.path(percentEncoded: false)).yearsInReview
+            let jsonURL = fileURL.appending(path: "yearsInReview.json")
+            try Generator.generateJson(for: yearsInReview, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                """
+                [
+                  {
+                    "eventStats" : {
+                      "averageParticipants" : 47,
+                      "topicsCovered" : 9,
+                      "totalEvents" : 4,
+                      "totalParticipants" : 188,
+                      "totalSpeakers" : 10,
+                      "totalSponsors" : 3,
+                      "totalVenues" : 3
+                    },
+                    "id" : "0cdf61b8efe97ecd872ab84c3736a668da32d335fce2fe690be8a5b516e8b249",
+                    "org" : "Swift Ahmedabad",
+                    "year" : 2024
+                  }
+                ]
+                """
+            }
+        }
+
+    }
 }
