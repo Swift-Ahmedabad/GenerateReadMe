@@ -33,13 +33,15 @@ public struct YearInReview: Codable, Identifiable, Equatable {
     public var org: String
     public var eventStats: EventStats
     public var url: URL?
+    public var photos: [String]?
     
-    public init(year: Int, org: String, eventStats: EventStats, url: URL? = nil) {
+    public init(year: Int, org: String, eventStats: EventStats, url: URL? = nil, photos: [String]? = nil) {
         self.id = StableID(using: year, org).id
         self.year = year
         self.org = org
         self.eventStats = eventStats
         self.url = url
+        self.photos = photos
     }
     
     public init(from decoder: any Decoder) throws {
@@ -48,6 +50,7 @@ public struct YearInReview: Codable, Identifiable, Equatable {
         self.org = try container.decode(String.self, forKey: .org)
         self.eventStats = try container.decode(YearInReview.EventStats.self, forKey: .eventStats)
         self.url = try container.decodeIfPresent(URL.self, forKey: .url)
+        self.photos = try container.decodeIfPresent([String].self, forKey: .photos)
         self.id = StableID(using: year, org).id
     }
 }

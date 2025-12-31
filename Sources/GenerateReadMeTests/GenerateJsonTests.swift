@@ -666,6 +666,11 @@ struct GenerateJsonTests {
             topicsCovered: 9
             totalVenues: 3
             totalSponsors: 3
+        
+        photos:
+            - photo1
+            - photo2
+            - photo3
         """
         .data(using: .utf8)?.write(to: year2024URL)
         
@@ -688,6 +693,11 @@ struct GenerateJsonTests {
                     },
                     "id" : "0cdf61b8efe97ecd872ab84c3736a668da32d335fce2fe690be8a5b516e8b249",
                     "org" : "Swift Ahmedabad",
+                    "photos" : [
+                      "photo1",
+                      "photo2",
+                      "photo3"
+                    ],
                     "year" : 2024
                   }
                 ]
