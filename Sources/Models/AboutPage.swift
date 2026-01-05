@@ -11,7 +11,7 @@ public struct AboutPage: Codable {
     public var name: String
     public var description: String
     public var organizers: [Organizer]
-    public var volunteers: [String]
+    public var volunteers: [Volunteer]
     public var socialMedias: Socials
 }
 
@@ -27,4 +27,6 @@ extension AboutPage {
             self.socials = socials
         }
     }
+    
+    public typealias Volunteer = Self.Organizer
 }

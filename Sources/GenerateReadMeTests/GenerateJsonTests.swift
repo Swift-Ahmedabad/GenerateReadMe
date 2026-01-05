@@ -470,9 +470,18 @@ struct GenerateJsonTests {
               socials:
                 linkedIn: "https://www.linkedin.com/in/ratnesh-jain-7a2270146/"
         volunteers:
-            - "Riya Kheskwani"
-            - "Jinkal Hirani"
-            - "Priyanka Poojara"
+            - name: "Riya Kheskwani"
+              about: "Software Engineer | iOS Developer"
+              socials: 
+                linkedIn: "https://www.linkedin.com/in/riya-kheskwani-21b168136/"
+            - name: "Jinkal Hirani"
+              about: "iOS Developer"
+              socials: 
+                linkedIn: "https://www.linkedin.com/in/jinkalhirani/"
+            - name: "Priyanka Poojara"
+              about: "Helping Startups & Entrepreneurs Build Innovative Mobile Apps | SwiftUI, Combine, AI & Web3 | Mobile App Consultant | Blockchain & NFT Innovator | Digital Marketing Strategist | Let’s Build the Future"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/priyanka-poojara/"
         socialMedias:
             linkedIn: "https://www.linkedin.com/company/103221799/admin/dashboard/"
             luma: "https://luma.com/user/swiftahmedabad"
@@ -552,9 +561,27 @@ struct GenerateJsonTests {
                     "whatsApp" : "https:\/\/chat.whatsapp.com\/FlZuWzMf8ak8C8yAmfRRVf"
                   },
                   "volunteers" : [
-                    "Riya Kheskwani",
-                    "Jinkal Hirani",
-                    "Priyanka Poojara"
+                    {
+                      "about" : "Software Engineer | iOS Developer",
+                      "name" : "Riya Kheskwani",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/riya-kheskwani-21b168136\/"
+                      }
+                    },
+                    {
+                      "about" : "iOS Developer",
+                      "name" : "Jinkal Hirani",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/jinkalhirani\/"
+                      }
+                    },
+                    {
+                      "about" : "Helping Startups & Entrepreneurs Build Innovative Mobile Apps | SwiftUI, Combine, AI & Web3 | Mobile App Consultant | Blockchain & NFT Innovator | Digital Marketing Strategist | Let’s Build the Future",
+                      "name" : "Priyanka Poojara",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/priyanka-poojara\/"
+                      }
+                    }
                   ]
                 }
                 """#
