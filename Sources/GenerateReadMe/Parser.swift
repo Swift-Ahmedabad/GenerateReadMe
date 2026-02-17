@@ -70,6 +70,9 @@ enum Parser {
         var sponsors: [Sponsor] = []
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
         var about: AboutPage?
+        var newsSources: [NewsSource] = []
+        var yearsInReview: [YearInReview] = []
+        var podcasts: [PodcastSource] = []
     }
     
     static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
@@ -80,6 +83,27 @@ enum Parser {
         if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percentEncoded: false)) {
             let aboutPage = try decoder.decode(AboutPage.self, from: aboutContent)
             info.about = aboutPage
+        }
+        
+        let podcastPath = URL(filePath: path).appending(path: ".podcastSource").appending(path: "PodcastSource.yml")
+        if let podcastContent = FileManager.default.contents(atPath: podcastPath.path(percentEncoded: false)) {
+            let podcastSource = try decoder.decode(PodcastSourceResponse.self, from: podcastContent)
+            info.podcasts = podcastSource.podcasts
+        }
+        
+        let yearsInReviewPath = URL(filePath: path).appending(path: ".yearsInReview")
+        let urls = try? validContentsOfDirectory(at: yearsInReviewPath, skipping: skipFileWithExtensions)
+        for yearInReviewURL in (urls ?? []) {
+            if let yearInReviewData = FileManager.default.contents(atPath: yearInReviewURL.path(percentEncoded: false)) {
+                let decoded = try decoder.decode(YearInReview.self, from: yearInReviewData)
+                info.yearsInReview.append(decoded)
+            }
+        }
+        
+        let newsSourcePath = URL(filePath: path).appending(path: ".newsSource").appending(path: "NewsSource.yml")
+        if let newsSourceContent = FileManager.default.contents(atPath: newsSourcePath.path(percentEncoded: false)) {
+            let newsSources = try decoder.decode([NewsSource].self, from: newsSourceContent)
+            info.newsSources = newsSources
         }
         
         for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {

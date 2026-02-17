@@ -10,8 +10,7 @@ import Foundation
 public struct AboutPage: Codable {
     public var name: String
     public var description: String
-    public var organizers: [Organizer]
-    public var volunteers: [String]
+    public var members: [Member]
     public var socialMedias: Socials
 }
 
@@ -27,4 +26,6 @@ extension AboutPage {
             self.socials = socials
         }
     }
+    
+    public typealias Member = Self.Organizer
 }

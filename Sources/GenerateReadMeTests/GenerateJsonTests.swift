@@ -452,7 +452,7 @@ struct GenerateJsonTests {
         try """
         name: "Swift Ahmedabad"
         description: "A welcoming space where everyone who is interested in Swift or Apple Ecosystem can connect and grow together."
-        organizers:
+        members:
             - name: "Devanshi Modha"
               about: "Software Engineer (iOS) | Women Techmakers Ambassador | Tech Evangelist"
               socials:
@@ -469,10 +469,18 @@ struct GenerateJsonTests {
               about: "Sr. iOS Engineer"
               socials:
                 linkedIn: "https://www.linkedin.com/in/ratnesh-jain-7a2270146/"
-        volunteers:
-            - "Riya Kheskwani"
-            - "Jinkal Hirani"
-            - "Priyanka Poojara"
+            - name: "Riya Kheskwani"
+              about: "Software Engineer | iOS Developer"
+              socials: 
+                linkedIn: "https://www.linkedin.com/in/riya-kheskwani-21b168136/"
+            - name: "Jinkal Hirani"
+              about: "iOS Developer"
+              socials: 
+                linkedIn: "https://www.linkedin.com/in/jinkalhirani/"
+            - name: "Priyanka Poojara"
+              about: "Helping Startups & Entrepreneurs Build Innovative Mobile Apps | SwiftUI, Combine, AI & Web3 | Mobile App Consultant | Blockchain & NFT Innovator | Digital Marketing Strategist | Let’s Build the Future"
+              socials:
+                linkedIn: "https://www.linkedin.com/in/priyanka-poojara/"
         socialMedias:
             linkedIn: "https://www.linkedin.com/company/103221799/admin/dashboard/"
             luma: "https://luma.com/user/swiftahmedabad"
@@ -511,8 +519,7 @@ struct GenerateJsonTests {
                 #"""
                 {
                   "description" : "A welcoming space where everyone who is interested in Swift or Apple Ecosystem can connect and grow together.",
-                  "name" : "Swift Ahmedabad",
-                  "organizers" : [
+                  "members" : [
                     {
                       "about" : "Software Engineer (iOS) | Women Techmakers Ambassador | Tech Evangelist",
                       "name" : "Devanshi Modha",
@@ -540,8 +547,30 @@ struct GenerateJsonTests {
                       "socials" : {
                         "linkedIn" : "https:\/\/www.linkedin.com\/in\/ratnesh-jain-7a2270146\/"
                       }
+                    },
+                    {
+                      "about" : "Software Engineer | iOS Developer",
+                      "name" : "Riya Kheskwani",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/riya-kheskwani-21b168136\/"
+                      }
+                    },
+                    {
+                      "about" : "iOS Developer",
+                      "name" : "Jinkal Hirani",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/jinkalhirani\/"
+                      }
+                    },
+                    {
+                      "about" : "Helping Startups & Entrepreneurs Build Innovative Mobile Apps | SwiftUI, Combine, AI & Web3 | Mobile App Consultant | Blockchain & NFT Innovator | Digital Marketing Strategist | Let’s Build the Future",
+                      "name" : "Priyanka Poojara",
+                      "socials" : {
+                        "linkedIn" : "https:\/\/www.linkedin.com\/in\/priyanka-poojara\/"
+                      }
                     }
                   ],
+                  "name" : "Swift Ahmedabad",
                   "socialMedias" : {
                     "arattai" : "https:\/\/web.arattai.in\/@swift_ahmedabad",
                     "discord" : "https:\/\/discord.com\/invite\/pswxUQxEny",
@@ -550,14 +579,79 @@ struct GenerateJsonTests {
                     "luma" : "https:\/\/luma.com\/user\/swiftahmedabad",
                     "twitter" : "https:\/\/x.com\/swift_ahmedabad",
                     "whatsApp" : "https:\/\/chat.whatsapp.com\/FlZuWzMf8ak8C8yAmfRRVf"
-                  },
-                  "volunteers" : [
-                    "Riya Kheskwani",
-                    "Jinkal Hirani",
-                    "Priyanka Poojara"
-                  ]
+                  }
                 }
                 """#
+            }
+        }
+    }
+    
+    @Test func generatePodcastSourceJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let aboutURL = fileURL.appending(path: ".podcastSource")
+        try FileManager.default.createDirectory(at: aboutURL, withIntermediateDirectories: true)
+        try """
+        podcasts:
+            - id: "281777685"
+              name: "Core Intuition"
+            - id: "1730260283"
+              name: "Swift Academy The Podcast"
+            - id: "1227872143"
+              name: "AppStories"
+            - id: "1331816080"
+              name: "9to5Mac Daily"
+        """
+            .data(using: .utf8)!.write(to: aboutURL.appending(path: "PodcastSource.yml"))
+        
+        let eventsURL = fileURL.appending(path: "1. Apr 20 2025")
+        let event1URL = eventsURL.appending(path: "Talk1")
+        try FileManager.default.createDirectory(at: event1URL, withIntermediateDirectories: true)
+        let speakerYML =
+        """
+        - name: Johny Appleseed
+          socials:
+            linkedIn: https://www.linkedin.com/in/johny-appleseed-0a0123456/
+            github: https://github.com/johny-appleseed
+            portfolio: https://johny-appleseed.github.io
+          about: Apple Engineer
+        - name: Linus Torvalds
+          socials:
+            linkedIn: https://www.linkedin.com/in/linus-torvalds-0a0123456/
+          about: Git Inventor
+        """
+        let speakerYMLURL = event1URL.appendingPathComponent("Speaker.yml")
+        try speakerYML.write(to: speakerYMLURL, atomically: true, encoding: .utf8)
+                
+        try withSnapshotTesting {
+            let about = try Parser.events(from: fileURL.path(percentEncoded: false)).podcasts
+            let jsonURL = fileURL.appending(path: "podcastSource.json")
+            try Generator.generateJson(for: about, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                """
+                [
+                  {
+                    "id" : "281777685",
+                    "name" : "Core Intuition"
+                  },
+                  {
+                    "id" : "1730260283",
+                    "name" : "Swift Academy The Podcast"
+                  },
+                  {
+                    "id" : "1227872143",
+                    "name" : "AppStories"
+                  },
+                  {
+                    "id" : "1331816080",
+                    "name" : "9to5Mac Daily"
+                  }
+                ]
+                """
             }
         }
     }
@@ -592,5 +686,118 @@ struct GenerateJsonTests {
                 }
             }
         }
+    }
+    
+    @Test func generateNewsSourceJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let newsSourceURL = fileURL.appending(path: ".newsSource")
+        try FileManager.default.createDirectory(at: newsSourceURL, withIntermediateDirectories: true)
+        let newsYMLURL = newsSourceURL.appending(path: "NewsSource.yml")
+        try """
+        - title: "The.Swift.Dev."
+          url: "https://theswiftdev.com/rss.xml"
+          
+        - title: "OhMySwift"
+          url: "https://ohmyswift.com/blog/feed.xml"
+          
+        - title: "Swift Tool Kit"
+          url: "https://www.swifttoolkit.dev/feed.rss"
+        """
+        .data(using: .utf8)?.write(to: newsYMLURL)
+        
+        try withSnapshotTesting {
+            let newsSources = try Parser.events(from: fileURL.path(percentEncoded: false)).newsSources
+            let jsonURL = fileURL.appending(path: "newsSource.json")
+            try Generator.generateJson(for: newsSources, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                #"""
+                [
+                  {
+                    "id" : "3b806bee1754b7a2896a721ed9bc4f4ed6141b6eac46af244a7a0063c3b2c898",
+                    "title" : "The.Swift.Dev.",
+                    "url" : "https:\/\/theswiftdev.com\/rss.xml"
+                  },
+                  {
+                    "id" : "83bb8ed52101a4a8bc1d5ac32b22b15d02854b25055a18da5a7fc6cf6736cdb7",
+                    "title" : "OhMySwift",
+                    "url" : "https:\/\/ohmyswift.com\/blog\/feed.xml"
+                  },
+                  {
+                    "id" : "8c197ae58a41dabab034b5ea824cfa52dd32f6d9006991a9cdc7495b35f533a9",
+                    "title" : "Swift Tool Kit",
+                    "url" : "https:\/\/www.swifttoolkit.dev\/feed.rss"
+                  }
+                ]
+                """#
+            }
+        }
+    }
+    
+    @Test func generateYearInReviewJSON() throws {
+        let testURL = URL(filePath: ".").appending(path: #function)
+        defer {
+            try? FileManager.default.removeItem(at: testURL)
+        }
+        
+        let fileURL = testURL.appending(path: "Events")
+        let yearsInReviewURL = fileURL.appending(path: ".yearsInReview")
+        try FileManager.default.createDirectory(at: yearsInReviewURL, withIntermediateDirectories: true)
+        let year2024URL = yearsInReviewURL.appending(path: "year2024.yml")
+        try """
+        year: 2024
+        org: Swift Ahmedabad
+
+        eventStats:
+            totalEvents: 4
+            totalParticipants: 188
+            averageParticipants: 47
+            totalSpeakers: 10
+            topicsCovered: 9
+            totalVenues: 3
+            totalSponsors: 3
+        
+        photos:
+            - photo1
+            - photo2
+            - photo3
+        """
+        .data(using: .utf8)?.write(to: year2024URL)
+        
+        try withSnapshotTesting {
+            let yearsInReview = try Parser.events(from: fileURL.path(percentEncoded: false)).yearsInReview
+            let jsonURL = fileURL.appending(path: "yearsInReview.json")
+            try Generator.generateJson(for: yearsInReview, at: jsonURL)
+            assertInlineSnapshot(of: jsonURL, as: .jsonURLContent) {
+                """
+                [
+                  {
+                    "eventStats" : {
+                      "averageParticipants" : 47,
+                      "topicsCovered" : 9,
+                      "totalEvents" : 4,
+                      "totalParticipants" : 188,
+                      "totalSpeakers" : 10,
+                      "totalSponsors" : 3,
+                      "totalVenues" : 3
+                    },
+                    "id" : "0cdf61b8efe97ecd872ab84c3736a668da32d335fce2fe690be8a5b516e8b249",
+                    "org" : "Swift Ahmedabad",
+                    "photos" : [
+                      "photo1",
+                      "photo2",
+                      "photo3"
+                    ],
+                    "year" : 2024
+                  }
+                ]
+                """
+            }
+        }
+
     }
 }

@@ -84,6 +84,15 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the last updated at file for auto refresh. Default: lastUpdatedAt.json")
     var lastUpdatedAtFileName: String = "lastUpdatedAt.json"
     
+    @Option(help: "Name of news source file. Default: newsSource.json")
+    var newsSourceFileName: String = "newsSource.json"
+    
+    @Option(help: "Name of year in review file. Default: yearsInReview.json")
+    var yearsInReviewFileName: String = "yearsInReview.json"
+    
+    @Option(help: "Name of the podcast source file. Default: podcastSource.json")
+    var podcastSourceFileName: String = "podcastSource.json"
+    
     func run() throws {
         let allEvents = try Parser.events(
             from: path,
@@ -106,7 +115,10 @@ struct GenerateReadMe: ParsableCommand {
         if let about = allEvents.about {
             try Generator.generateJson(for: about, at: pathURL.appending(path: aboutFileName))
         }
+        try Generator.generateJson(for: allEvents.newsSources, at: pathURL.appending(path: newsSourceFileName))
         try Generator.generateJson(for: UpdatedAt(), at: pathURL.appending(path: lastUpdatedAtFileName))
+        try Generator.generateJson(for: allEvents.yearsInReview, at: pathURL.appending(path: yearsInReviewFileName))
+        try Generator.generateJson(for: allEvents.podcasts, at: pathURL.appending(path: podcastSourceFileName))
     }
 }
 
