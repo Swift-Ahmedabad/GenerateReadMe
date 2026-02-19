@@ -93,32 +93,42 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the podcast source file. Default: podcastSource.json")
     var podcastSourceFileName: String = "podcastSource.json"
     
+    @Option(help: "Name of the organization events file. Default: communityEvents.json")
+    var communityEventsFileName: String = "communityEvents.json"
+    
+    @Option(help: "Name of the organization events file. Default: communities.json")
+    var communitiesFileName: String = "communities.json"
+    
     func run() throws {
-        let allEvents = try Parser.events(
-            from: path,
-            skipFileWithExtensions: skipFileWithExtensions
-        )
-        
-        try Generator.generateReadMe(for: allEvents.eventsWithTalks.sorted(by: {$0.event.date > $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
-        
+        let newsItems = try Parser.parseNewsItems(at: path)
         let pathURL = URL(filePath: path).appending(path: ".generated")
-        try? FileManager.default.createDirectory(at: pathURL, withIntermediateDirectories: true)
+        let eventInfos = try Parser.parse(at: path, skipFileWithExtensions: skipFileWithExtensions)
         
-        try Generator.generateJson(for: allEvents.events, at: pathURL.appending(path: eventsjsonFileName))
-        try Generator.generateJson(for: allEvents.speakers, at: pathURL.appending(path: speakersJsonFileName))
-        try Generator.generateJson(for: allEvents.talks, at: pathURL.appending(path: talksJsonFileName))
-        try Generator.generateJson(for: allEvents.talkSpeakers, at: pathURL.appending(path: talkSpeakersFileName))
-        try Generator.generateJson(for: allEvents.eventInfos, at: pathURL.appending(path: eventInfosFileName))
-        try Generator.generateJson(for: allEvents.sponsors, at: pathURL.appending(path: sponsorsFileName))
-        try Generator.generateJson(for: allEvents.agendas, at: pathURL.appending(path: agendasFileName))
-        try Generator.generateJson(for: allEvents.agendaSpeakerIDs, at: pathURL.appending(path: agendaSpeakerIDsFileName))
-        if let about = allEvents.about {
-            try Generator.generateJson(for: about, at: pathURL.appending(path: aboutFileName))
+        do {
+            try Generator.generateReadMe(for: eventInfos.flatMap { $0.eventsWithTalks } .sorted(by: {$0.event.date > $1.event.date}), at: URL(filePath: path).appending(path: readMeFileName))
+            
+            let abouts = eventInfos.compactMap { $0.about }
+            try? FileManager.default.createDirectory(at: pathURL, withIntermediateDirectories: true)
+            
+            try Generator.generateJson(for: abouts, at: pathURL.appending(path: aboutFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.events }, at: pathURL.appending(path: eventsjsonFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.speakers }, at: pathURL.appending(path: speakersJsonFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.talks }, at: pathURL.appending(path: talksJsonFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.talkSpeakers }, at: pathURL.appending(path: talkSpeakersFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.eventInfos }, at: pathURL.appending(path: eventInfosFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.sponsors }, at: pathURL.appending(path: sponsorsFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.agendas }, at: pathURL.appending(path: agendasFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.agendaSpeakerIDs }, at: pathURL.appending(path: agendaSpeakerIDsFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.yearsInReview }, at: pathURL.appending(path: yearsInReviewFileName))
+        } catch {
+            print(error)
         }
-        try Generator.generateJson(for: allEvents.newsSources, at: pathURL.appending(path: newsSourceFileName))
+        
+        try Generator.generateJson(for: newsItems.podcasts, at: pathURL.appending(path: podcastSourceFileName))
+        try Generator.generateJson(for: newsItems.newsSources, at: pathURL.appending(path: newsSourceFileName))
+        try Generator.generateJson(for: eventInfos.communityEvents, at: pathURL.appending(path: communityEventsFileName))
+        try Generator.generateJson(for: eventInfos.communities, at: pathURL.appending(path: communitiesFileName))
         try Generator.generateJson(for: UpdatedAt(), at: pathURL.appending(path: lastUpdatedAtFileName))
-        try Generator.generateJson(for: allEvents.yearsInReview, at: pathURL.appending(path: yearsInReviewFileName))
-        try Generator.generateJson(for: allEvents.podcasts, at: pathURL.appending(path: podcastSourceFileName))
     }
 }
 
@@ -129,5 +139,31 @@ extension [String] {
             "json",
             "sh"
         ]
+    }
+}
+
+
+extension  [Parser.EventsInfo] {
+    
+    public var communityEvents: [CommunityEvent] {
+        var items: [CommunityEvent] = []
+        for events in self {
+            if let orgID = events.about?.id {
+                for event in events.events {
+                    items.append(.init(communityID: orgID, eventID: event.id))
+                }
+            }
+        }
+        return items
+    }
+    
+    public var communities: [Community] {
+        var orgs: [Community] = []
+        for event in self {
+            if let org = event.about {
+                orgs.append(.init(id: org.id, name: org.name, resourcePath: org.name, logo: org.logo))
+            }
+        }
+        return orgs
     }
 }

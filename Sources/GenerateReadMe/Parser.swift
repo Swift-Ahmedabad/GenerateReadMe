@@ -70,34 +70,34 @@ enum Parser {
         var sponsors: [Sponsor] = []
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
         var about: AboutPage?
-        var newsSources: [NewsSource] = []
         var yearsInReview: [YearInReview] = []
-        var podcasts: [PodcastSource] = []
     }
     
-    static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
-        let decoder = YAMLDecoder()
-        var info = EventsInfo()
-        
-        let aboutPath = URL(filePath: path).appending(path: ".about").appending(path: "About.yaml")
-        if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percentEncoded: false)) {
-            let aboutPage = try decoder.decode(AboutPage.self, from: aboutContent)
-            info.about = aboutPage
+    static func parse(at path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> [EventsInfo] {
+        var infos: [EventsInfo] = []
+        let root = URL(filePath: path)
+        //let content = try FileManager.default.contentsOfDirectory(atPath: root.path(percentEncoded: false))
+        let content = (try? validContentsOfDirectory(at: root, skipping: skipFileWithExtensions)) ?? []
+        for item in content {
+            do {
+                let info = try Self.events(from: item.path(percentEncoded: false), skipFileWithExtensions: skipFileWithExtensions)
+                infos.append(info)
+            } catch {
+                print(error)
+                continue
+            }
         }
-        
+        return infos
+    }
+    
+    static func parseNewsItems(at path: String) throws -> NewsItems {
+        let decoder = YAMLDecoder()
+        var info = NewsItems()
+
         let podcastPath = URL(filePath: path).appending(path: ".podcastSource").appending(path: "PodcastSource.yml")
         if let podcastContent = FileManager.default.contents(atPath: podcastPath.path(percentEncoded: false)) {
             let podcastSource = try decoder.decode(PodcastSourceResponse.self, from: podcastContent)
             info.podcasts = podcastSource.podcasts
-        }
-        
-        let yearsInReviewPath = URL(filePath: path).appending(path: ".yearsInReview")
-        let urls = try? validContentsOfDirectory(at: yearsInReviewPath, skipping: skipFileWithExtensions)
-        for yearInReviewURL in (urls ?? []) {
-            if let yearInReviewData = FileManager.default.contents(atPath: yearInReviewURL.path(percentEncoded: false)) {
-                let decoded = try decoder.decode(YearInReview.self, from: yearInReviewData)
-                info.yearsInReview.append(decoded)
-            }
         }
         
         let newsSourcePath = URL(filePath: path).appending(path: ".newsSource").appending(path: "NewsSource.yml")
@@ -106,11 +106,35 @@ enum Parser {
             info.newsSources = newsSources
         }
         
-        for eventURL in try validContentsOfDirectory(at: URL(filePath: path), skipping: skipFileWithExtensions) {
+        return info
+    }
+    
+    static func events(from path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> EventsInfo {
+        let decoder = YAMLDecoder()
+        var info = EventsInfo()
+        let pathURL = URL(filePath: path)
+        let communityID = StableID(using: pathURL.lastPathComponent.replacingOccurrences(of: "-", with: " ")).id
+        
+        let aboutPath = pathURL.appending(path: ".about").appending(path: "About.yaml")
+        if let aboutContent = FileManager.default.contents(atPath: aboutPath.path(percentEncoded: false)) {
+            let aboutPage = try decoder.decode(AboutPage.self, from: aboutContent)
+            info.about = aboutPage
+        }
+        
+        let yearsInReviewPath = pathURL.appending(path: ".yearsInReview")
+        let urls = try? validContentsOfDirectory(at: yearsInReviewPath, skipping: skipFileWithExtensions)
+        for yearInReviewURL in (urls ?? []) {
+            if let yearInReviewData = FileManager.default.contents(atPath: yearInReviewURL.path(percentEncoded: false)) {
+                let decoded = try decoder.decode(YearInReview.self, from: yearInReviewData)
+                info.yearsInReview.append(decoded)
+            }
+        }
+        
+        for eventURL in try validContentsOfDirectory(at: pathURL, skipping: skipFileWithExtensions) {
             debugPrint(eventURL.lastPathComponent)
             guard let date = eventURL.lastPathComponent.date else { continue }
             var parsedTalks: [TalkWithSpeakers] = []
-            var parsedEvent = Event(title: eventURL.lastPathComponent, date: date, endDate: nil)
+            var parsedEvent = Event(title: eventURL.lastPathComponent, communityID: communityID, date: date, endDate: nil)
             var parsedEventInfo: EventInfo?
             var parsedSponsors: Set<Sponsor> = .init()
             

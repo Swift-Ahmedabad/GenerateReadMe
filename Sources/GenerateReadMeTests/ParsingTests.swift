@@ -45,7 +45,8 @@ struct ParsingTests {
                 Parser.EventsInfo(
                   events: [
                     [0]: Event(
-                      id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      id: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "1. Jan 01 2025",
                       date: Date(2024-12-31T18:30:00.000Z),
                       endDate: nil
@@ -54,7 +55,8 @@ struct ParsingTests {
                   eventsWithTalks: [
                     [0]: EventWithTalks(
                       event: Event(
-                        id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                        id: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "1. Jan 01 2025",
                         date: Date(2024-12-31T18:30:00.000Z),
                         endDate: nil
@@ -62,9 +64,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                            id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                             title: "Talk1",
-                            eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                            eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -112,9 +114,9 @@ struct ParsingTests {
                   talksWithSpeakers: [
                     [0]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                        id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                         title: "Talk1",
-                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                        eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -139,15 +141,15 @@ struct ParsingTests {
                   ],
                   talks: [
                     [0]: Talk(
-                      id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                       title: "Talk1",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                      eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                     )
                   ],
                   talkSpeakers: [
                     [0]: TalkSpeaker(
-                      id: "ce3e25fc078c362f895300696b827876c9e1f407bbb172257bef21f7910c6043",
-                      talkID: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "2b33229f8c9bcfb7eafbd2ca734647e8ee04ed61af52d4018c39ae43f0c3b9ca",
+                      talkID: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                       speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                     )
                   ],
@@ -156,9 +158,7 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: [],
-                  yearsInReview: [],
-                  podcasts: []
+                  yearsInReview: []
                 )
                 """
             }
@@ -199,7 +199,8 @@ struct ParsingTests {
                 Parser.EventsInfo(
                   events: [
                     [0]: Event(
-                      id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                      id: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "1. Jan 01 2025",
                       date: Date(2024-12-31T18:30:00.000Z),
                       endDate: nil
@@ -208,7 +209,8 @@ struct ParsingTests {
                   eventsWithTalks: [
                     [0]: EventWithTalks(
                       event: Event(
-                        id: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3",
+                        id: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "1. Jan 01 2025",
                         date: Date(2024-12-31T18:30:00.000Z),
                         endDate: nil
@@ -216,9 +218,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                            id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                             title: "Talk1",
-                            eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                            eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -300,9 +302,9 @@ struct ParsingTests {
                   talksWithSpeakers: [
                     [0]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                        id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                         title: "Talk1",
-                        eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                        eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -344,20 +346,20 @@ struct ParsingTests {
                   ],
                   talks: [
                     [0]: Talk(
-                      id: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                       title: "Talk1",
-                      eventID: "f604f4a98f81a6c927d94bdf265c17f593680b9e18a4afa8aacea1c833ad82c3"
+                      eventID: "7340f1054da69dcece7839d1a6daae301ffc9de4e6ff83421d4b556966b16adb"
                     )
                   ],
                   talkSpeakers: [
                     [0]: TalkSpeaker(
-                      id: "ce3e25fc078c362f895300696b827876c9e1f407bbb172257bef21f7910c6043",
-                      talkID: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "2b33229f8c9bcfb7eafbd2ca734647e8ee04ed61af52d4018c39ae43f0c3b9ca",
+                      talkID: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                       speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                     ),
                     [1]: TalkSpeaker(
-                      id: "6b390aaefe4805bc5a34cf73a0abcef23b14cf23335fcf167e3ef14e2c155fc4",
-                      talkID: "81c01356949a2310018218b6d0013b2b4209ae5b5facf123d279a7eec2fb8a9e",
+                      id: "92d1843ee729781ab1174d4bef9da432af1d421bf0425a5f4d14ed703526faa2",
+                      talkID: "616514d9eca6409c2cb174097b232d6253db4f211b998d52af8e48a68aa6b6a5",
                       speakerID: "2ba4ec6ac4ff4c5b40da6d70c7d8053de6a2a7f07871fc59a489108de32486b2"
                     )
                   ],
@@ -366,9 +368,7 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: [],
-                  yearsInReview: [],
-                  podcasts: []
+                  yearsInReview: []
                 )
                 """
             }
@@ -408,19 +408,22 @@ struct ParsingTests {
                 Parser.EventsInfo(
                   events: [
                     [0]: Event(
-                      id: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b",
+                      id: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "3. Jan 3 2025",
                       date: Date(2025-01-02T18:30:00.000Z),
                       endDate: nil
                     ),
                     [1]: Event(
-                      id: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c",
+                      id: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "1. Jan 1 2025",
                       date: Date(2024-12-31T18:30:00.000Z),
                       endDate: nil
                     ),
                     [2]: Event(
-                      id: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa",
+                      id: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "2. Jan 2 2025",
                       date: Date(2025-01-01T18:30:00.000Z),
                       endDate: nil
@@ -429,7 +432,8 @@ struct ParsingTests {
                   eventsWithTalks: [
                     [0]: EventWithTalks(
                       event: Event(
-                        id: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b",
+                        id: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "3. Jan 3 2025",
                         date: Date(2025-01-02T18:30:00.000Z),
                         endDate: nil
@@ -437,9 +441,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "c5a8cd9a541fd0cd1cac0da14a7363d288b24a3f2ccc5f517bc6fbe52bd9237a",
+                            id: "a29c82755866f266013640a0f33b6eb4f873baeca41366196d22676ef32ce70d",
                             title: "Talk1",
-                            eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                            eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -463,9 +467,9 @@ struct ParsingTests {
                         ),
                         [1]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "3bcbfbf5c6467410768f83462c13a9228a7141e302f9587e0c019b83ae73db58",
+                            id: "841f3d6134b7c6f18ad911eb3c36087a5e2646a73252d56c66e412f66f0012eb",
                             title: "Talk2",
-                            eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                            eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -489,9 +493,9 @@ struct ParsingTests {
                         ),
                         [2]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "5d7446e453a72bb684926b92dec42ad41899ad2bfeecacfffff25e2386b0ab59",
+                            id: "d21febe8d0f7a182c0f3e55e6d9a81abb123ada1f8c93196a7c0272a76ac14dc",
                             title: "Talk3",
-                            eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                            eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -518,7 +522,8 @@ struct ParsingTests {
                     ),
                     [1]: EventWithTalks(
                       event: Event(
-                        id: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c",
+                        id: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "1. Jan 1 2025",
                         date: Date(2024-12-31T18:30:00.000Z),
                         endDate: nil
@@ -526,9 +531,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "47bdf483b646f5ca943cb0861f275b0d33acfc8f7c68ff1d1b691b5af54c6129",
+                            id: "34d7f590459254f4716e16e43fb555fa1faee7dafc8f382c49211ef331bfd5f1",
                             title: "Talk1",
-                            eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                            eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -552,9 +557,9 @@ struct ParsingTests {
                         ),
                         [1]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "f6418a9a45c64c94ffd823671b6e8716be09773fc48edff5ff001b77ea89637a",
+                            id: "9ffa3ca9495ce9df6c75b9e753d1218a95f9de755a27e5fb7e1632c2fa250476",
                             title: "Talk2",
-                            eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                            eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -578,9 +583,9 @@ struct ParsingTests {
                         ),
                         [2]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "8ceb89592195b03eec29984b8c682e7dc6a2e4f8e865b4e744c861edecfd77d4",
+                            id: "9d2aa5e2e1ad76f7609fdaf6c45a18d67c96bca57f0801aad8545aeb8f0ec85f",
                             title: "Talk3",
-                            eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                            eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -607,7 +612,8 @@ struct ParsingTests {
                     ),
                     [2]: EventWithTalks(
                       event: Event(
-                        id: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa",
+                        id: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "2. Jan 2 2025",
                         date: Date(2025-01-01T18:30:00.000Z),
                         endDate: nil
@@ -615,9 +621,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "40e94bd6795baaca8809b99359709187837df745a443ccb230cfe963a7c39723",
+                            id: "8aec8b0dd4ac968d9d0940bfa707e32975fe855fa30a0629d2557cc414165bf3",
                             title: "Talk1",
-                            eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                            eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -641,9 +647,9 @@ struct ParsingTests {
                         ),
                         [1]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "f60e59352020ec238691e7cdca3eefc614ee317a00d5cb1482f1dfdd70ffc59b",
+                            id: "496bff9960f15017a832eb2f309060e9a4f8b75613a0449854f405ccdfeec698",
                             title: "Talk2",
-                            eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                            eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -667,9 +673,9 @@ struct ParsingTests {
                         ),
                         [2]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "b45986c47d464ede2b45b1708ac6b00c37a07c661534d5f1e133f5ac827c17d4",
+                            id: "e75131120406a0dc980c07dc425adba1e42069ac03c5f0f688cb48618ebc09a0",
                             title: "Talk3",
-                            eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                            eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -853,9 +859,9 @@ struct ParsingTests {
                   talksWithSpeakers: [
                     [0]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "c5a8cd9a541fd0cd1cac0da14a7363d288b24a3f2ccc5f517bc6fbe52bd9237a",
+                        id: "a29c82755866f266013640a0f33b6eb4f873baeca41366196d22676ef32ce70d",
                         title: "Talk1",
-                        eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                        eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -879,9 +885,9 @@ struct ParsingTests {
                     ),
                     [1]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "3bcbfbf5c6467410768f83462c13a9228a7141e302f9587e0c019b83ae73db58",
+                        id: "841f3d6134b7c6f18ad911eb3c36087a5e2646a73252d56c66e412f66f0012eb",
                         title: "Talk2",
-                        eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                        eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -905,9 +911,9 @@ struct ParsingTests {
                     ),
                     [2]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "5d7446e453a72bb684926b92dec42ad41899ad2bfeecacfffff25e2386b0ab59",
+                        id: "d21febe8d0f7a182c0f3e55e6d9a81abb123ada1f8c93196a7c0272a76ac14dc",
                         title: "Talk3",
-                        eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                        eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -931,9 +937,9 @@ struct ParsingTests {
                     ),
                     [3]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "47bdf483b646f5ca943cb0861f275b0d33acfc8f7c68ff1d1b691b5af54c6129",
+                        id: "34d7f590459254f4716e16e43fb555fa1faee7dafc8f382c49211ef331bfd5f1",
                         title: "Talk1",
-                        eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                        eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -957,9 +963,9 @@ struct ParsingTests {
                     ),
                     [4]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "f6418a9a45c64c94ffd823671b6e8716be09773fc48edff5ff001b77ea89637a",
+                        id: "9ffa3ca9495ce9df6c75b9e753d1218a95f9de755a27e5fb7e1632c2fa250476",
                         title: "Talk2",
-                        eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                        eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -983,9 +989,9 @@ struct ParsingTests {
                     ),
                     [5]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "8ceb89592195b03eec29984b8c682e7dc6a2e4f8e865b4e744c861edecfd77d4",
+                        id: "9d2aa5e2e1ad76f7609fdaf6c45a18d67c96bca57f0801aad8545aeb8f0ec85f",
                         title: "Talk3",
-                        eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                        eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1009,9 +1015,9 @@ struct ParsingTests {
                     ),
                     [6]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "40e94bd6795baaca8809b99359709187837df745a443ccb230cfe963a7c39723",
+                        id: "8aec8b0dd4ac968d9d0940bfa707e32975fe855fa30a0629d2557cc414165bf3",
                         title: "Talk1",
-                        eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                        eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1035,9 +1041,9 @@ struct ParsingTests {
                     ),
                     [7]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "f60e59352020ec238691e7cdca3eefc614ee317a00d5cb1482f1dfdd70ffc59b",
+                        id: "496bff9960f15017a832eb2f309060e9a4f8b75613a0449854f405ccdfeec698",
                         title: "Talk2",
-                        eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                        eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1061,9 +1067,9 @@ struct ParsingTests {
                     ),
                     [8]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "b45986c47d464ede2b45b1708ac6b00c37a07c661534d5f1e133f5ac827c17d4",
+                        id: "e75131120406a0dc980c07dc425adba1e42069ac03c5f0f688cb48618ebc09a0",
                         title: "Talk3",
-                        eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                        eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1088,95 +1094,95 @@ struct ParsingTests {
                   ],
                   talks: [
                     [0]: Talk(
-                      id: "c5a8cd9a541fd0cd1cac0da14a7363d288b24a3f2ccc5f517bc6fbe52bd9237a",
+                      id: "a29c82755866f266013640a0f33b6eb4f873baeca41366196d22676ef32ce70d",
                       title: "Talk1",
-                      eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                      eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                     ),
                     [1]: Talk(
-                      id: "3bcbfbf5c6467410768f83462c13a9228a7141e302f9587e0c019b83ae73db58",
+                      id: "841f3d6134b7c6f18ad911eb3c36087a5e2646a73252d56c66e412f66f0012eb",
                       title: "Talk2",
-                      eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                      eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                     ),
                     [2]: Talk(
-                      id: "5d7446e453a72bb684926b92dec42ad41899ad2bfeecacfffff25e2386b0ab59",
+                      id: "d21febe8d0f7a182c0f3e55e6d9a81abb123ada1f8c93196a7c0272a76ac14dc",
                       title: "Talk3",
-                      eventID: "4993da9c25096119c9d83956b7b4d47e24930d202f7d30fe12f66e785887655b"
+                      eventID: "902e186af620b70860184149a7ec703eb2781b12351f2caa8e259d7092d3e296"
                     ),
                     [3]: Talk(
-                      id: "47bdf483b646f5ca943cb0861f275b0d33acfc8f7c68ff1d1b691b5af54c6129",
+                      id: "34d7f590459254f4716e16e43fb555fa1faee7dafc8f382c49211ef331bfd5f1",
                       title: "Talk1",
-                      eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                      eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                     ),
                     [4]: Talk(
-                      id: "f6418a9a45c64c94ffd823671b6e8716be09773fc48edff5ff001b77ea89637a",
+                      id: "9ffa3ca9495ce9df6c75b9e753d1218a95f9de755a27e5fb7e1632c2fa250476",
                       title: "Talk2",
-                      eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                      eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                     ),
                     [5]: Talk(
-                      id: "8ceb89592195b03eec29984b8c682e7dc6a2e4f8e865b4e744c861edecfd77d4",
+                      id: "9d2aa5e2e1ad76f7609fdaf6c45a18d67c96bca57f0801aad8545aeb8f0ec85f",
                       title: "Talk3",
-                      eventID: "c2268d1cc36728db58a57e999430706d1557e8725c4160b11bad1a9665d4e11c"
+                      eventID: "c0745690e6dfd4b35ae29565e18cf8a51ba76eb4849834fdaceb994200818bd8"
                     ),
                     [6]: Talk(
-                      id: "40e94bd6795baaca8809b99359709187837df745a443ccb230cfe963a7c39723",
+                      id: "8aec8b0dd4ac968d9d0940bfa707e32975fe855fa30a0629d2557cc414165bf3",
                       title: "Talk1",
-                      eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                      eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                     ),
                     [7]: Talk(
-                      id: "f60e59352020ec238691e7cdca3eefc614ee317a00d5cb1482f1dfdd70ffc59b",
+                      id: "496bff9960f15017a832eb2f309060e9a4f8b75613a0449854f405ccdfeec698",
                       title: "Talk2",
-                      eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                      eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                     ),
                     [8]: Talk(
-                      id: "b45986c47d464ede2b45b1708ac6b00c37a07c661534d5f1e133f5ac827c17d4",
+                      id: "e75131120406a0dc980c07dc425adba1e42069ac03c5f0f688cb48618ebc09a0",
                       title: "Talk3",
-                      eventID: "15c372e9de65d46e0e5ebbd66e23270b32360c7a07220a508f98b3a447cf33fa"
+                      eventID: "c80a6177af039821af50a83804afa7ecceed7425912b043b62c3048a93443644"
                     )
                   ],
                   talkSpeakers: [
                     [0]: TalkSpeaker(
-                      id: "71c16e467e3b78bf145102c9fa26ba5ea3485abc0161847aa51ecfe25adc798c",
-                      talkID: "c5a8cd9a541fd0cd1cac0da14a7363d288b24a3f2ccc5f517bc6fbe52bd9237a",
+                      id: "754a57ee493805460f31cdeeab2da05d38d720a865c4972dcd23726dd00a512e",
+                      talkID: "a29c82755866f266013640a0f33b6eb4f873baeca41366196d22676ef32ce70d",
                       speakerID: "0efb512fe5ae1b65c754b900a68a440ce733b440f386c30fd40f302e5f7d07b6"
                     ),
                     [1]: TalkSpeaker(
-                      id: "5f1d6e8070bb760bb90871ffd7000ee90d76f9dcf2aec9821855a4ef19e4ef10",
-                      talkID: "3bcbfbf5c6467410768f83462c13a9228a7141e302f9587e0c019b83ae73db58",
+                      id: "27a1eb21cd4cab8c1a6feff5accf266406d20aa849620ebfff209e64e6394384",
+                      talkID: "841f3d6134b7c6f18ad911eb3c36087a5e2646a73252d56c66e412f66f0012eb",
                       speakerID: "dbdd5e35ea6abcf1af549739f16b1fdcdfd984ef867a14009e085cf23913c497"
                     ),
                     [2]: TalkSpeaker(
-                      id: "1bc2ee3707423f7f435fe62afdd4f796351d30a0d5c8aa2f68d73022505990af",
-                      talkID: "5d7446e453a72bb684926b92dec42ad41899ad2bfeecacfffff25e2386b0ab59",
+                      id: "3f9a91ba67b1b08ca8cd6032b62d80691a1d547cef8f12c15f90bfed236f87c9",
+                      talkID: "d21febe8d0f7a182c0f3e55e6d9a81abb123ada1f8c93196a7c0272a76ac14dc",
                       speakerID: "a286a248e3551b27be8d0f302f48223aedebe26279f5d4610ab695495fa1f079"
                     ),
                     [3]: TalkSpeaker(
-                      id: "182f84eb215bb89fe89124759a44100f279581319882a77f16bbfe65820f9ad7",
-                      talkID: "47bdf483b646f5ca943cb0861f275b0d33acfc8f7c68ff1d1b691b5af54c6129",
+                      id: "9cdfd5a27a49c32ab91ca7c7ca7d7b4efbbb994c9d590afacda207534f05bc84",
+                      talkID: "34d7f590459254f4716e16e43fb555fa1faee7dafc8f382c49211ef331bfd5f1",
                       speakerID: "10b030d02583beb3b6da9f3c5f782c2c04624f30a17c3d95966403814a22333f"
                     ),
                     [4]: TalkSpeaker(
-                      id: "f854361e5646184b1a155457f22d2e5ff9ae705927b518548ec876f36e89ea14",
-                      talkID: "f6418a9a45c64c94ffd823671b6e8716be09773fc48edff5ff001b77ea89637a",
+                      id: "892783198b6f4c5cfdbbd36e6ccc290ef2fa610c87022cf55baf66afdc574884",
+                      talkID: "9ffa3ca9495ce9df6c75b9e753d1218a95f9de755a27e5fb7e1632c2fa250476",
                       speakerID: "c6052a7af0fe75697260d9e133e03d3e6b1c551f3c1893204fd74747697ce3e3"
                     ),
                     [5]: TalkSpeaker(
-                      id: "86ee1b9c2e0ce991ca05255cd5414eeeed8b9ece98946b358b9e3ea7bfec5772",
-                      talkID: "8ceb89592195b03eec29984b8c682e7dc6a2e4f8e865b4e744c861edecfd77d4",
+                      id: "879c54a57f1b92792165c33849fb526a2135985d628b8538d2d702f7fc97d864",
+                      talkID: "9d2aa5e2e1ad76f7609fdaf6c45a18d67c96bca57f0801aad8545aeb8f0ec85f",
                       speakerID: "992f1e3c743cbb83854592acf4b0b60529e2b8adab842ab01ad2c94be34c5d32"
                     ),
                     [6]: TalkSpeaker(
-                      id: "e251893fc52dd534b9e6e861d29bffafd9ff8090dc89fbdab374dd9982ea1fea",
-                      talkID: "40e94bd6795baaca8809b99359709187837df745a443ccb230cfe963a7c39723",
+                      id: "5141d8268868ca29ad297b761126dbdca0b1447a40d0f11d88eded8819d1e992",
+                      talkID: "8aec8b0dd4ac968d9d0940bfa707e32975fe855fa30a0629d2557cc414165bf3",
                       speakerID: "2e69dac55eedc33f8eaf01f1b592c1acecf7798f400f7f1771c18a430258876d"
                     ),
                     [7]: TalkSpeaker(
-                      id: "dcc4ecf52ba0fb95187e3e0d80821c29e734eeaf70bfbea68528410d51673e2c",
-                      talkID: "f60e59352020ec238691e7cdca3eefc614ee317a00d5cb1482f1dfdd70ffc59b",
+                      id: "8b1e944ccd9a0c5c9b5f8c9aee349ce2e109006fff05ef03a5f5b79f966db64d",
+                      talkID: "496bff9960f15017a832eb2f309060e9a4f8b75613a0449854f405ccdfeec698",
                       speakerID: "54756dba2fffffd2a967cfed5f73424859dd772e089ebe52560f87eef5aeca52"
                     ),
                     [8]: TalkSpeaker(
-                      id: "15d416adc0d6bea91c292575bd886668931d61a827ecb4a9b140fc7cde3b778a",
-                      talkID: "b45986c47d464ede2b45b1708ac6b00c37a07c661534d5f1e133f5ac827c17d4",
+                      id: "f0fe9a58e505b5d29bbc86006ebc44c56569405a9e914f67cf722b693d4c8ca1",
+                      talkID: "e75131120406a0dc980c07dc425adba1e42069ac03c5f0f688cb48618ebc09a0",
                       speakerID: "5cb349f252548f6229855ad913f6d51060c43e52fc66e12c1eabb4b83737182c"
                     )
                   ],
@@ -1185,9 +1191,7 @@ struct ParsingTests {
                   sponsors: [],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: [],
-                  yearsInReview: [],
-                  podcasts: []
+                  yearsInReview: []
                 )
                 """
             }
@@ -1260,7 +1264,8 @@ struct ParsingTests {
                 Parser.EventsInfo(
                   events: [
                     [0]: Event(
-                      id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      id: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
+                      communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                       title: "1. Oct 11 2025",
                       date: Date(2025-10-10T18:30:00.000Z),
                       endDate: Date(2025-10-11T07:00:00.000Z)
@@ -1269,7 +1274,8 @@ struct ParsingTests {
                   eventsWithTalks: [
                     [0]: EventWithTalks(
                       event: Event(
-                        id: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                        id: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
+                        communityID: "298dd7c15c671332526dcc22c0d64d73aa377cb75ff0034ec6efd854b7404239",
                         title: "1. Oct 11 2025",
                         date: Date(2025-10-10T18:30:00.000Z),
                         endDate: Date(2025-10-11T07:00:00.000Z)
@@ -1277,9 +1283,9 @@ struct ParsingTests {
                       talks: [
                         [0]: TalkWithSpeakers(
                           talk: Talk(
-                            id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
+                            id: "4d96680d0395a7d04644a4a509cc6d2d4ac093f3c8514263bbc11ebd489f1a3b",
                             title: "Talk1",
-                            eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
+                            eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa"
                           ),
                           speakers: [
                             [0]: Speaker(
@@ -1303,8 +1309,8 @@ struct ParsingTests {
                         )
                       ],
                       eventInfo: EventInfo(
-                        id: "02e736efadf843bf33129c630906f915bb05c1831953a9f844de7d4b190ac593",
-                        eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                        id: "06a9758bca6a7e50c0a18be631bdf9642f0ac47a01d4d217319a4df2325f0343",
+                        eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
                         date: Date(2025-10-10T18:30:00.000Z),
                         about: "Swift Ahmedabad October\'25 MeetUp",
                         location: EventInfo.Location(
@@ -1357,9 +1363,9 @@ struct ParsingTests {
                   talksWithSpeakers: [
                     [0]: TalkWithSpeakers(
                       talk: Talk(
-                        id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
+                        id: "4d96680d0395a7d04644a4a509cc6d2d4ac093f3c8514263bbc11ebd489f1a3b",
                         title: "Talk1",
-                        eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
+                        eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa"
                       ),
                       speakers: [
                         [0]: Speaker(
@@ -1384,22 +1390,22 @@ struct ParsingTests {
                   ],
                   talks: [
                     [0]: Talk(
-                      id: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
+                      id: "4d96680d0395a7d04644a4a509cc6d2d4ac093f3c8514263bbc11ebd489f1a3b",
                       title: "Talk1",
-                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e"
+                      eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa"
                     )
                   ],
                   talkSpeakers: [
                     [0]: TalkSpeaker(
-                      id: "b583b9a696ee93f2122f402aac49778fda5d41ae9e5ceeabf708e303c1082d15",
-                      talkID: "12db3841d095bf5f3c6c239b0da7a47ba9b1570f43b7cbdd8e81d263dcb9b2bf",
+                      id: "b5eb91356b4559fc20ad868249830d0db940102a81b140c32a71b79b1baf10e2",
+                      talkID: "4d96680d0395a7d04644a4a509cc6d2d4ac093f3c8514263bbc11ebd489f1a3b",
                       speakerID: "de3a6933de1304cc65729639ffe1f6101f06647be726d9c176283bdf7e4b0173"
                     )
                   ],
                   eventInfos: [
                     [0]: EventInfo(
-                      id: "02e736efadf843bf33129c630906f915bb05c1831953a9f844de7d4b190ac593",
-                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      id: "06a9758bca6a7e50c0a18be631bdf9642f0ac47a01d4d217319a4df2325f0343",
+                      eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
                       date: Date(2025-10-10T18:30:00.000Z),
                       about: "Swift Ahmedabad October\'25 MeetUp",
                       location: EventInfo.Location(
@@ -1431,24 +1437,24 @@ struct ParsingTests {
                   ],
                   agendas: [
                     [0]: Agenda(
-                      id: "6cdc33ff72be104bb5f7cfd3d3f9cc02d1d819aa8c558abcd9ceb69d931ba7a7",
-                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      id: "42b524ad9d902431bb863f47c400dd3d562c3303e4341aa1018e90b496138e1a",
+                      eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
                       time: Date(2025-10-11T04:30:00.000Z),
                       title: "Welcome & Registration",
                       speakers: nil,
                       type: .registration
                     ),
                     [1]: Agenda(
-                      id: "c8f22ecd8d3f1bba32ca6c228c272374ab49b058c2b22906d4f390820c0e8133",
-                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      id: "4f08b22a10acaba28e2d23a7cb9699189af962c794944498959ed6df09944168",
+                      eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
                       time: Date(2025-10-11T04:45:00.000Z),
                       title: "Talk 1",
                       speakers: nil,
                       type: .talk
                     ),
                     [2]: Agenda(
-                      id: "628dbe0410aad225eb6de8a80865c840d4fb0740f0c7f74cac111b0d458d8548",
-                      eventID: "b1bf3292fb54ccb18ee3b28114e0a4bda6a83092bd1140e5af8bd411cd30917e",
+                      id: "cfe01f27bf95d759947ff4a038215a2ea1e8715d168178d0af7b715139233125",
+                      eventID: "093283eeb7991c0865e81450de61e0b25858d62dc21bbf32b23aa7d56fc143fa",
                       time: Date(2025-10-11T06:30:00.000Z),
                       title: "Networking & Refreshments",
                       speakers: nil,
@@ -1465,9 +1471,7 @@ struct ParsingTests {
                   ],
                   agendaSpeakerIDs: [],
                   about: nil,
-                  newsSources: [],
-                  yearsInReview: [],
-                  podcasts: []
+                  yearsInReview: []
                 )
                 """#
             }
