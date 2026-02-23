@@ -48,6 +48,7 @@ public struct EventInfo: Identifiable, Codable {
     public var location: Location
     public var sponsors: Sponsors
     public var photoURL: URL?
+    public var registrationLink: URL?
     
     public enum CodingKeys: CodingKey {
         case id
@@ -57,9 +58,10 @@ public struct EventInfo: Identifiable, Codable {
         case location
         case sponsors
         case photoURL
+        case registrationLink
     }
     
-    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: Sponsors, photoURL: URL?) {
+    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: Sponsors, photoURL: URL?, registrationLink: URL?) {
         self.id = StableID(using: about, date, eventID).id
         self.eventID = eventID
         self.about = about
@@ -67,6 +69,7 @@ public struct EventInfo: Identifiable, Codable {
         self.location = location
         self.sponsors = sponsors
         self.photoURL = photoURL
+        self.registrationLink = registrationLink
     }
     
     public func encode(to encoder: any Encoder) throws {
@@ -78,6 +81,7 @@ public struct EventInfo: Identifiable, Codable {
         try container.encode(self.location, forKey: .location)
         try container.encode(SponsorIDs(from: self.sponsors), forKey: .sponsors)
         try container.encodeIfPresent(self.photoURL, forKey: .photoURL)
+        try container.encodeIfPresent(self.registrationLink, forKey: .registrationLink)
     }
 }
 
@@ -138,6 +142,7 @@ public struct EventInfoWithAgendas: Codable {
         let location = try eventInfoContainer.decode(EventInfo.Location.self, forKey: .location)
         let sponsors = try eventInfoContainer.decode(Sponsors.self, forKey: .sponsors)
         let photoURL = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .photoURL)
+        let registrationLink = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .registrationLink)
         let dateFormatter = DateFormatter()
         guard let eventID = decoder.userInfo[EventInfo.eventIDUserInfoKey] as? Event.ID else {
             throw DecodingError.valueNotFound(
@@ -150,7 +155,7 @@ public struct EventInfoWithAgendas: Codable {
         }
         dateFormatter.dateFormat = "MMMM dd, yyyy"
         if let date = dateFormatter.date(from: dateString) {
-            self.eventInfo = .init(about: about, eventID: eventID, date: date, location: location, sponsors: sponsors, photoURL: photoURL)
+            self.eventInfo = .init(about: about, eventID: eventID, date: date, location: location, sponsors: sponsors, photoURL: photoURL, registrationLink: registrationLink)
         } else {
             throw DecodingError.typeMismatch(
                 Date.self,
