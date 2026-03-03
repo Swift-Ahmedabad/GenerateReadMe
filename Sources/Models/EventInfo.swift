@@ -30,10 +30,10 @@ public struct Sponsor: Codable, Identifiable, Hashable {
 }
 
 public struct Sponsors: Codable {
-    public var vanue: Sponsor
+    public var vanue: Sponsor?
     public var food: Sponsor?
     
-    public init(vanue: Sponsor, food: Sponsor? = nil) {
+    public init(vanue: Sponsor?, food: Sponsor? = nil) {
         self.vanue = vanue
         self.food = food
     }
@@ -49,6 +49,7 @@ public struct EventInfo: Identifiable, Codable {
     public var sponsors: Sponsors
     public var photoURL: URL?
     public var registrationLink: URL?
+    public var instructions: String?
     
     public enum CodingKeys: CodingKey {
         case id
@@ -59,9 +60,10 @@ public struct EventInfo: Identifiable, Codable {
         case sponsors
         case photoURL
         case registrationLink
+        case instructions
     }
     
-    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: Sponsors, photoURL: URL?, registrationLink: URL?) {
+    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: Sponsors, photoURL: URL?, registrationLink: URL?, instructions: String?) {
         self.id = StableID(using: about, date, eventID).id
         self.eventID = eventID
         self.about = about
@@ -70,6 +72,7 @@ public struct EventInfo: Identifiable, Codable {
         self.sponsors = sponsors
         self.photoURL = photoURL
         self.registrationLink = registrationLink
+        self.instructions = instructions
     }
     
     public func encode(to encoder: any Encoder) throws {
@@ -82,16 +85,17 @@ public struct EventInfo: Identifiable, Codable {
         try container.encode(SponsorIDs(from: self.sponsors), forKey: .sponsors)
         try container.encodeIfPresent(self.photoURL, forKey: .photoURL)
         try container.encodeIfPresent(self.registrationLink, forKey: .registrationLink)
+        try container.encodeIfPresent(self.instructions, forKey: .instructions)
     }
 }
 
 public struct SponsorIDs: Codable {
-    public var vanueSponsorID: Sponsor.ID
+    public var vanueSponsorID: Sponsor.ID?
     public var foodSponsorID: Sponsor.ID?
 }
 extension SponsorIDs {
     init(from sponsors: Sponsors) {
-        self.init(vanueSponsorID: sponsors.vanue.id, foodSponsorID: sponsors.food?.id)
+        self.init(vanueSponsorID: sponsors.vanue?.id, foodSponsorID: sponsors.food?.id)
     }
 }
 
@@ -110,7 +114,7 @@ extension EventInfo {
         }
         
         public var name: String
-        public var map: URL
+        public var map: URL?
         public var address: String
         public var coordinates: Coordinates
     }
@@ -143,6 +147,7 @@ public struct EventInfoWithAgendas: Codable {
         let sponsors = try eventInfoContainer.decode(Sponsors.self, forKey: .sponsors)
         let photoURL = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .photoURL)
         let registrationLink = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .registrationLink)
+        let instructions = try eventInfoContainer.decodeIfPresent(String.self, forKey: .instructions)
         let dateFormatter = DateFormatter()
         guard let eventID = decoder.userInfo[EventInfo.eventIDUserInfoKey] as? Event.ID else {
             throw DecodingError.valueNotFound(
@@ -155,7 +160,7 @@ public struct EventInfoWithAgendas: Codable {
         }
         dateFormatter.dateFormat = "MMMM dd, yyyy"
         if let date = dateFormatter.date(from: dateString) {
-            self.eventInfo = .init(about: about, eventID: eventID, date: date, location: location, sponsors: sponsors, photoURL: photoURL, registrationLink: registrationLink)
+            self.eventInfo = .init(about: about, eventID: eventID, date: date, location: location, sponsors: sponsors, photoURL: photoURL, registrationLink: registrationLink, instructions: instructions)
         } else {
             throw DecodingError.typeMismatch(
                 Date.self,
@@ -170,7 +175,7 @@ public struct EventInfoWithAgendas: Codable {
         }
         
         let agendaContainer = try decoder.container(keyedBy: CodingKeys.self)
-        let agendas = try agendaContainer.decode([Agenda].self, forKey: .agenda, configuration: dateString)
-        self.agenda = agendas
+        let agendas = try agendaContainer.decodeIfPresent([Agenda].self, forKey: .agenda, configuration: dateString)
+        self.agenda = agendas ?? []
     }
 }

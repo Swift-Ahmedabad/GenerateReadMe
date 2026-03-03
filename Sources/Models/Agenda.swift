@@ -13,6 +13,7 @@ public enum AgendaType: String, Codable {
     case sponsorTalk
     case `break`
     case networking
+    case labs
 }
 
 public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {

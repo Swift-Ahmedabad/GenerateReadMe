@@ -146,8 +146,11 @@ enum Parser {
                 parsedEvent.endDate = eventInfo.agenda.last?.time.addingTimeInterval(30 * 60)
                 info.eventInfos.append(eventInfo.eventInfo)
                 info.agendas.append(contentsOf: eventInfo.agenda)
-                parsedSponsors.insert(eventInfo.eventInfo.sponsors.vanue)
-                if let foodSponsor = eventInfo.eventInfo.sponsors.food {
+                let sponsors = eventInfo.eventInfo.sponsors
+                if let vanue = sponsors.vanue {
+                    parsedSponsors.insert(vanue)
+                }
+                if let foodSponsor = sponsors.food {
                     parsedSponsors.insert(foodSponsor)
                 }
             }
