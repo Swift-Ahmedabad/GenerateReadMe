@@ -17,8 +17,9 @@ public struct Socials: Codable, Hashable, Sendable {
     public var instagram: String?
     public var arattai: String?
     public var discord: String?
+    public var mastodon: String?
 
-    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil, luma: String? = nil, whatsApp: String? = nil, instagram: String? = nil, arattai: String? = nil, discord: String? = nil) {
+    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil, luma: String? = nil, whatsApp: String? = nil, instagram: String? = nil, arattai: String? = nil, discord: String? = nil, mastodon: String? = nil) {
         self.linkedIn = linkedIn
         self.github = github
         self.portfolio = portfolio
@@ -28,6 +29,7 @@ public struct Socials: Codable, Hashable, Sendable {
         self.instagram = instagram
         self.arattai = arattai
         self.discord = discord
+        self.mastodon = mastodon
     }
 }
 
@@ -60,6 +62,9 @@ extension Socials: CustomStringConvertible {
         }
         if let discord {
             strings.append("[Discord](\(discord)")
+        }
+        if let mastodon {
+            strings.append("[Mastodon](\(mastodon)")
         }
         return strings.joined(separator: ", ")
     }
