@@ -23,6 +23,8 @@ public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
     public var title: String
     public var speakers: [String]?
     public var type: AgendaType
+    public var starterProject: URL?
+    public var finalProject: URL?
     
     public enum CodingKeys: CodingKey {
         case id
@@ -31,14 +33,18 @@ public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
         case title
         case speakers
         case type
+        case starterProject
+        case finalProject
     }
     
-    public init(time: Date, title: String, eventID: Event.ID, type: AgendaType) {
+    public init(time: Date, title: String, eventID: Event.ID, type: AgendaType, starterProject: URL? = nil, finalProject: URL? = nil) {
         self.id = StableID(using: title, time, eventID).id
         self.eventID = eventID
         self.time = time
         self.title = title
         self.type = type
+        self.starterProject = starterProject
+        self.finalProject = finalProject
     }
     
     public init(from decoder: any Decoder, configuration: String) throws {
@@ -59,6 +65,8 @@ public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
         self.title = try container.decode(String.self, forKey: .title)
         self.speakers = try container.decodeIfPresent([String].self, forKey: .speakers)
         self.type = try container.decode(AgendaType.self, forKey: .type)
+        self.starterProject = try container.decodeIfPresent(URL.self, forKey: .starterProject)
+        self.finalProject = try container.decodeIfPresent(URL.self, forKey: .finalProject)
         self.id = StableID(using: title, time, eventID).id
     }
     
@@ -69,6 +77,8 @@ public struct Agenda: Identifiable, Codable, DecodableWithConfiguration {
         try container.encode(self.time, forKey: .time)
         try container.encode(self.title, forKey: .title)
         try container.encode(self.type, forKey: .type)
+        try container.encode(starterProject, forKey: .starterProject)
+        try container.encode(finalProject, forKey: .finalProject)
         //NOTE: Will not encode speakers array since we have AgendaSpeakerID to retrieve from
     }
 }
