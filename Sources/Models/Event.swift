@@ -35,15 +35,17 @@ import Foundation
 ///   a new identity for the event.
 public struct Event: Codable, Identifiable {
     public var id: String
+    public var communityID: Community.ID
     public var title: String
     public var date: Date
     public var endDate: Date?
     
-    public init(title: String, date: Date, endDate: Date? = nil) {
+    public init(title: String, communityID: Community.ID, date: Date, endDate: Date? = nil) {
         self.title = title
         self.date = date
         self.endDate = endDate
-        self.id = StableID(using: title, date).id
+        self.communityID = communityID
+        self.id = StableID(using: title, date, communityID).id
     }
 }
 
