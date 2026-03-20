@@ -99,6 +99,12 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the organization events file. Default: communities.json")
     var communitiesFileName: String = "communities.json"
     
+    @Option(help: "Name of the recordings file. Default: recordings.json")
+    var recordingsFileName: String = "recordings.json"
+    
+    @Option(help: "Name of the talkInfo file. Default: talkInfos.json")
+    var talkInfoFileName: String = "talkInfos.json"
+    
     func run() throws {
         let newsItems = try Parser.parseNewsItems(at: path)
         let pathURL = URL(filePath: path).appending(path: ".generated")
@@ -120,6 +126,8 @@ struct GenerateReadMe: ParsableCommand {
             try Generator.generateJson(for: eventInfos.flatMap { $0.agendas }, at: pathURL.appending(path: agendasFileName))
             try Generator.generateJson(for: eventInfos.flatMap { $0.agendaSpeakerIDs }, at: pathURL.appending(path: agendaSpeakerIDsFileName))
             try Generator.generateJson(for: eventInfos.flatMap { $0.yearsInReview }, at: pathURL.appending(path: yearsInReviewFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.recording }, at: pathURL.appending(path: recordingsFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.talkInfos }, at: pathURL.appending(path: talkInfoFileName))
         } catch {
             print(error)
         }

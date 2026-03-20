@@ -71,6 +71,8 @@ enum Parser {
         var agendaSpeakerIDs: [AgendaSpeakerID] = []
         var about: AboutPage?
         var yearsInReview: [YearInReview] = []
+        var recording: [Recording] = []
+        var talkInfos: [TalkInfoRecord] = []
     }
     
     static func parse(at path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> [EventsInfo] {
@@ -157,6 +159,7 @@ enum Parser {
             
             for talkURL in try validContentsOfDirectory(at: eventURL, skipping: skipFileWithExtensions, additionalSkipFileNames: ["Info.yml"]) {
                 debugPrint("\t", talkURL.lastPathComponent)
+                let parsedTalk = Talk(title: talkURL.lastPathComponent, eventID: parsedEvent.id)
                 
                 for talkContentURL in try validContentsOfDirectory(at: talkURL, skipping: skipFileWithExtensions) {
                     debugPrint("\t\t", talkContentURL.lastPathComponent)
@@ -165,12 +168,15 @@ enum Parser {
                             let decodedSpeakers = try decoder.decode([Speaker].self, from: contentData)
                             info.speakers.append(contentsOf: decodedSpeakers)
                             
-                            let parsedTalk = Talk(title: talkURL.lastPathComponent, eventID: parsedEvent.id)
                             info.talks.append(parsedTalk)
                             
                             let talkWithSpeakers = TalkWithSpeakers(talk: parsedTalk, speakers: decodedSpeakers)
                             info.talksWithSpeakers.append(talkWithSpeakers)
                             parsedTalks.append(talkWithSpeakers)
+                            
+                            if let recording = info.agendas.first(where: {$0.speakers == decodedSpeakers.map { $0.name }})?.recording {
+                                info.recording.append(.init(talkID: parsedTalk.id, recording: recording))
+                            }
                             
                             for speaker in decodedSpeakers {
                                 let talkSpeaker = TalkSpeaker(talkID: parsedTalk.id, speakerID: speaker.id)
@@ -178,6 +184,12 @@ enum Parser {
                             }
                         } else {
                             throw GeneratorError.noSpeakerFile
+                        }
+                    }
+                    if talkContentURL.lastPathComponent.contains("TalkInfo") {
+                        if let contentData = FileManager.default.contents(atPath: talkContentURL.path(percentEncoded: false)) {
+                            let decodedTalkInfo = try decoder.decode(TalkInfo.self, from: contentData)
+                            info.talkInfos.append(TalkInfoRecord(talkID: parsedTalk.id, title: decodedTalkInfo.title, about: decodedTalkInfo.about))
                         }
                     }
                 }
