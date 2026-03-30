@@ -18,8 +18,9 @@ public struct Socials: Codable, Hashable, Sendable {
     public var arattai: String?
     public var discord: String?
     public var mastodon: String?
+    public var youtube: String?
 
-    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil, luma: String? = nil, whatsApp: String? = nil, instagram: String? = nil, arattai: String? = nil, discord: String? = nil, mastodon: String? = nil) {
+    public init(linkedIn: String? = nil, github: String? = nil, portfolio: String? = nil, twitter: String? = nil, luma: String? = nil, whatsApp: String? = nil, instagram: String? = nil, arattai: String? = nil, discord: String? = nil, mastodon: String? = nil, youtube: String? = nil) {
         self.linkedIn = linkedIn
         self.github = github
         self.portfolio = portfolio
@@ -30,6 +31,7 @@ public struct Socials: Codable, Hashable, Sendable {
         self.arattai = arattai
         self.discord = discord
         self.mastodon = mastodon
+        self.youtube = youtube
     }
 }
 
@@ -49,22 +51,25 @@ extension Socials: CustomStringConvertible {
             strings.append("[Twitter](\(twitter))")
         }
         if let luma {
-            strings.append("[Luma](\(luma)")
+            strings.append("[Luma](\(luma))")
         }
         if let whatsApp {
-            strings.append("[WhatsApp](\(whatsApp)")
+            strings.append("[WhatsApp](\(whatsApp))")
         }
         if let instagram {
-            strings.append("[Instagram](\(instagram)")
+            strings.append("[Instagram](\(instagram))")
         }
         if let arattai {
-            strings.append("[Arattai](\(arattai)")
+            strings.append("[Arattai](\(arattai))")
         }
         if let discord {
-            strings.append("[Discord](\(discord)")
+            strings.append("[Discord](\(discord))")
         }
         if let mastodon {
-            strings.append("[Mastodon](\(mastodon)")
+            strings.append("[Mastodon](\(mastodon))")
+        }
+        if let youtube {
+            strings.append("[Youtube](\(youtube))")
         }
         return strings.joined(separator: ", ")
     }
