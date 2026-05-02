@@ -73,6 +73,7 @@ enum Parser {
         var yearsInReview: [YearInReview] = []
         var recording: [Recording] = []
         var talkInfos: [TalkInfoRecord] = []
+        var talkResources: [TalkResource] = []
     }
     
     static func parse(at path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> [EventsInfo] {
@@ -161,6 +162,7 @@ enum Parser {
                 debugPrint("\t", talkURL.lastPathComponent)
                 let parsedTalk = Talk(title: talkURL.lastPathComponent, eventID: parsedEvent.id)
                 
+                var links: [Link] = []
                 for talkContentURL in try validContentsOfDirectory(at: talkURL, skipping: skipFileWithExtensions) {
                     debugPrint("\t\t", talkContentURL.lastPathComponent)
                     if talkContentURL.lastPathComponent.contains("Speaker") {
@@ -192,8 +194,14 @@ enum Parser {
                             info.talkInfos.append(TalkInfoRecord(talkID: parsedTalk.id, title: decodedTalkInfo.title, about: decodedTalkInfo.about))
                         }
                     }
+                    if !talkContentURL.lastPathComponent.contains("TalkInfo") && !talkContentURL.lastPathComponent.contains("Speaker") {
+                        links.append(Link(title: talkContentURL.lastPathComponent, url: talkContentURL.replaceWithGithubURL(in: pathURL)))
+                    }
                 }
                 
+                if !links.isEmpty {
+                    info.talkResources.append(TalkResource(talkID: parsedTalk.id, links: links))
+                }
             }
             
             let eventWithTalks = EventWithTalks(event: parsedEvent, talks: parsedTalks, eventInfo: parsedEventInfo)
@@ -248,5 +256,21 @@ enum Parser {
             return speakerIDs.map { AgendaSpeakerID(agendaID: agendaID, speakerID: $0)}
         }
         return result.flatMap({$0})
+    }
+}
+
+extension URL {
+    public func replaceWithGithubURL(in localPath: URL) -> URL {
+        /// file:///Users/ratneshjain/Development/Github/Swift%20Ahmedabad/Talks/Swift-Pune/1.%20Mar%208%2C%202026/CI-CD%20With%20Github%20Action%20and%20Fastlane/From-Clicks-To-Commit.pdf
+        ///
+        /// https://github.com/Swift-Ahmedabad/Talks/blob/main/Swift-Pune/1.%20Mar%208%2C%202026/CI-CD%20With%20Github%20Action%20and%20Fastlane/From-Clicks-To-Commit.pdf
+        ///
+        ///
+        var copy = self.path(percentEncoded: true)
+        if let range = copy.range(of: localPath.deletingLastPathComponent().path(percentEncoded: true)) {
+            copy.removeSubrange(range)
+        }
+        copy = copy.replacingOccurrences(of: ",", with: "%2C")
+        return URL(string: "https://github.com/Swift-Ahmedabad/Talks/blob/main/\(copy)")!
     }
 }
