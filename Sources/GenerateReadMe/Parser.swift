@@ -149,6 +149,9 @@ enum Parser {
             if let infoContent = FileManager.default.contents(atPath: infoYMLURL.path(percentEncoded: false)) {
                 let eventInfo = try decoder.decode(EventInfoWithAgendas.self, from: infoContent, userInfo: [Models.EventInfo.eventIDUserInfoKey : parsedEvent.id])
                 parsedEventInfo = eventInfo.eventInfo
+                if let about = parsedEventInfo?.about {
+                    parsedEvent.title = about
+                }
                 parsedEvent.date = eventInfo.eventInfo.date
                 parsedEvent.endDate = eventInfo.agenda.last?.time.addingTimeInterval(30 * 60)
                 info.eventInfos.append(eventInfo.eventInfo)
