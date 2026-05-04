@@ -74,6 +74,10 @@ enum Parser {
         var recording: [Recording] = []
         var talkInfos: [TalkInfoRecord] = []
         var talkResources: [TalkResource] = []
+        
+        var eventPublicationStatuses: [EventPublicationStatus] {
+            self.events.map { EventPublicationStatus(id: $0.id, publicationStatus: .published) }
+        }
     }
     
     static func parse(at path: String, skipFileWithExtensions: [String] = .defaultSkippingExtensions) throws -> [EventsInfo] {

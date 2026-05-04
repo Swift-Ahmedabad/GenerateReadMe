@@ -107,6 +107,9 @@ struct GenerateReadMe: ParsableCommand {
     
     @Option(help: "Name of the talkResources file. Default: talkResources.json")
     var talkResourcesFileName: String = "talkResources.json"
+    
+    @Option(help: "Name of the eventPublicationStatuses file. Default: eventPublicationStatuses.json")
+    var eventPublicationStatusesFileName: String = "eventPublicationStatuses.json"
 
     
     func run() throws {
@@ -133,6 +136,7 @@ struct GenerateReadMe: ParsableCommand {
             try Generator.generateJson(for: eventInfos.flatMap { $0.recording }, at: pathURL.appending(path: recordingsFileName))
             try Generator.generateJson(for: eventInfos.flatMap { $0.talkInfos }, at: pathURL.appending(path: talkInfoFileName))
             try Generator.generateJson(for: eventInfos.flatMap { $0.talkResources }, at: pathURL.appending(path: talkResourcesFileName))
+            try Generator.generateJson(for: eventInfos.flatMap { $0.eventPublicationStatuses }, at: pathURL.appending(path: eventPublicationStatusesFileName))
         } catch {
             print(error)
         }
