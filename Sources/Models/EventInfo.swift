@@ -29,14 +29,9 @@ public struct Sponsor: Codable, Identifiable, Hashable {
     }
 }
 
-public struct Sponsors: Codable {
-    public var vanue: Sponsor?
-    public var food: Sponsor?
-    
-    public init(vanue: Sponsor?, food: Sponsor? = nil) {
-        self.vanue = vanue
-        self.food = food
-    }
+public struct SponsorItem: Codable {
+    public var sponsor: Sponsor
+    public var sponsoringFor: String
 }
 
 public struct EventInfo: Identifiable, Codable {
@@ -46,7 +41,7 @@ public struct EventInfo: Identifiable, Codable {
     public var date: Date
     public var about: String
     public var location: Location
-    public var sponsors: Sponsors
+    public var sponsors: [SponsorItem]
     public var photoURL: URL?
     public var registrationLink: URL?
     public var instructions: String?
@@ -63,7 +58,7 @@ public struct EventInfo: Identifiable, Codable {
         case instructions
     }
     
-    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: Sponsors, photoURL: URL?, registrationLink: URL?, instructions: String?) {
+    public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: [SponsorItem], photoURL: URL?, registrationLink: URL?, instructions: String?) {
         self.id = StableID(using: about, date, eventID).id
         self.eventID = eventID
         self.about = about
@@ -89,13 +84,16 @@ public struct EventInfo: Identifiable, Codable {
     }
 }
 
-public struct SponsorIDs: Codable {
-    public var vanueSponsorID: Sponsor.ID?
-    public var foodSponsorID: Sponsor.ID?
+public struct SponsorID: Codable {
+    public var sponsorID: Sponsor.ID
+    public var sponsoringFor: String
 }
+
+typealias SponsorIDs = [SponsorID]
+
 extension SponsorIDs {
-    init(from sponsors: Sponsors) {
-        self.init(vanueSponsorID: sponsors.vanue?.id, foodSponsorID: sponsors.food?.id)
+    init(from sponsors: [SponsorItem]) {
+        self = sponsors.map { SponsorID(sponsorID: $0.sponsor.id, sponsoringFor: $0.sponsoringFor) }
     }
 }
 
@@ -144,7 +142,7 @@ public struct EventInfoWithAgendas: Codable {
         let about = try eventInfoContainer.decode(String.self, forKey: .about)
         let dateString = try eventInfoContainer.decode(String.self, forKey: .date)
         let location = try eventInfoContainer.decode(EventInfo.Location.self, forKey: .location)
-        let sponsors = try eventInfoContainer.decode(Sponsors.self, forKey: .sponsors)
+        let sponsors = try eventInfoContainer.decode([SponsorItem].self, forKey: .sponsors)
         let photoURL = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .photoURL)
         let registrationLink = try eventInfoContainer.decodeIfPresent(URL.self, forKey: .registrationLink)
         let instructions = try eventInfoContainer.decodeIfPresent(String.self, forKey: .instructions)

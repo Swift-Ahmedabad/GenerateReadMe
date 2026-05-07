@@ -157,11 +157,8 @@ enum Parser {
                 info.eventInfos.append(eventInfo.eventInfo)
                 info.agendas.append(contentsOf: eventInfo.agenda)
                 let sponsors = eventInfo.eventInfo.sponsors
-                if let vanue = sponsors.vanue {
-                    parsedSponsors.insert(vanue)
-                }
-                if let foodSponsor = sponsors.food {
-                    parsedSponsors.insert(foodSponsor)
+                for sponsorItem in sponsors {
+                    parsedSponsors.insert(sponsorItem.sponsor)
                 }
             }
             
