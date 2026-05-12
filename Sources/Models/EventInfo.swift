@@ -59,7 +59,7 @@ public struct EventInfo: Identifiable, Codable {
     }
     
     public init(about: String, eventID: Event.ID, date: Date, location: Location, sponsors: [SponsorItem], photoURL: URL?, registrationLink: URL?, instructions: String?) {
-        self.id = StableID(using: about, date, eventID).id
+        self.id = eventID
         self.eventID = eventID
         self.about = about
         self.date = date
