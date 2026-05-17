@@ -99,6 +99,9 @@ struct GenerateReadMe: ParsableCommand {
     @Option(help: "Name of the organization events file. Default: communities.json")
     var communitiesFileName: String = "communities.json"
     
+    @Option(help: "Name of the community publication statuses file: Default: communityPublicationStatuses.json")
+    var communityPublicationStatusesFileName: String = "communityPublicationStatuses.json"
+    
     @Option(help: "Name of the recordings file. Default: recordings.json")
     var recordingsFileName: String = "recordings.json"
     
@@ -145,6 +148,7 @@ struct GenerateReadMe: ParsableCommand {
         try Generator.generateJson(for: newsItems.newsSources, at: pathURL.appending(path: newsSourceFileName))
         try Generator.generateJson(for: eventInfos.communityEvents, at: pathURL.appending(path: communityEventsFileName))
         try Generator.generateJson(for: eventInfos.communities, at: pathURL.appending(path: communitiesFileName))
+        try Generator.generateJson(for: eventInfos.communityPublicationStatuses, at: pathURL.appending(path: communityPublicationStatusesFileName))
         try Generator.generateJson(for: UpdatedAt(), at: pathURL.appending(path: lastUpdatedAtFileName))
     }
 }
@@ -182,5 +186,9 @@ extension  [Parser.EventsInfo] {
             }
         }
         return orgs
+    }
+    
+    public var communityPublicationStatuses: [CommunityPublicationStatus] {
+        communities.map { CommunityPublicationStatus(id: $0.id, publicationStatus: .published, minVersion: "1.0") }
     }
 }
